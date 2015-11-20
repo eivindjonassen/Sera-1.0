@@ -1,0 +1,436 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		17B350DF26E92A3E669FC0CEC5839146 /* Pods-SeraiOS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AF124B318D844B8972AF32242CA9C09 /* Pods-SeraiOS-dummy.m */; };
+		4F4063362A58DE47DA24CBC270256767 /* UIView+Shimmer.m in Sources */ = {isa = PBXBuildFile; fileRef = EDF4965BB7F573ED55B12FABFDC3767C /* UIView+Shimmer.m */; settings = {COMPILER_FLAGS = "-DOS_OBJECT_USE_OBJC=0"; }; };
+		690EF06FA6C5A498D84512511D036D6B /* UIView+Shimmer.h in Headers */ = {isa = PBXBuildFile; fileRef = 04D85C3A776C7602DE179EE3B2096527 /* UIView+Shimmer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		73532BE3AD8A6148C422EB566D1B9FFD /* UIView+Shimmer-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 29E9C3C7FF49E8793699901BA145F47F /* UIView+Shimmer-dummy.m */; };
+		EBFC6FCCAC530D32777E9F7FEA310525 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
+		ECCB25576D66C54559A2DBBFC425AE1C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1BE0668AB6ABB4627D947C61FF4FD00E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EC82ACFB14709C2BAA05B78B38DD7ED2;
+			remoteInfo = "UIView+Shimmer";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		013DD7AE6EDCE5A43C15E42664E6C0BB /* libUIView+Shimmer.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libUIView+Shimmer.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		04D85C3A776C7602DE179EE3B2096527 /* UIView+Shimmer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIView+Shimmer.h"; path = "Classes/UIView+Shimmer.h"; sourceTree = "<group>"; };
+		1AF124B318D844B8972AF32242CA9C09 /* Pods-SeraiOS-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SeraiOS-dummy.m"; sourceTree = "<group>"; };
+		1C8B72BAB414783D6C9F5025C5E2CD4E /* Pods-SeraiOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SeraiOS.release.xcconfig"; sourceTree = "<group>"; };
+		29E9C3C7FF49E8793699901BA145F47F /* UIView+Shimmer-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIView+Shimmer-dummy.m"; sourceTree = "<group>"; };
+		3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		46282F322F5F48D1B36ABED8AB0C9829 /* Pods-SeraiOS-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SeraiOS-resources.sh"; sourceTree = "<group>"; };
+		49EA8B7D58B9DC34CBE6E9C6C38A717D /* Pods-SeraiOS-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SeraiOS-frameworks.sh"; sourceTree = "<group>"; };
+		4FD2E3DF6B71906705D3354E6E598048 /* UIView+Shimmer-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIView+Shimmer-prefix.pch"; sourceTree = "<group>"; };
+		5D64A26F4B6EB947B20E30539F569725 /* Pods-SeraiOS-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SeraiOS-acknowledgements.markdown"; sourceTree = "<group>"; };
+		8136F2BCF71983374A0F683BA1A8A4F8 /* Pods-SeraiOS-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SeraiOS-acknowledgements.plist"; sourceTree = "<group>"; };
+		898F2B197D26CCD1A3C246BB81089701 /* libPods-SeraiOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SeraiOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A3171441B815875B4D8AD5E1D2C95562 /* Pods-SeraiOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SeraiOS.debug.xcconfig"; sourceTree = "<group>"; };
+		B6653E8FE014FE051C520A2E9706A99E /* UIView+Shimmer.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "UIView+Shimmer.xcconfig"; sourceTree = "<group>"; };
+		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		EDF4965BB7F573ED55B12FABFDC3767C /* UIView+Shimmer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIView+Shimmer.m"; path = "Classes/UIView+Shimmer.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A9C1946255E064F17987E8011806610E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EBFC6FCCAC530D32777E9F7FEA310525 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F83E7CB414A530D34AD6FE5476EC49F5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ECCB25576D66C54559A2DBBFC425AE1C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		128FE240D9302B5DD997A5066094FAC9 /* Pods-SeraiOS */ = {
+			isa = PBXGroup;
+			children = (
+				5D64A26F4B6EB947B20E30539F569725 /* Pods-SeraiOS-acknowledgements.markdown */,
+				8136F2BCF71983374A0F683BA1A8A4F8 /* Pods-SeraiOS-acknowledgements.plist */,
+				1AF124B318D844B8972AF32242CA9C09 /* Pods-SeraiOS-dummy.m */,
+				49EA8B7D58B9DC34CBE6E9C6C38A717D /* Pods-SeraiOS-frameworks.sh */,
+				46282F322F5F48D1B36ABED8AB0C9829 /* Pods-SeraiOS-resources.sh */,
+				A3171441B815875B4D8AD5E1D2C95562 /* Pods-SeraiOS.debug.xcconfig */,
+				1C8B72BAB414783D6C9F5025C5E2CD4E /* Pods-SeraiOS.release.xcconfig */,
+			);
+			name = "Pods-SeraiOS";
+			path = "Target Support Files/Pods-SeraiOS";
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
+				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
+				FFAE6762C600B54EEEBA01310E0D77A6 /* Pods */,
+				B3C720D6A419119B7CB0F39E61EFB7EE /* Products */,
+				9C2724A4735A5D71257AF55293D13E53 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		9C2724A4735A5D71257AF55293D13E53 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				128FE240D9302B5DD997A5066094FAC9 /* Pods-SeraiOS */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		A1978B85588C76671E2324A61E4966EA /* UIView+Shimmer */ = {
+			isa = PBXGroup;
+			children = (
+				04D85C3A776C7602DE179EE3B2096527 /* UIView+Shimmer.h */,
+				EDF4965BB7F573ED55B12FABFDC3767C /* UIView+Shimmer.m */,
+				E185DBE52D74FC4F186BC1F7240E6F5F /* Support Files */,
+			);
+			path = "UIView+Shimmer";
+			sourceTree = "<group>";
+		};
+		B3C720D6A419119B7CB0F39E61EFB7EE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				898F2B197D26CCD1A3C246BB81089701 /* libPods-SeraiOS.a */,
+				013DD7AE6EDCE5A43C15E42664E6C0BB /* libUIView+Shimmer.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BF6342C8B29F4CEEA088EFF7AB4DE362 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BF6342C8B29F4CEEA088EFF7AB4DE362 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		E185DBE52D74FC4F186BC1F7240E6F5F /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				B6653E8FE014FE051C520A2E9706A99E /* UIView+Shimmer.xcconfig */,
+				29E9C3C7FF49E8793699901BA145F47F /* UIView+Shimmer-dummy.m */,
+				4FD2E3DF6B71906705D3354E6E598048 /* UIView+Shimmer-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/UIView+Shimmer";
+			sourceTree = "<group>";
+		};
+		FFAE6762C600B54EEEBA01310E0D77A6 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A1978B85588C76671E2324A61E4966EA /* UIView+Shimmer */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D9D9A7356142FD774933C6FD2A6DECD4 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				690EF06FA6C5A498D84512511D036D6B /* UIView+Shimmer.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		1196F225BB50CD298EA5764B63113DE2 /* Pods-SeraiOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0457C01F0DF2A989999BCEF3CA9AB834 /* Build configuration list for PBXNativeTarget "Pods-SeraiOS" */;
+			buildPhases = (
+				4EAECD742820E7767BEF986BE6BFE839 /* Sources */,
+				F83E7CB414A530D34AD6FE5476EC49F5 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				23F1D73388E514E218644AC734605E7B /* PBXTargetDependency */,
+			);
+			name = "Pods-SeraiOS";
+			productName = "Pods-SeraiOS";
+			productReference = 898F2B197D26CCD1A3C246BB81089701 /* libPods-SeraiOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		EC82ACFB14709C2BAA05B78B38DD7ED2 /* UIView+Shimmer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5DA12793388F05F5C8E9AB7077E89352 /* Build configuration list for PBXNativeTarget "UIView+Shimmer" */;
+			buildPhases = (
+				3A6FD6FCCAF50CF3EA4DC38161F5BC41 /* Sources */,
+				A9C1946255E064F17987E8011806610E /* Frameworks */,
+				D9D9A7356142FD774933C6FD2A6DECD4 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "UIView+Shimmer";
+			productName = "UIView+Shimmer";
+			productReference = 013DD7AE6EDCE5A43C15E42664E6C0BB /* libUIView+Shimmer.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = B3C720D6A419119B7CB0F39E61EFB7EE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1196F225BB50CD298EA5764B63113DE2 /* Pods-SeraiOS */,
+				EC82ACFB14709C2BAA05B78B38DD7ED2 /* UIView+Shimmer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3A6FD6FCCAF50CF3EA4DC38161F5BC41 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				73532BE3AD8A6148C422EB566D1B9FFD /* UIView+Shimmer-dummy.m in Sources */,
+				4F4063362A58DE47DA24CBC270256767 /* UIView+Shimmer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4EAECD742820E7767BEF986BE6BFE839 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17B350DF26E92A3E669FC0CEC5839146 /* Pods-SeraiOS-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		23F1D73388E514E218644AC734605E7B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "UIView+Shimmer";
+			target = EC82ACFB14709C2BAA05B78B38DD7ED2 /* UIView+Shimmer */;
+			targetProxy = 1BE0668AB6ABB4627D947C61FF4FD00E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0709AF24B57363164DBF97003DDCBA9E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C8B72BAB414783D6C9F5025C5E2CD4E /* Pods-SeraiOS.release.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		6569F07DC21AD8B72752685013E3D9D8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		7439E944868998FDFE78804E318634DD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B6653E8FE014FE051C520A2E9706A99E /* UIView+Shimmer.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/UIView+Shimmer/UIView+Shimmer-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		87008B12F8FE45591A5E87FCF8EB4AC7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B6653E8FE014FE051C520A2E9706A99E /* UIView+Shimmer.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/UIView+Shimmer/UIView+Shimmer-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		A14E2444F162A20E3776820E0ADFFB52 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F9ECC981E9C303AD04810949C8151FB1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A3171441B815875B4D8AD5E1D2C95562 /* Pods-SeraiOS.debug.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0457C01F0DF2A989999BCEF3CA9AB834 /* Build configuration list for PBXNativeTarget "Pods-SeraiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F9ECC981E9C303AD04810949C8151FB1 /* Debug */,
+				0709AF24B57363164DBF97003DDCBA9E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6569F07DC21AD8B72752685013E3D9D8 /* Debug */,
+				A14E2444F162A20E3776820E0ADFFB52 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5DA12793388F05F5C8E9AB7077E89352 /* Build configuration list for PBXNativeTarget "UIView+Shimmer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				87008B12F8FE45591A5E87FCF8EB4AC7 /* Debug */,
+				7439E944868998FDFE78804E318634DD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

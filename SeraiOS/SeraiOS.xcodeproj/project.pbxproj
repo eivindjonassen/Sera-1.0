@@ -1,0 +1,648 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		074A4E9AFF861374BDDE1003 /* libPods-SeraiOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1978B5E8F7EE3B35E53293BB /* libPods-SeraiOS.a */; };
+		A73406461BF5F13000D25206 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A73406451BF5F13000D25206 /* UIKit.framework */; };
+		A77D68CC1BF48BA600DAB1FD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A77D68CB1BF48BA600DAB1FD /* main.m */; };
+		A77D68CF1BF48BA600DAB1FD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A77D68CE1BF48BA600DAB1FD /* AppDelegate.m */; };
+		A77D68D21BF48BA600DAB1FD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A77D68D11BF48BA600DAB1FD /* ViewController.m */; };
+		A77D68D51BF48BA600DAB1FD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A77D68D31BF48BA600DAB1FD /* Main.storyboard */; };
+		A77D68D71BF48BA600DAB1FD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A77D68D61BF48BA600DAB1FD /* Assets.xcassets */; };
+		A77D68DA1BF48BA600DAB1FD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A77D68D81BF48BA600DAB1FD /* LaunchScreen.storyboard */; };
+		A77D68E51BF48BA600DAB1FD /* SeraiOSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A77D68E41BF48BA600DAB1FD /* SeraiOSTests.m */; };
+		A77D68F01BF48BA600DAB1FD /* SeraiOSUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A77D68EF1BF48BA600DAB1FD /* SeraiOSUITests.m */; };
+		A77D69031BF48C7C00DAB1FD /* BluetoothManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A77D69021BF48C7C00DAB1FD /* BluetoothManager.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A77D68E11BF48BA600DAB1FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A77D68BF1BF48BA600DAB1FD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A77D68C61BF48BA600DAB1FD;
+			remoteInfo = SeraiOS;
+		};
+		A77D68EC1BF48BA600DAB1FD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A77D68BF1BF48BA600DAB1FD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A77D68C61BF48BA600DAB1FD;
+			remoteInfo = SeraiOS;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1978B5E8F7EE3B35E53293BB /* libPods-SeraiOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SeraiOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E323CC0269E8D8AD989C4A4 /* Pods-SeraiOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeraiOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SeraiOS/Pods-SeraiOS.debug.xcconfig"; sourceTree = "<group>"; };
+		952E9E2B79F46096E03219E8 /* Pods-SeraiOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeraiOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-SeraiOS/Pods-SeraiOS.release.xcconfig"; sourceTree = "<group>"; };
+		A73406451BF5F13000D25206 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A77D68C71BF48BA600DAB1FD /* SeraiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeraiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A77D68CB1BF48BA600DAB1FD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A77D68CD1BF48BA600DAB1FD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		A77D68CE1BF48BA600DAB1FD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		A77D68D01BF48BA600DAB1FD /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		A77D68D11BF48BA600DAB1FD /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		A77D68D41BF48BA600DAB1FD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A77D68D61BF48BA600DAB1FD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A77D68D91BF48BA600DAB1FD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		A77D68DB1BF48BA600DAB1FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A77D68E01BF48BA600DAB1FD /* SeraiOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SeraiOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A77D68E41BF48BA600DAB1FD /* SeraiOSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SeraiOSTests.m; sourceTree = "<group>"; };
+		A77D68E61BF48BA600DAB1FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A77D68EB1BF48BA600DAB1FD /* SeraiOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SeraiOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A77D68EF1BF48BA600DAB1FD /* SeraiOSUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SeraiOSUITests.m; sourceTree = "<group>"; };
+		A77D68F11BF48BA600DAB1FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A77D69011BF48C7C00DAB1FD /* BluetoothManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BluetoothManager.h; sourceTree = "<group>"; };
+		A77D69021BF48C7C00DAB1FD /* BluetoothManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BluetoothManager.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A77D68C41BF48BA600DAB1FD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A73406461BF5F13000D25206 /* UIKit.framework in Frameworks */,
+				074A4E9AFF861374BDDE1003 /* libPods-SeraiOS.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A77D68DD1BF48BA600DAB1FD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A77D68E81BF48BA600DAB1FD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A77D68BE1BF48BA600DAB1FD = {
+			isa = PBXGroup;
+			children = (
+				A73406451BF5F13000D25206 /* UIKit.framework */,
+				A77D68C91BF48BA600DAB1FD /* SeraiOS */,
+				A77D68E31BF48BA600DAB1FD /* SeraiOSTests */,
+				A77D68EE1BF48BA600DAB1FD /* SeraiOSUITests */,
+				A77D68C81BF48BA600DAB1FD /* Products */,
+				D5199B8D88879EBA37F4A68B /* Pods */,
+				B7F7027133352AAEB01C8F67 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		A77D68C81BF48BA600DAB1FD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A77D68C71BF48BA600DAB1FD /* SeraiOS.app */,
+				A77D68E01BF48BA600DAB1FD /* SeraiOSTests.xctest */,
+				A77D68EB1BF48BA600DAB1FD /* SeraiOSUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A77D68C91BF48BA600DAB1FD /* SeraiOS */ = {
+			isa = PBXGroup;
+			children = (
+				A77D68FD1BF48C6700DAB1FD /* BluetoothManager */,
+				A77D68FE1BF48C6700DAB1FD /* Classes */,
+				A77D68FF1BF48C6700DAB1FD /* ViewControllers */,
+				A77D69001BF48C6700DAB1FD /* Views */,
+				A77D68CD1BF48BA600DAB1FD /* AppDelegate.h */,
+				A77D68CE1BF48BA600DAB1FD /* AppDelegate.m */,
+				A77D68D01BF48BA600DAB1FD /* ViewController.h */,
+				A77D68D11BF48BA600DAB1FD /* ViewController.m */,
+				A77D68D31BF48BA600DAB1FD /* Main.storyboard */,
+				A77D68D61BF48BA600DAB1FD /* Assets.xcassets */,
+				A77D68D81BF48BA600DAB1FD /* LaunchScreen.storyboard */,
+				A77D68DB1BF48BA600DAB1FD /* Info.plist */,
+				A77D68CA1BF48BA600DAB1FD /* Supporting Files */,
+			);
+			path = SeraiOS;
+			sourceTree = "<group>";
+		};
+		A77D68CA1BF48BA600DAB1FD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A77D68CB1BF48BA600DAB1FD /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A77D68E31BF48BA600DAB1FD /* SeraiOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				A77D68E41BF48BA600DAB1FD /* SeraiOSTests.m */,
+				A77D68E61BF48BA600DAB1FD /* Info.plist */,
+			);
+			path = SeraiOSTests;
+			sourceTree = "<group>";
+		};
+		A77D68EE1BF48BA600DAB1FD /* SeraiOSUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A77D68EF1BF48BA600DAB1FD /* SeraiOSUITests.m */,
+				A77D68F11BF48BA600DAB1FD /* Info.plist */,
+			);
+			path = SeraiOSUITests;
+			sourceTree = "<group>";
+		};
+		A77D68FD1BF48C6700DAB1FD /* BluetoothManager */ = {
+			isa = PBXGroup;
+			children = (
+				A77D69011BF48C7C00DAB1FD /* BluetoothManager.h */,
+				A77D69021BF48C7C00DAB1FD /* BluetoothManager.m */,
+			);
+			path = BluetoothManager;
+			sourceTree = "<group>";
+		};
+		A77D68FE1BF48C6700DAB1FD /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		A77D68FF1BF48C6700DAB1FD /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		A77D69001BF48C6700DAB1FD /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B7F7027133352AAEB01C8F67 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1978B5E8F7EE3B35E53293BB /* libPods-SeraiOS.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D5199B8D88879EBA37F4A68B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4E323CC0269E8D8AD989C4A4 /* Pods-SeraiOS.debug.xcconfig */,
+				952E9E2B79F46096E03219E8 /* Pods-SeraiOS.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A77D68C61BF48BA600DAB1FD /* SeraiOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A77D68F41BF48BA600DAB1FD /* Build configuration list for PBXNativeTarget "SeraiOS" */;
+			buildPhases = (
+				DD4931EA8BCD6B72B13A20E8 /* Check Pods Manifest.lock */,
+				A77D68C31BF48BA600DAB1FD /* Sources */,
+				A77D68C41BF48BA600DAB1FD /* Frameworks */,
+				A77D68C51BF48BA600DAB1FD /* Resources */,
+				3CDB6C919B86BF744A724E22 /* Embed Pods Frameworks */,
+				A345B367CC60765374EA2B33 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SeraiOS;
+			productName = SeraiOS;
+			productReference = A77D68C71BF48BA600DAB1FD /* SeraiOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A77D68DF1BF48BA600DAB1FD /* SeraiOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A77D68F71BF48BA600DAB1FD /* Build configuration list for PBXNativeTarget "SeraiOSTests" */;
+			buildPhases = (
+				A77D68DC1BF48BA600DAB1FD /* Sources */,
+				A77D68DD1BF48BA600DAB1FD /* Frameworks */,
+				A77D68DE1BF48BA600DAB1FD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A77D68E21BF48BA600DAB1FD /* PBXTargetDependency */,
+			);
+			name = SeraiOSTests;
+			productName = SeraiOSTests;
+			productReference = A77D68E01BF48BA600DAB1FD /* SeraiOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A77D68EA1BF48BA600DAB1FD /* SeraiOSUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A77D68FA1BF48BA600DAB1FD /* Build configuration list for PBXNativeTarget "SeraiOSUITests" */;
+			buildPhases = (
+				A77D68E71BF48BA600DAB1FD /* Sources */,
+				A77D68E81BF48BA600DAB1FD /* Frameworks */,
+				A77D68E91BF48BA600DAB1FD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A77D68ED1BF48BA600DAB1FD /* PBXTargetDependency */,
+			);
+			name = SeraiOSUITests;
+			productName = SeraiOSUITests;
+			productReference = A77D68EB1BF48BA600DAB1FD /* SeraiOSUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A77D68BF1BF48BA600DAB1FD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = Ignitum;
+				TargetAttributes = {
+					A77D68C61BF48BA600DAB1FD = {
+						CreatedOnToolsVersion = 7.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
+					A77D68DF1BF48BA600DAB1FD = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = A77D68C61BF48BA600DAB1FD;
+					};
+					A77D68EA1BF48BA600DAB1FD = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = A77D68C61BF48BA600DAB1FD;
+					};
+				};
+			};
+			buildConfigurationList = A77D68C21BF48BA600DAB1FD /* Build configuration list for PBXProject "SeraiOS" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A77D68BE1BF48BA600DAB1FD;
+			productRefGroup = A77D68C81BF48BA600DAB1FD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A77D68C61BF48BA600DAB1FD /* SeraiOS */,
+				A77D68DF1BF48BA600DAB1FD /* SeraiOSTests */,
+				A77D68EA1BF48BA600DAB1FD /* SeraiOSUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A77D68C51BF48BA600DAB1FD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A77D68DA1BF48BA600DAB1FD /* LaunchScreen.storyboard in Resources */,
+				A77D68D71BF48BA600DAB1FD /* Assets.xcassets in Resources */,
+				A77D68D51BF48BA600DAB1FD /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A77D68DE1BF48BA600DAB1FD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A77D68E91BF48BA600DAB1FD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3CDB6C919B86BF744A724E22 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SeraiOS/Pods-SeraiOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A345B367CC60765374EA2B33 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SeraiOS/Pods-SeraiOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DD4931EA8BCD6B72B13A20E8 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A77D68C31BF48BA600DAB1FD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A77D68D21BF48BA600DAB1FD /* ViewController.m in Sources */,
+				A77D68CF1BF48BA600DAB1FD /* AppDelegate.m in Sources */,
+				A77D69031BF48C7C00DAB1FD /* BluetoothManager.m in Sources */,
+				A77D68CC1BF48BA600DAB1FD /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A77D68DC1BF48BA600DAB1FD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A77D68E51BF48BA600DAB1FD /* SeraiOSTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A77D68E71BF48BA600DAB1FD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A77D68F01BF48BA600DAB1FD /* SeraiOSUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A77D68E21BF48BA600DAB1FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A77D68C61BF48BA600DAB1FD /* SeraiOS */;
+			targetProxy = A77D68E11BF48BA600DAB1FD /* PBXContainerItemProxy */;
+		};
+		A77D68ED1BF48BA600DAB1FD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A77D68C61BF48BA600DAB1FD /* SeraiOS */;
+			targetProxy = A77D68EC1BF48BA600DAB1FD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A77D68D31BF48BA600DAB1FD /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A77D68D41BF48BA600DAB1FD /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A77D68D81BF48BA600DAB1FD /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A77D68D91BF48BA600DAB1FD /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A77D68F21BF48BA600DAB1FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		A77D68F31BF48BA600DAB1FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A77D68F51BF48BA600DAB1FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4E323CC0269E8D8AD989C4A4 /* Pods-SeraiOS.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = SeraiOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = no.ignitum.SeraiOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A77D68F61BF48BA600DAB1FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 952E9E2B79F46096E03219E8 /* Pods-SeraiOS.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = SeraiOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = no.ignitum.SeraiOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		A77D68F81BF48BA600DAB1FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = SeraiOSTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = no.ignitum.SeraiOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SeraiOS.app/SeraiOS";
+			};
+			name = Debug;
+		};
+		A77D68F91BF48BA600DAB1FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = SeraiOSTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = no.ignitum.SeraiOSTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SeraiOS.app/SeraiOS";
+			};
+			name = Release;
+		};
+		A77D68FB1BF48BA600DAB1FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = SeraiOSUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = no.ignitum.SeraiOSUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = SeraiOS;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		A77D68FC1BF48BA600DAB1FD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = SeraiOSUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = no.ignitum.SeraiOSUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = SeraiOS;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A77D68C21BF48BA600DAB1FD /* Build configuration list for PBXProject "SeraiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A77D68F21BF48BA600DAB1FD /* Debug */,
+				A77D68F31BF48BA600DAB1FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A77D68F41BF48BA600DAB1FD /* Build configuration list for PBXNativeTarget "SeraiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A77D68F51BF48BA600DAB1FD /* Debug */,
+				A77D68F61BF48BA600DAB1FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A77D68F71BF48BA600DAB1FD /* Build configuration list for PBXNativeTarget "SeraiOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A77D68F81BF48BA600DAB1FD /* Debug */,
+				A77D68F91BF48BA600DAB1FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A77D68FA1BF48BA600DAB1FD /* Build configuration list for PBXNativeTarget "SeraiOSUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A77D68FB1BF48BA600DAB1FD /* Debug */,
+				A77D68FC1BF48BA600DAB1FD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A77D68BF1BF48BA600DAB1FD /* Project object */;
+}

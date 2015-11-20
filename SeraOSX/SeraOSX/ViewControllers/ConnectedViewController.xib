@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9060"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="ConnectedViewController">
+            <connections>
+                <outlet property="phoneNameLabel" destination="Rzv-u5-RUA" id="L8J-M4-10j"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ryp-WP-WsK">
+                    <rect key="frame" x="111" y="225" width="259" height="27"/>
+                    <animations/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Your iPhone is connected!" id="MYC-gP-aMU">
+                        <font key="font" metaFont="system" size="22"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="C3g-mx-Rx4">
+                    <rect key="frame" x="48" y="183" width="384" height="34"/>
+                    <animations/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Congratulations, you have successfully paired your phone with your Mac." id="l19-XC-jRu">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="hY9-Uv-kON">
+                    <rect key="frame" x="48" y="141" width="384" height="34"/>
+                    <animations/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Next we will need you to enter your password so that we can unlock your Mac." id="Rcr-0o-pdk">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="voF-3D-YS5">
+                    <rect key="frame" x="34" y="0.0" width="412" height="133"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="133" id="ONB-Gm-Ie2"/>
+                    </constraints>
+                    <animations/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="ic_iphone" id="zhm-UZ-hUb"/>
+                </imageView>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="Rzv-u5-RUA">
+                    <rect key="frame" x="194" y="43" width="92" height="32"/>
+                    <animations/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Connected to Eivind's iPhone" id="pxU-mM-mzq">
+                        <font key="font" metaFont="systemThin" size="12"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="ryp-WP-WsK" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="0vv-hD-h9u"/>
+                <constraint firstItem="voF-3D-YS5" firstAttribute="top" relation="greaterThanOrEqual" secondItem="hY9-Uv-kON" secondAttribute="bottom" constant="8" id="LfK-k6-k8G"/>
+                <constraint firstAttribute="trailing" secondItem="Rzv-u5-RUA" secondAttribute="trailing" constant="196" id="NEG-ZD-upf"/>
+                <constraint firstItem="voF-3D-YS5" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="Nk4-Mw-h2d"/>
+                <constraint firstItem="Rzv-u5-RUA" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="196" id="OSV-rz-Kml"/>
+                <constraint firstAttribute="bottom" secondItem="voF-3D-YS5" secondAttribute="bottom" id="UTK-Kz-xth"/>
+                <constraint firstItem="C3g-mx-Rx4" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="V27-Du-8tP"/>
+                <constraint firstItem="C3g-mx-Rx4" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="50" id="XMV-DH-Sf1"/>
+                <constraint firstItem="Rzv-u5-RUA" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="197" id="Zcn-CH-vSS"/>
+                <constraint firstAttribute="trailing" secondItem="C3g-mx-Rx4" secondAttribute="trailing" constant="50" id="a5t-yb-GNT"/>
+                <constraint firstItem="hY9-Uv-kON" firstAttribute="width" secondItem="C3g-mx-Rx4" secondAttribute="width" id="bxk-YL-T50"/>
+                <constraint firstItem="ryp-WP-WsK" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="eg6-99-DYc"/>
+                <constraint firstItem="hY9-Uv-kON" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="iWO-N9-leh"/>
+                <constraint firstItem="C3g-mx-Rx4" firstAttribute="top" secondItem="ryp-WP-WsK" secondAttribute="bottom" constant="8" id="q6n-yy-KKx"/>
+                <constraint firstItem="hY9-Uv-kON" firstAttribute="top" secondItem="C3g-mx-Rx4" secondAttribute="bottom" constant="8" id="r0f-ge-yvX"/>
+            </constraints>
+            <animations/>
+        </customView>
+    </objects>
+    <resources>
+        <image name="ic_iphone" width="412" height="408"/>
+    </resources>
+</document>

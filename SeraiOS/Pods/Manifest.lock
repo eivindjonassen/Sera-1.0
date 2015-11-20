@@ -1,0 +1,10 @@
+PODS:
+  - UIView+Shimmer (1.0.0)
+
+DEPENDENCIES:
+  - UIView+Shimmer
+
+SPEC CHECKSUMS:
+  UIView+Shimmer: ed634f95e8f4bda666b28b47bd85a4336a4117d8
+
+COCOAPODS: 0.39.0

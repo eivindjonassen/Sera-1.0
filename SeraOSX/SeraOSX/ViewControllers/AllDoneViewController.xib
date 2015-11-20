@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9060"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="AllDoneViewController">
+            <connections>
+                <outlet property="shareFacebookButton" destination="njT-kt-aw0" id="PJC-db-zWK"/>
+                <outlet property="shareLinkedInButton" destination="MoV-0h-0UW" id="rmv-pY-xLs"/>
+                <outlet property="shareTwitterButton" destination="CKG-ra-Wzm" id="uAc-nQ-JdY"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Pnm-Fn-B21">
+                    <rect key="frame" x="157" y="205" width="166" height="27"/>
+                    <animations/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="You are all done!" id="ivv-0f-OvO">
+                        <font key="font" metaFont="system" size="22"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="XUh-GD-ozW">
+                    <rect key="frame" x="50" y="119" width="380" height="34"/>
+                    <animations/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="If you think that we have done a cool job, please share it with your friends!" id="LO6-Gj-aPF">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="CKG-ra-Wzm">
+                    <rect key="frame" x="163" y="50" width="48" height="48"/>
+                    <animations/>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_share_tw" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="4Av-p8-zMR">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="onShareTwitterClicked:" target="-2" id="tmb-EG-GX2"/>
+                    </connections>
+                </button>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="njT-kt-aw0">
+                    <rect key="frame" x="216" y="50" width="48" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="lTS-iV-Ugo"/>
+                        <constraint firstAttribute="width" constant="48" id="sXW-CM-o1G"/>
+                    </constraints>
+                    <animations/>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_share_fb" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="FCz-t0-Rqh">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="onShareFacebookClicked:" target="-2" id="iCF-x7-hNf"/>
+                    </connections>
+                </button>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="MoV-0h-0UW">
+                    <rect key="frame" x="269" y="50" width="48" height="48"/>
+                    <animations/>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="ic_share_in" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="ERg-dH-vDo">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="onShareLinkedInClicked:" target="-2" id="11l-J1-1jZ"/>
+                    </connections>
+                </button>
+                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ecG-SA-DKb">
+                    <rect key="frame" x="190" y="13" width="101" height="32"/>
+                    <animations/>
+                    <buttonCell key="cell" type="push" title="Close app" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Gr2-Dn-Im0">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="onCloseAppClicked:" target="-2" id="iNL-c7-bHK"/>
+                    </connections>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="ecG-SA-DKb" firstAttribute="top" secondItem="njT-kt-aw0" secondAttribute="bottom" constant="9" id="5vP-ni-pLx"/>
+                <constraint firstItem="MoV-0h-0UW" firstAttribute="leading" secondItem="njT-kt-aw0" secondAttribute="trailing" constant="5" id="BPf-p7-sJt"/>
+                <constraint firstItem="XUh-GD-ozW" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="J0M-Nr-oX9"/>
+                <constraint firstItem="njT-kt-aw0" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="KlJ-Yl-FxV"/>
+                <constraint firstItem="Pnm-Fn-B21" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="ONf-Uq-zDU"/>
+                <constraint firstItem="njT-kt-aw0" firstAttribute="top" secondItem="XUh-GD-ozW" secondAttribute="bottom" constant="21" id="PAh-Mc-mcz"/>
+                <constraint firstItem="ecG-SA-DKb" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="UFL-dt-a0g"/>
+                <constraint firstItem="CKG-ra-Wzm" firstAttribute="height" secondItem="njT-kt-aw0" secondAttribute="height" id="fYb-Ta-YYB"/>
+                <constraint firstItem="CKG-ra-Wzm" firstAttribute="width" secondItem="njT-kt-aw0" secondAttribute="width" id="fm7-Sy-4ie"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="XUh-GD-ozW" secondAttribute="trailing" constant="50" id="idh-ZK-HYc"/>
+                <constraint firstItem="XUh-GD-ozW" firstAttribute="top" secondItem="Pnm-Fn-B21" secondAttribute="bottom" constant="52" id="kN5-Zv-VMP"/>
+                <constraint firstItem="MoV-0h-0UW" firstAttribute="centerY" secondItem="njT-kt-aw0" secondAttribute="centerY" id="lW4-JZ-BVS"/>
+                <constraint firstItem="MoV-0h-0UW" firstAttribute="height" secondItem="njT-kt-aw0" secondAttribute="height" id="sFZ-Pc-n5n"/>
+                <constraint firstItem="MoV-0h-0UW" firstAttribute="width" secondItem="njT-kt-aw0" secondAttribute="width" id="sea-17-2KE"/>
+                <constraint firstItem="XUh-GD-ozW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="50" id="tCd-tE-eLg"/>
+                <constraint firstItem="njT-kt-aw0" firstAttribute="leading" secondItem="CKG-ra-Wzm" secondAttribute="trailing" constant="5" id="tgc-vT-1Gc"/>
+                <constraint firstItem="Pnm-Fn-B21" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="40" id="ubm-gJ-c5Y"/>
+                <constraint firstItem="CKG-ra-Wzm" firstAttribute="centerY" secondItem="njT-kt-aw0" secondAttribute="centerY" id="xNu-g4-A2J"/>
+            </constraints>
+            <animations/>
+        </customView>
+    </objects>
+    <resources>
+        <image name="ic_share_fb" width="104" height="82"/>
+        <image name="ic_share_in" width="100" height="82"/>
+        <image name="ic_share_tw" width="96" height="82"/>
+    </resources>
+</document>

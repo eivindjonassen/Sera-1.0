@@ -1,0 +1,609 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A705F09E1BE3560B001DE0C3 /* SyncViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A705F09C1BE3560B001DE0C3 /* SyncViewController.m */; };
+		A705F09F1BE3560B001DE0C3 /* SyncViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A705F09D1BE3560B001DE0C3 /* SyncViewController.xib */; };
+		A705F0A31BE35EF0001DE0C3 /* ConnectedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A705F0A11BE35EF0001DE0C3 /* ConnectedViewController.m */; };
+		A705F0A41BE35EF0001DE0C3 /* ConnectedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A705F0A21BE35EF0001DE0C3 /* ConnectedViewController.xib */; };
+		A735522B1BE0FA7F008A02EE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A735522A1BE0FA7F008A02EE /* AppDelegate.m */; };
+		A735522E1BE0FA7F008A02EE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A735522D1BE0FA7F008A02EE /* main.m */; };
+		A73552301BE0FA7F008A02EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A735522F1BE0FA7F008A02EE /* Assets.xcassets */; };
+		A73552331BE0FA7F008A02EE /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = A73552311BE0FA7F008A02EE /* MainMenu.xib */; };
+		A735523E1BE0FA7F008A02EE /* SeraOSXTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A735523D1BE0FA7F008A02EE /* SeraOSXTests.m */; };
+		A73552491BE0FA7F008A02EE /* SeraOSXUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A73552481BE0FA7F008A02EE /* SeraOSXUITests.m */; };
+		A77C0F131BFC9E3B0018831F /* AllDoneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A77C0F111BFC9E3B0018831F /* AllDoneViewController.m */; };
+		A77C0F141BFC9E3B0018831F /* AllDoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A77C0F121BFC9E3B0018831F /* AllDoneViewController.xib */; };
+		A77C0F161BFCB8CB0018831F /* AppleScriptKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A77C0F151BFCB8CB0018831F /* AppleScriptKit.framework */; };
+		A77D68BD1BF4834600DAB1FD /* IOBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A77D68BC1BF4834600DAB1FD /* IOBluetooth.framework */; };
+		A7C9675C1BE75BEF00A08022 /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C9675A1BE75BEF00A08022 /* PasswordViewController.m */; };
+		A7C9675D1BE75BEF00A08022 /* PasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7C9675B1BE75BEF00A08022 /* PasswordViewController.xib */; };
+		A7C9675F1BE768EB00A08022 /* Collaboration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7C9675E1BE768EB00A08022 /* Collaboration.framework */; };
+		A7C967631BE7772F00A08022 /* SignalStrengthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C967611BE7772F00A08022 /* SignalStrengthViewController.m */; };
+		A7C967641BE7772F00A08022 /* SignalStrengthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7C967621BE7772F00A08022 /* SignalStrengthViewController.xib */; };
+		A7C967671BE77D2900A08022 /* BluetoothManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C967661BE77D2900A08022 /* BluetoothManager.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A735523A1BE0FA7F008A02EE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A735521E1BE0FA7F008A02EE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A73552251BE0FA7F008A02EE;
+			remoteInfo = SeraOSX;
+		};
+		A73552451BE0FA7F008A02EE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A735521E1BE0FA7F008A02EE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A73552251BE0FA7F008A02EE;
+			remoteInfo = SeraOSX;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A705F09B1BE3560B001DE0C3 /* SyncViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SyncViewController.h; sourceTree = "<group>"; };
+		A705F09C1BE3560B001DE0C3 /* SyncViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SyncViewController.m; sourceTree = "<group>"; };
+		A705F09D1BE3560B001DE0C3 /* SyncViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SyncViewController.xib; sourceTree = "<group>"; };
+		A705F0A01BE35EF0001DE0C3 /* ConnectedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectedViewController.h; sourceTree = "<group>"; };
+		A705F0A11BE35EF0001DE0C3 /* ConnectedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectedViewController.m; sourceTree = "<group>"; };
+		A705F0A21BE35EF0001DE0C3 /* ConnectedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConnectedViewController.xib; sourceTree = "<group>"; };
+		A73552261BE0FA7F008A02EE /* SeraOSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeraOSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A73552291BE0FA7F008A02EE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		A735522A1BE0FA7F008A02EE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		A735522D1BE0FA7F008A02EE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A735522F1BE0FA7F008A02EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A73552321BE0FA7F008A02EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		A73552341BE0FA7F008A02EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A73552391BE0FA7F008A02EE /* SeraOSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SeraOSXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A735523D1BE0FA7F008A02EE /* SeraOSXTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SeraOSXTests.m; sourceTree = "<group>"; };
+		A735523F1BE0FA7F008A02EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A73552441BE0FA7F008A02EE /* SeraOSXUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SeraOSXUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A73552481BE0FA7F008A02EE /* SeraOSXUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SeraOSXUITests.m; sourceTree = "<group>"; };
+		A735524A1BE0FA7F008A02EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A77C0F101BFC9E3B0018831F /* AllDoneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AllDoneViewController.h; sourceTree = "<group>"; };
+		A77C0F111BFC9E3B0018831F /* AllDoneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AllDoneViewController.m; sourceTree = "<group>"; };
+		A77C0F121BFC9E3B0018831F /* AllDoneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllDoneViewController.xib; sourceTree = "<group>"; };
+		A77C0F151BFCB8CB0018831F /* AppleScriptKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppleScriptKit.framework; path = System/Library/Frameworks/AppleScriptKit.framework; sourceTree = SDKROOT; };
+		A77D68BC1BF4834600DAB1FD /* IOBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOBluetooth.framework; path = System/Library/Frameworks/IOBluetooth.framework; sourceTree = SDKROOT; };
+		A7C967591BE75BEF00A08022 /* PasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordViewController.h; sourceTree = "<group>"; };
+		A7C9675A1BE75BEF00A08022 /* PasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordViewController.m; sourceTree = "<group>"; };
+		A7C9675B1BE75BEF00A08022 /* PasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasswordViewController.xib; sourceTree = "<group>"; };
+		A7C9675E1BE768EB00A08022 /* Collaboration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Collaboration.framework; path = System/Library/Frameworks/Collaboration.framework; sourceTree = SDKROOT; };
+		A7C967601BE7772F00A08022 /* SignalStrengthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignalStrengthViewController.h; sourceTree = "<group>"; };
+		A7C967611BE7772F00A08022 /* SignalStrengthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignalStrengthViewController.m; sourceTree = "<group>"; };
+		A7C967621BE7772F00A08022 /* SignalStrengthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignalStrengthViewController.xib; sourceTree = "<group>"; };
+		A7C967651BE77D2900A08022 /* BluetoothManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BluetoothManager.h; sourceTree = "<group>"; };
+		A7C967661BE77D2900A08022 /* BluetoothManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BluetoothManager.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A73552231BE0FA7F008A02EE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A77C0F161BFCB8CB0018831F /* AppleScriptKit.framework in Frameworks */,
+				A77D68BD1BF4834600DAB1FD /* IOBluetooth.framework in Frameworks */,
+				A7C9675F1BE768EB00A08022 /* Collaboration.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A73552361BE0FA7F008A02EE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A73552411BE0FA7F008A02EE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A705F0921BE34BBE001DE0C3 /* Bluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				A7C967651BE77D2900A08022 /* BluetoothManager.h */,
+				A7C967661BE77D2900A08022 /* BluetoothManager.m */,
+			);
+			path = Bluetooth;
+			sourceTree = "<group>";
+		};
+		A705F0931BE34BBE001DE0C3 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		A705F0941BE34BBE001DE0C3 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				A705F09B1BE3560B001DE0C3 /* SyncViewController.h */,
+				A705F09C1BE3560B001DE0C3 /* SyncViewController.m */,
+				A705F09D1BE3560B001DE0C3 /* SyncViewController.xib */,
+				A705F0A01BE35EF0001DE0C3 /* ConnectedViewController.h */,
+				A705F0A11BE35EF0001DE0C3 /* ConnectedViewController.m */,
+				A705F0A21BE35EF0001DE0C3 /* ConnectedViewController.xib */,
+				A7C967591BE75BEF00A08022 /* PasswordViewController.h */,
+				A7C9675A1BE75BEF00A08022 /* PasswordViewController.m */,
+				A7C9675B1BE75BEF00A08022 /* PasswordViewController.xib */,
+				A7C967601BE7772F00A08022 /* SignalStrengthViewController.h */,
+				A7C967611BE7772F00A08022 /* SignalStrengthViewController.m */,
+				A7C967621BE7772F00A08022 /* SignalStrengthViewController.xib */,
+				A77C0F101BFC9E3B0018831F /* AllDoneViewController.h */,
+				A77C0F111BFC9E3B0018831F /* AllDoneViewController.m */,
+				A77C0F121BFC9E3B0018831F /* AllDoneViewController.xib */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		A705F0951BE34BBE001DE0C3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A735521D1BE0FA7F008A02EE = {
+			isa = PBXGroup;
+			children = (
+				A77C0F151BFCB8CB0018831F /* AppleScriptKit.framework */,
+				A77D68BC1BF4834600DAB1FD /* IOBluetooth.framework */,
+				A7C9675E1BE768EB00A08022 /* Collaboration.framework */,
+				A73552281BE0FA7F008A02EE /* SeraOSX */,
+				A735523C1BE0FA7F008A02EE /* SeraOSXTests */,
+				A73552471BE0FA7F008A02EE /* SeraOSXUITests */,
+				A73552271BE0FA7F008A02EE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A73552271BE0FA7F008A02EE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A73552261BE0FA7F008A02EE /* SeraOSX.app */,
+				A73552391BE0FA7F008A02EE /* SeraOSXTests.xctest */,
+				A73552441BE0FA7F008A02EE /* SeraOSXUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A73552281BE0FA7F008A02EE /* SeraOSX */ = {
+			isa = PBXGroup;
+			children = (
+				A705F0921BE34BBE001DE0C3 /* Bluetooth */,
+				A705F0931BE34BBE001DE0C3 /* Classes */,
+				A705F0941BE34BBE001DE0C3 /* ViewControllers */,
+				A705F0951BE34BBE001DE0C3 /* Views */,
+				A73552291BE0FA7F008A02EE /* AppDelegate.h */,
+				A735522A1BE0FA7F008A02EE /* AppDelegate.m */,
+				A735522F1BE0FA7F008A02EE /* Assets.xcassets */,
+				A73552311BE0FA7F008A02EE /* MainMenu.xib */,
+				A73552341BE0FA7F008A02EE /* Info.plist */,
+				A735522C1BE0FA7F008A02EE /* Supporting Files */,
+			);
+			path = SeraOSX;
+			sourceTree = "<group>";
+		};
+		A735522C1BE0FA7F008A02EE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A735522D1BE0FA7F008A02EE /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A735523C1BE0FA7F008A02EE /* SeraOSXTests */ = {
+			isa = PBXGroup;
+			children = (
+				A735523D1BE0FA7F008A02EE /* SeraOSXTests.m */,
+				A735523F1BE0FA7F008A02EE /* Info.plist */,
+			);
+			path = SeraOSXTests;
+			sourceTree = "<group>";
+		};
+		A73552471BE0FA7F008A02EE /* SeraOSXUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A73552481BE0FA7F008A02EE /* SeraOSXUITests.m */,
+				A735524A1BE0FA7F008A02EE /* Info.plist */,
+			);
+			path = SeraOSXUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A73552251BE0FA7F008A02EE /* SeraOSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A735524D1BE0FA7F008A02EE /* Build configuration list for PBXNativeTarget "SeraOSX" */;
+			buildPhases = (
+				A73552221BE0FA7F008A02EE /* Sources */,
+				A73552231BE0FA7F008A02EE /* Frameworks */,
+				A73552241BE0FA7F008A02EE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SeraOSX;
+			productName = SeraOSX;
+			productReference = A73552261BE0FA7F008A02EE /* SeraOSX.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A73552381BE0FA7F008A02EE /* SeraOSXTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A73552501BE0FA7F008A02EE /* Build configuration list for PBXNativeTarget "SeraOSXTests" */;
+			buildPhases = (
+				A73552351BE0FA7F008A02EE /* Sources */,
+				A73552361BE0FA7F008A02EE /* Frameworks */,
+				A73552371BE0FA7F008A02EE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A735523B1BE0FA7F008A02EE /* PBXTargetDependency */,
+			);
+			name = SeraOSXTests;
+			productName = SeraOSXTests;
+			productReference = A73552391BE0FA7F008A02EE /* SeraOSXTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		A73552431BE0FA7F008A02EE /* SeraOSXUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A73552531BE0FA7F008A02EE /* Build configuration list for PBXNativeTarget "SeraOSXUITests" */;
+			buildPhases = (
+				A73552401BE0FA7F008A02EE /* Sources */,
+				A73552411BE0FA7F008A02EE /* Frameworks */,
+				A73552421BE0FA7F008A02EE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A73552461BE0FA7F008A02EE /* PBXTargetDependency */,
+			);
+			name = SeraOSXUITests;
+			productName = SeraOSXUITests;
+			productReference = A73552441BE0FA7F008A02EE /* SeraOSXUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A735521E1BE0FA7F008A02EE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = Ignitum;
+				TargetAttributes = {
+					A73552251BE0FA7F008A02EE = {
+						CreatedOnToolsVersion = 7.1;
+					};
+					A73552381BE0FA7F008A02EE = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = A73552251BE0FA7F008A02EE;
+					};
+					A73552431BE0FA7F008A02EE = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = A73552251BE0FA7F008A02EE;
+					};
+				};
+			};
+			buildConfigurationList = A73552211BE0FA7F008A02EE /* Build configuration list for PBXProject "SeraOSX" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A735521D1BE0FA7F008A02EE;
+			productRefGroup = A73552271BE0FA7F008A02EE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A73552251BE0FA7F008A02EE /* SeraOSX */,
+				A73552381BE0FA7F008A02EE /* SeraOSXTests */,
+				A73552431BE0FA7F008A02EE /* SeraOSXUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A73552241BE0FA7F008A02EE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7C967641BE7772F00A08022 /* SignalStrengthViewController.xib in Resources */,
+				A73552301BE0FA7F008A02EE /* Assets.xcassets in Resources */,
+				A73552331BE0FA7F008A02EE /* MainMenu.xib in Resources */,
+				A705F0A41BE35EF0001DE0C3 /* ConnectedViewController.xib in Resources */,
+				A77C0F141BFC9E3B0018831F /* AllDoneViewController.xib in Resources */,
+				A705F09F1BE3560B001DE0C3 /* SyncViewController.xib in Resources */,
+				A7C9675D1BE75BEF00A08022 /* PasswordViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A73552371BE0FA7F008A02EE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A73552421BE0FA7F008A02EE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A73552221BE0FA7F008A02EE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A77C0F131BFC9E3B0018831F /* AllDoneViewController.m in Sources */,
+				A705F09E1BE3560B001DE0C3 /* SyncViewController.m in Sources */,
+				A735522E1BE0FA7F008A02EE /* main.m in Sources */,
+				A705F0A31BE35EF0001DE0C3 /* ConnectedViewController.m in Sources */,
+				A7C967671BE77D2900A08022 /* BluetoothManager.m in Sources */,
+				A7C967631BE7772F00A08022 /* SignalStrengthViewController.m in Sources */,
+				A735522B1BE0FA7F008A02EE /* AppDelegate.m in Sources */,
+				A7C9675C1BE75BEF00A08022 /* PasswordViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A73552351BE0FA7F008A02EE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A735523E1BE0FA7F008A02EE /* SeraOSXTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A73552401BE0FA7F008A02EE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A73552491BE0FA7F008A02EE /* SeraOSXUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A735523B1BE0FA7F008A02EE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A73552251BE0FA7F008A02EE /* SeraOSX */;
+			targetProxy = A735523A1BE0FA7F008A02EE /* PBXContainerItemProxy */;
+		};
+		A73552461BE0FA7F008A02EE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A73552251BE0FA7F008A02EE /* SeraOSX */;
+			targetProxy = A73552451BE0FA7F008A02EE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A73552311BE0FA7F008A02EE /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A73552321BE0FA7F008A02EE /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A735524B1BE0FA7F008A02EE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		A735524C1BE0FA7F008A02EE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		A735524E1BE0FA7F008A02EE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = SeraOSX/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = no.ignitum.SeraOSX;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A735524F1BE0FA7F008A02EE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = SeraOSX/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = no.ignitum.SeraOSX;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		A73552511BE0FA7F008A02EE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = SeraOSXTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = no.ignitum.SeraOSXTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SeraOSX.app/Contents/MacOS/SeraOSX";
+			};
+			name = Debug;
+		};
+		A73552521BE0FA7F008A02EE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = SeraOSXTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = no.ignitum.SeraOSXTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SeraOSX.app/Contents/MacOS/SeraOSX";
+			};
+			name = Release;
+		};
+		A73552541BE0FA7F008A02EE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = SeraOSXUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = no.ignitum.SeraOSXUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = SeraOSX;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		A73552551BE0FA7F008A02EE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = SeraOSXUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = no.ignitum.SeraOSXUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = SeraOSX;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A73552211BE0FA7F008A02EE /* Build configuration list for PBXProject "SeraOSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A735524B1BE0FA7F008A02EE /* Debug */,
+				A735524C1BE0FA7F008A02EE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A735524D1BE0FA7F008A02EE /* Build configuration list for PBXNativeTarget "SeraOSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A735524E1BE0FA7F008A02EE /* Debug */,
+				A735524F1BE0FA7F008A02EE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A73552501BE0FA7F008A02EE /* Build configuration list for PBXNativeTarget "SeraOSXTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A73552511BE0FA7F008A02EE /* Debug */,
+				A73552521BE0FA7F008A02EE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A73552531BE0FA7F008A02EE /* Build configuration list for PBXNativeTarget "SeraOSXUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A73552541BE0FA7F008A02EE /* Debug */,
+				A73552551BE0FA7F008A02EE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A735521E1BE0FA7F008A02EE /* Project object */;
+}
