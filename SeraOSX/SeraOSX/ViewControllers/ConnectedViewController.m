@@ -27,14 +27,14 @@
     NSLog(@"%@",[defaults objectForKey:@"sera_pass"]);
     NSLog(@"%li",(long)[defaults integerForKey:@"signalStrength"]);
     if ([defaults objectForKey:@"sera_pass"] == nil || [defaults integerForKey:@"signalStrength"] == 0){
-        [self performSelector:@selector(goToConfiguration) withObject:nil afterDelay:5];
+        [self performSelector:@selector(goToConfiguration:) withObject:nil afterDelay:5];
     } else {
         [self performSelector:@selector(dismissPopover) withObject:nil afterDelay:5];
     }
-    
+
 }
 
-- (IBAction)goToConfiguration {
+- (IBAction)goToConfiguration:(id)sender  {
      AppDelegate *delegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
     [delegate onSetupClick];
 }

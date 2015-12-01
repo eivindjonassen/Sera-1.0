@@ -28,10 +28,16 @@
 
 }
 - (IBAction)onShareFacebookClicked:(id)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.facebook.com/"]];
+    
 }
 - (IBAction)onShareLinkedInClicked:(id)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.linkedin.com/"]];
+    
 }
 - (IBAction)onShareTwitterClicked:(id)sender {
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://www.twitter.com/"]];
+    
 }
 
 - (void)tintIcons {

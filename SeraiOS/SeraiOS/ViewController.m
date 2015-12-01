@@ -44,6 +44,8 @@
             self.bluetoothDisabledView.alpha = 1;
             break;
         case UserStateConfigured:
+            self.unlinkButton.hidden = NO;
+            self.unlinkButton.alpha = 1;
             self.greetingsView.alpha = 0;
             self.connectView.alpha = 1;
             self.bluetoothDisabledView.alpha = 0;
@@ -144,6 +146,7 @@
             self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"You've connected to Your %@\n\nYou can now press sleep button on iPhone and put it in the pocket!",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
             [self.connectViewStateImageView setImage:[UIImage imageNamed:@"ic_mac_complete"]];
             self.activityIndicator.hidden = YES;
+            self.unlinkButton.hidden = NO;
             break;
         case UserStateConfigured:
             [self.connectViewStateImageView setImage:[UIImage imageNamed:@"ic_mac_on"]];
@@ -156,6 +159,7 @@
 
 - (void)peripheralDisconnected {
     if (self.connectView.alpha){
+        self.activityIndicator.hidden = NO;
         self.connectViewStateImageView.image = [UIImage imageNamed:@"ic_mac_off"];
         self.connectViewTitleLabel.text = @"";
         self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"We can not find %@\n\nPlease start Sera on Your Mac",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];

@@ -46,7 +46,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="swipe left" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQK-Ht-93m">
-                                        <rect key="frame" x="257" y="301" width="86" height="26"/>
+                                        <rect key="frame" x="257" y="474" width="86" height="26"/>
                                         <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="22"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -57,7 +57,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="lQK-Ht-93m" firstAttribute="top" secondItem="Ykh-Zn-QQW" secondAttribute="bottom" constant="20" id="0Rr-JA-GqR"/>
-                                    <constraint firstItem="hND-u0-fLo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="c4s-2w-r5S" secondAttribute="leading" constant="20" id="DhD-xx-0fB"/>
+                                    <constraint firstItem="hND-u0-fLo" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="c4s-2w-r5S" secondAttribute="leading" constant="40" id="DhD-xx-0fB"/>
                                     <constraint firstItem="hND-u0-fLo" firstAttribute="top" secondItem="c4s-2w-r5S" secondAttribute="top" constant="50" id="Ebe-5P-hO6"/>
                                     <constraint firstItem="Ykh-Zn-QQW" firstAttribute="centerX" secondItem="c4s-2w-r5S" secondAttribute="centerX" id="EcU-PT-xfX"/>
                                     <constraint firstItem="6oX-Yb-WNJ" firstAttribute="top" secondItem="hND-u0-fLo" secondAttribute="bottom" constant="60" id="FuC-rE-eKJ"/>
@@ -67,10 +67,16 @@
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Ykh-Zn-QQW" secondAttribute="trailing" constant="20" id="Tis-0A-qv3"/>
                                     <constraint firstItem="Ykh-Zn-QQW" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="c4s-2w-r5S" secondAttribute="leading" constant="20" id="dwr-Sp-vN2"/>
                                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6oX-Yb-WNJ" secondAttribute="trailing" constant="20" id="fOr-0n-pfh"/>
+                                    <constraint firstAttribute="bottom" secondItem="lQK-Ht-93m" secondAttribute="bottom" constant="100" id="fzm-p1-3hJ"/>
                                     <constraint firstItem="6oX-Yb-WNJ" firstAttribute="centerX" secondItem="c4s-2w-r5S" secondAttribute="centerX" id="hg3-9c-tIx"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hND-u0-fLo" secondAttribute="trailing" constant="20" id="kA1-5P-1Td"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="hND-u0-fLo" secondAttribute="trailing" constant="40" id="kA1-5P-1Td"/>
                                     <constraint firstItem="lQK-Ht-93m" firstAttribute="centerX" secondItem="c4s-2w-r5S" secondAttribute="centerX" id="mxO-UM-1lV"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="0Rr-JA-GqR"/>
+                                    </mask>
+                                </variation>
                             </view>
                             <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yxa-Ik-aWf" userLabel="Bluetooth View">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
@@ -128,11 +134,11 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="17y-Jr-eTA">
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="17y-Jr-eTA">
                                         <rect key="frame" x="290" y="459" width="20" height="20"/>
                                         <animations/>
                                     </activityIndicatorView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eBr-81-2Bn">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eBr-81-2Bn">
                                         <rect key="frame" x="10" y="566" width="24" height="24"/>
                                         <animations/>
                                         <state key="normal" image="ic_help"/>
@@ -194,6 +200,7 @@
                         <outlet property="greetingsSwipeLeftLabel" destination="lQK-Ht-93m" id="muS-Sz-bnd"/>
                         <outlet property="greetingsView" destination="c4s-2w-r5S" id="D8t-iK-HNK"/>
                         <outlet property="statusImageYConstraint" destination="0qu-o5-rok" id="2it-XL-W5B"/>
+                        <outlet property="unlinkButton" destination="eBr-81-2Bn" id="jgb-G8-XUC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -201,7 +208,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="bg" width="151" height="267"/>
+        <image name="bg" width="302" height="534"/>
         <image name="ic_arrow" width="13" height="176"/>
         <image name="ic_help" width="24" height="24"/>
         <image name="ic_mac_off" width="342" height="186"/>

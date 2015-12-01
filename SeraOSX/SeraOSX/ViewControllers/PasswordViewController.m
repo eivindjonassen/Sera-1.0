@@ -57,9 +57,14 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     AppDelegate *delegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
-    [delegate compileUnlockScript];
-    [delegate showSignalStrenghtView];
-    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [delegate compileUnlockScriptWitchCompletionBlock:^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [delegate showSignalStrenghtView];
+            });
+        }];
+        
+    });
     
 }
 @end

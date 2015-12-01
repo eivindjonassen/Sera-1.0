@@ -27,6 +27,7 @@ typedef NS_ENUM (NSInteger, UserState){
 @property (weak, nonatomic) IBOutlet UIView *connectView;
 @property (weak, nonatomic) IBOutlet UILabel *connectViewTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *connectViewDescriptionLabel;
+@property (weak, nonatomic) IBOutlet UIButton *unlinkButton;
 @property (weak, nonatomic) IBOutlet UIImageView *connectViewStateImageView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *statusImageYConstraint;

@@ -51,7 +51,7 @@
     
     self.macNameLastCharacteristics = [[CBMutableCharacteristic alloc] initWithType:self.macNameLastUUID properties:CBCharacteristicPropertyWriteWithoutResponse value:nil permissions:CBAttributePermissionsWriteable];
     
-    self.unlinkCharacteristics = [[CBMutableCharacteristic alloc] initWithType:self.unlinkUUID properties:CBCharacteristicPropertyWriteWithoutResponse value:nil permissions:CBAttributePermissionsWriteable];
+    self.unlinkCharacteristics = [[CBMutableCharacteristic alloc] initWithType:self.unlinkUUID properties:CBCharacteristicPropertyWriteWithoutResponse|CBCharacteristicPropertyNotify value:nil permissions:CBAttributePermissionsWriteable];
     
     self.deviceInfoService.characteristics = @[self.deviceInfoCharacteristic, self.macNameCharacteristics, self.macNameLastCharacteristics, self.unlinkCharacteristics];
     [self.peripheralManager addService:self.deviceInfoService];
@@ -78,9 +78,10 @@
 
 - (void)peripheralManager:(CBPeripheralManager *)peripheral central:(CBCentral *)central didSubscribeToCharacteristic:(CBCharacteristic *)characteristic {
     NSLog(@"didSubscribeToCharacteristic");
+    NSLog(@"%@",characteristic.UUID);
     if ([characteristic.UUID isEqual:self.characteristicsUUID]){
+        
     [self.delegate peripheralSuccessfullyConnected];
-    self.connectedCentral = central;
     }
 }
 
@@ -169,13 +170,15 @@
         } else if ([singleRequest.characteristic.UUID isEqual:[CBUUID UUIDWithString:BLE_CHARACTERISTICS_MACNAME_LAST_UUID]]){
             NSString *macName = [[NSString alloc] initWithData:singleRequest.value encoding:NSUTF8StringEncoding];
             NSLog(@"LAST NAME CHUNK: %@",macName);
-            NSString *prevName = [[NSUserDefaults standardUserDefaults] stringForKey:@"macName"];
-            
-            if (prevName){
-                [[NSUserDefaults standardUserDefaults] setObject:[prevName stringByAppendingString:macName] forKey:@"macName"];
-            } else {
+            if (!self.hasReceivedMacName){
+                self.hasReceivedMacName = YES;
                 [[NSUserDefaults standardUserDefaults] setObject:macName forKey:@"macName"];
+            } else {
+                NSString *prevName = [[NSUserDefaults standardUserDefaults] stringForKey:@"macName"];
+                [[NSUserDefaults standardUserDefaults] setObject:[prevName stringByAppendingString:macName] forKey:@"macName"];
             }
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
             
             [[NSUserDefaults standardUserDefaults] synchronize];
             [self.delegate macNameUpdated];
@@ -190,10 +193,12 @@
 }
 
 - (void)sendUnlinkToCentral {
+    
     NSUInteger index = 1;
     NSData *payload = [NSData dataWithBytes:&index length:sizeof(index)];
     
     if( [self.peripheralManager updateValue:payload forCharacteristic:self.unlinkCharacteristics onSubscribedCentrals:nil]){
+        NSLog(@"didSentUnlink");
         [self.peripheralManager stopAdvertising];
     }
 

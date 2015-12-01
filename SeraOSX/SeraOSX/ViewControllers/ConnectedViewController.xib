@@ -61,9 +61,21 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="pgV-WY-TiC">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="272"/>
+                    <animations/>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="urG-IF-dFd">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="goToConfiguration:" target="-2" id="gat-aO-bKs"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
                 <constraint firstItem="ryp-WP-WsK" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="0vv-hD-h9u"/>
+                <constraint firstItem="pgV-WY-TiC" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="G8A-dX-JrB"/>
                 <constraint firstItem="voF-3D-YS5" firstAttribute="top" relation="greaterThanOrEqual" secondItem="hY9-Uv-kON" secondAttribute="bottom" constant="8" id="LfK-k6-k8G"/>
                 <constraint firstAttribute="trailing" secondItem="Rzv-u5-RUA" secondAttribute="trailing" constant="196" id="NEG-ZD-upf"/>
                 <constraint firstItem="voF-3D-YS5" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="Nk4-Mw-h2d"/>
@@ -72,12 +84,15 @@
                 <constraint firstItem="C3g-mx-Rx4" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="V27-Du-8tP"/>
                 <constraint firstItem="C3g-mx-Rx4" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" constant="50" id="XMV-DH-Sf1"/>
                 <constraint firstItem="Rzv-u5-RUA" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="197" id="Zcn-CH-vSS"/>
+                <constraint firstItem="pgV-WY-TiC" firstAttribute="height" secondItem="Hz6-mo-xeY" secondAttribute="height" id="Zy4-dI-Vva"/>
                 <constraint firstAttribute="trailing" secondItem="C3g-mx-Rx4" secondAttribute="trailing" constant="50" id="a5t-yb-GNT"/>
+                <constraint firstItem="pgV-WY-TiC" firstAttribute="width" secondItem="Hz6-mo-xeY" secondAttribute="width" id="bL6-Qr-tEj"/>
                 <constraint firstItem="hY9-Uv-kON" firstAttribute="width" secondItem="C3g-mx-Rx4" secondAttribute="width" id="bxk-YL-T50"/>
                 <constraint firstItem="ryp-WP-WsK" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="eg6-99-DYc"/>
                 <constraint firstItem="hY9-Uv-kON" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="iWO-N9-leh"/>
                 <constraint firstItem="C3g-mx-Rx4" firstAttribute="top" secondItem="ryp-WP-WsK" secondAttribute="bottom" constant="8" id="q6n-yy-KKx"/>
                 <constraint firstItem="hY9-Uv-kON" firstAttribute="top" secondItem="C3g-mx-Rx4" secondAttribute="bottom" constant="8" id="r0f-ge-yvX"/>
+                <constraint firstItem="pgV-WY-TiC" firstAttribute="centerY" secondItem="Hz6-mo-xeY" secondAttribute="centerY" id="rkX-32-5vz"/>
             </constraints>
             <animations/>
         </customView>

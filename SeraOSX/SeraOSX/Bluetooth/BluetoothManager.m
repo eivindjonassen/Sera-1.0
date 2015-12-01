@@ -7,6 +7,7 @@
 //
 
 #import "BluetoothManager.h"
+#import <Cocoa/Cocoa.h>
 
 
 @implementation BluetoothManager
@@ -94,12 +95,28 @@
     }
     else if ([central state] == CBCentralManagerStateUnauthorized) {
         NSLog(@"CoreBluetooth BLE state is unauthorized");
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert setMessageText:@"Bluetooth error!"];
+        [alert setInformativeText:@"CoreBluetooth BLE state is unauthorized"];
+        [alert addButtonWithTitle:@"Ok"];
+        [alert runModal];
+        
     }
     else if ([central state] == CBCentralManagerStateUnknown) {
         NSLog(@"CoreBluetooth BLE state is unknown");
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert setMessageText:@"Bluetooth error!"];
+        [alert setInformativeText:@"CoreBluetooth BLE state is unknown"];
+        [alert addButtonWithTitle:@"Ok"];
+        [alert runModal];
     }
     else if ([central state] == CBCentralManagerStateUnsupported) {
         NSLog(@"CoreBluetooth BLE hardware is unsupported on this platform");
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert setMessageText:@"Bluetooth error!"];
+        [alert setInformativeText:@"CoreBluetooth BLE hardware is unsupported on this platform"];
+        [alert addButtonWithTitle:@"Ok"];
+        [alert runModal];
     }
 }
 
@@ -176,6 +193,12 @@
             [self.delegate deviceUnlinked];
         }
     }
+}
+
+- (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
+    NSLog(@"peripheral: %@ didUpdateNotificationStateForCharacteristic: %@, error: %@",peripheral, characteristic.UUID, error)
+    ;
+
 }
 
 - (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error {

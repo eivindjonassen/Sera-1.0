@@ -29,59 +29,69 @@
     // Insert code here to initialize your application
     
     [self compileLockScript];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self compileUnlockScriptWitchCompletionBlock:^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
+                NSStatusBarButton *barButton = self.statusItem.button;
+                if (barButton){
+                    barButton.image = [NSImage imageNamed:@"ic_statusbar"];
+                    //        barButton.action = @selector(togglePopover:);
+                }
+                self.statusItem.highlightMode = YES;
+                
+                // Initializing main menu
+                NSMenu *mainMenu = [[NSMenu alloc] init];
+                [mainMenu addItemWithTitle:@"Setup Sera" action:@selector(onSetupClick) keyEquivalent:@""];
+                [mainMenu addItem:[NSMenuItem separatorItem]];
+                
+                // Need reference for title changes
+                self.linkPhoneItem = [mainMenu addItemWithTitle:@"Scanning..." action:@selector(onLinkPhoneClick) keyEquivalent:@""];
+                self.linkPhoneItem.enabled = NO;
+                [mainMenu addItemWithTitle:@"Unlock automaticly" action:@selector(onUpdatesClick) keyEquivalent:@""];
+                [mainMenu addItem:[NSMenuItem separatorItem]];
+                [mainMenu addItemWithTitle:@"Quit Sera" action:@selector(onQuitClick) keyEquivalent:@""];
+                
+                [mainMenu setAutoenablesItems:NO];
+                [mainMenu.itemArray objectAtIndex:0].enabled = NO;
+                [mainMenu.itemArray objectAtIndex:2].enabled = NO;
+                [mainMenu.itemArray objectAtIndex:3].enabled = YES;
+                [mainMenu.itemArray objectAtIndex:5].enabled = YES;
+                
+                self.statusItem.menu = mainMenu;
+                
+                [BluetoothManager sharedClient].delegate = self;
+                
+                
+                // Main popover for views
+                self.mainPopover = [[NSPopover alloc] init];
+                self.mainPopover.contentViewController = [[SyncViewController alloc] initWithNibName:@"SyncViewController" bundle:nil];
+                [self performSelector:@selector(togglePopover:) withObject:nil afterDelay:0.5]; // To show popover in the right place, we need delay
+                
+                [[BluetoothManager sharedClient] scanForDevices];
+                
+                NSDistributedNotificationCenter * center =
+                [NSDistributedNotificationCenter defaultCenter];
+                
+                [center
+                 addObserver:self
+                 selector:@selector(screenIsLocked:)
+                 name:@"com.apple.screenIsLocked"
+                 object:nil];
+                
+                [center
+                 addObserver:self
+                 selector:@selector(screenIsUnlocked:)
+                 name:@"com.apple.screenIsUnlocked"
+                 object:nil];
+                
+                [[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self selector:@selector(screenIsSleeping:) name:NSWorkspaceScreensDidSleepNotification object:nil];
+                [[[NSWorkspace sharedWorkspace] notificationCenter] addObserver:self selector:@selector(screenHasWakeUp:) name:NSWorkspaceScreensDidWakeNotification object:nil];
+            });
+            
+        }];
+    });
     // Setup main status bar info
-    self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSSquareStatusItemLength];
-    NSStatusBarButton *barButton = self.statusItem.button;
-    if (barButton){
-        barButton.image = [NSImage imageNamed:@"ic_statusbar"];
-//        barButton.action = @selector(togglePopover:);
-    }
-    self.statusItem.highlightMode = YES;
-    
-    // Initializing main menu
-    NSMenu *mainMenu = [[NSMenu alloc] init];
-    [mainMenu addItemWithTitle:@"Setup Sera" action:@selector(onSetupClick) keyEquivalent:@""];
-    [mainMenu addItem:[NSMenuItem separatorItem]];
-    
-    // Need reference for title changes
-    self.linkPhoneItem = [mainMenu addItemWithTitle:@"Scanning..." action:@selector(onLinkPhoneClick) keyEquivalent:@""];
-    self.linkPhoneItem.enabled = NO;
-    [mainMenu addItemWithTitle:@"Automatic Updates" action:@selector(onUpdatesClick) keyEquivalent:@""];
-    [mainMenu addItem:[NSMenuItem separatorItem]];
-    [mainMenu addItemWithTitle:@"Quit Sera" action:@selector(onQuitClick) keyEquivalent:@""];
-    
-    [mainMenu setAutoenablesItems:NO];
-    [mainMenu.itemArray objectAtIndex:0].enabled = NO;
-    [mainMenu.itemArray objectAtIndex:2].enabled = NO;
-    [mainMenu.itemArray objectAtIndex:3].enabled = YES;
-    [mainMenu.itemArray objectAtIndex:5].enabled = YES;
-    
-    self.statusItem.menu = mainMenu;
-
-    [BluetoothManager sharedClient].delegate = self;
-
-    
-    // Main popover for views
-    self.mainPopover = [[NSPopover alloc] init];
-    self.mainPopover.contentViewController = [[SyncViewController alloc] initWithNibName:@"SyncViewController" bundle:nil];
-    [self performSelector:@selector(togglePopover:) withObject:nil afterDelay:0.1]; // To show popover in the right place, we need delay
-    
-    [[BluetoothManager sharedClient] scanForDevices];
-    
-    NSDistributedNotificationCenter * center =
-    [NSDistributedNotificationCenter defaultCenter];
-    
-    [center
-     addObserver:self
-     selector:@selector(screenIsLocked:)
-     name:@"com.apple.screenIsLocked"
-     object:nil];
-    
-    [center
-     addObserver:self
-     selector:@selector(screenIsUnlocked:)
-     name:@"com.apple.screenIsUnlocked"
-     object:nil];
     
 }
 
@@ -95,24 +105,46 @@
     self.isScreenLocked = NO;
 }
 
+- (void)screenIsSleeping:(id)sender {
+    NSLog(@"Screen is sleeping!");
+    self.isScreenSleeping = YES;
+}
+
+- (void)screenHasWakeUp:(id)sender {
+    NSLog(@"Screen has wake up!");
+    self.isScreenSleeping = NO;
+}
+
 - (void)onSetupClick {
     self.mainPopover.contentViewController = [[PasswordViewController alloc] initWithNibName:@"PasswordViewController" bundle:nil];
+    [self showPopover];
 }
 
 - (void)onLinkPhoneClick {
     [[BluetoothManager sharedClient] sendUnlink];
-
+    
     [self deviceUnlinked];
 }
 
 - (void)onUpdatesClick {
-    BOOL autoUpdate = [[NSUserDefaults standardUserDefaults] boolForKey:@"autoUpdates"];
+    BOOL autoUpdate = [[NSUserDefaults standardUserDefaults] boolForKey:@"removeSleep"];
     
     autoUpdate = !autoUpdate;
     
-    [[NSUserDefaults standardUserDefaults] setBool:autoUpdate forKey:@"autoUpdates"];
+    [[NSUserDefaults standardUserDefaults] setBool:autoUpdate forKey:@"removeSleep"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     [self.statusItem.menu.itemArray objectAtIndex:3].image = autoUpdate ? [NSImage imageNamed:@"ic_tick"] : nil;
+    
+    AppDelegate *delegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [delegate compileUnlockScriptWitchCompletionBlock:^{
+            //            dispatch_async(dispatch_get_main_queue(), ^{
+            //                [delegate showSignalStrenghtView];
+            //            });
+        }];
+        
+    });
 }
 
 - (void)onQuitClick {
@@ -133,11 +165,11 @@
 
 - (void)hidePopoverWithFade {
     [self hidePopover:nil];
-//    [NSAnimationContext beginGrouping];
-//    [NSAnimationContext currentContext].duration = 0.25;
-//    self.mainPopover.contentViewController.view.animator.alphaValue = 0;
-//    [NSAnimationContext endGrouping];
-//    [self performSelector:@selector(hidePopover:) withObject:nil afterDelay:0.25];
+    //    [NSAnimationContext beginGrouping];
+    //    [NSAnimationContext currentContext].duration = 0.25;
+    //    self.mainPopover.contentViewController.view.animator.alphaValue = 0;
+    //    [NSAnimationContext endGrouping];
+    //    [self performSelector:@selector(hidePopover:) withObject:nil afterDelay:0.25];
 }
 
 - (void)showPopover{
@@ -169,7 +201,7 @@
     }
     
     NSInteger signalStrength = [[NSUserDefaults standardUserDefaults] integerForKey:@"signalStrength"];
-    NSLog(@"currentStrenght: %li, saved: %li",(long)RSSI.integerValue, (long)signalStrength);
+    // NSLog(@"currentStrenght: %li, saved: %li",(long)RSSI.integerValue, (long)signalStrength);
     if (signalStrength != 0){
         if (signalStrength >= RSSI.integerValue+10){
             if (!self.isScreenLocked){
@@ -180,8 +212,20 @@
             if (self.isScreenLocked){
                 NSLog(@"Unlock screen");
                 NSDictionary *error;
-                [self compileUnlockScript];
-                [self.unlockScript executeAndReturnError:&error];
+                if ([[NSUserDefaults standardUserDefaults] boolForKey:@"removeSleep"]){
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                        [self compileUnlockScriptWitchCompletionBlock:^{
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                [self.unlockScript executeAndReturnError:nil];
+                            });
+                        }];
+                        
+                    });
+                } else {
+                    if (!self.isScreenSleeping){
+                    [self.unlockScript executeAndReturnError:&error];
+                    }
+                }
                 
                 NSLog(@"error: %@",error);
             }
@@ -193,6 +237,9 @@
     [self.statusItem.menu.itemArray objectAtIndex:0].enabled = NO;
     [self.statusItem.menu.itemArray objectAtIndex:2].enabled = NO;
     [[self.statusItem.menu.itemArray objectAtIndex:2] setTitle:@"Scanning..."];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"signalStrength"];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"sera_pass"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     self.mainPopover.contentViewController = [[SyncViewController alloc] initWithNibName:@"SyncViewController" bundle:nil];
     [self performSelector:@selector(showPopover) withObject:nil afterDelay:0.1]; // To show popover in the right place, we need delay
     
@@ -200,7 +247,7 @@
 }
 
 - (void)showSignalStrenghtView {
-     self.mainPopover.contentViewController = [[SignalStrengthViewController alloc] initWithNibName:@"SignalStrengthViewController" bundle:nil];
+    self.mainPopover.contentViewController = [[SignalStrengthViewController alloc] initWithNibName:@"SignalStrengthViewController" bundle:nil];
 }
 
 - (void)peripheralSuccessfulyConnected:(CBPeripheral *)peripheral {
@@ -209,11 +256,11 @@
     [[self.statusItem.menu.itemArray objectAtIndex:2] setTitle:[NSString stringWithFormat:@"Unlink %@",[[NSUserDefaults standardUserDefaults] stringForKey:@"iphoneName"]]];
     switch([[NSUserDefaults standardUserDefaults] integerForKey:@"userState"]){
         case 0:{
-           
+            NSLog(@"Connected!");
             self.mainPopover.contentViewController = [[ConnectedViewController alloc] initWithNibName:@"ConnectedViewController" bundle:nil];
-
+            
             break;
-             }
+        }
         case 1:
             break;
         case 2:
@@ -222,14 +269,14 @@
 }
 
 - (void) compileScripts {
-//    NSString *pythonScript= @"import objc;bndl = objc.loadBundle('CoreGraphics', globals(), '/System/Library/Frameworks/ApplicationServices.framework');objc.loadBundleFunctions(bndl, globals(),[('CGWarpMouseCursorPosition', 'v{CGPoint=ff}')]);CGWarpMouseCursorPosition((0, 0));";
-//    
-//    NSString *pythonRunScript = [NSString stringWithFormat:@"python -c \"%@\"",pythonScript];
-//    
-//    NSString *allScript = [NSString stringWithFormat:@"do shell script \"%@\" tell application \"Finder\" to activate",pythonRunScript];
+    //    NSString *pythonScript= @"import objc;bndl = objc.loadBundle('CoreGraphics', globals(), '/System/Library/Frameworks/ApplicationServices.framework');objc.loadBundleFunctions(bndl, globals(),[('CGWarpMouseCursorPosition', 'v{CGPoint=ff}')]);CGWarpMouseCursorPosition((0, 0));";
+    //
+    //    NSString *pythonRunScript = [NSString stringWithFormat:@"python -c \"%@\"",pythonScript];
+    //
+    //    NSString *allScript = [NSString stringWithFormat:@"do shell script \"%@\" tell application \"Finder\" to activate",pythonRunScript];
     
     NSString *allScript = [NSString stringWithFormat:@"do shell script \"pmset displaysleepnow\""];
-
+    
     self.lockScript = [[NSAppleScript alloc] initWithSource:allScript];
     [self.lockScript compileAndReturnError:nil];
     
@@ -251,7 +298,7 @@
     [self.lockScript compileAndReturnError:nil];
 }
 
-- (void) compileUnlockScript {
+- (void)compileUnlockScriptWitchCompletionBlock:(void (^)(void))completion {
     NSString *password = [[NSUserDefaults standardUserDefaults] stringForKey:@"sera_pass"];
     if (password == nil || ![password length])
     {
@@ -263,19 +310,24 @@
     [formatter setDateFormat:@"MM/dd/yyyy HH:mm:ss"];
     NSString *dateString = [formatter stringFromDate:[[NSDate date] dateByAddingTimeInterval:1]];
     
+    BOOL shouldWakeUp = [[NSUserDefaults standardUserDefaults] boolForKey:@"removeSleep"];
     
-    NSString *shellScriptString = @"do shell script \"%@\"";
-    NSString *wakeString = @"pmset schedule wake \"%@\"";
+    NSString *escape = @"";
+    if (shouldWakeUp){
+        escape = [NSString stringWithFormat:@"do shell script \"pmset schedule wake \\\"%@\\\" &> /dev/null &\" user name \"%@\" password \"%@\" with administrator privileges\n ",dateString,username,password];
+    }
     
-    NSString *escape = [NSString stringWithFormat:@"do shell script \"pmset schedule wake \\\"%@\\\" &> /dev/null &\" user name \"%@\" password \"%@\" with administrator privileges\n tell application \"System Events\" to keystroke \"%@\"\n tell application \"System Events\" to keystroke return",dateString,username,password,password];
+    escape = [escape stringByAppendingString:[NSString stringWithFormat:@"tell application \"System Events\" to keystroke \"%@\"\n tell application \"System Events\" to keystroke return",password]];
     
-    NSString *unlockString = [NSString stringWithFormat:shellScriptString,[NSString stringWithFormat:wakeString,dateString]];
-   // NSString *trying = [escape stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
+    // NSString *trying = [escape stringByReplacingOccurrencesOfString:@"\"" withString:@"\\\""];
     NSLog(@"unlock string: %@",escape);
     
     self.unlockScript = [[NSAppleScript alloc] initWithSource:escape];
     
     [self.unlockScript compileAndReturnError:nil];
+    completion();
 }
+
+
 
 @end

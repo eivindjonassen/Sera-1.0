@@ -12,6 +12,7 @@
 @interface AppDelegate : NSObject <NSApplicationDelegate, BTManagerDelegate>
 
 @property (nonatomic, assign) BOOL isScreenLocked;
+@property (nonatomic, assign) BOOL isScreenSleeping;
 @property (nonatomic, retain) NSAppleScript *lockScript;
 @property (nonatomic, retain) NSAppleScript *unlockScript;
 
@@ -20,7 +21,7 @@
 - (void)showSignalStrenghtView;
 - (void)showAllDoneView;
 - (void) compileScripts;
-- (void)compileUnlockScript;
+- (void)compileUnlockScriptWitchCompletionBlock:(void (^)(void))completion;
 - (void)compileLockScript;
 @end
 
