@@ -18,8 +18,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib
     [BluetoothManager sharedClient].delegate = self;
-    [[BluetoothManager sharedClient] checkBluetoothState];
     [self initViews];
+    [[BluetoothManager sharedClient] checkBluetoothState];
+    //[[BluetoothManager sharedClient] startAdvertisingIfReady];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -47,8 +48,7 @@
             self.unlinkButton.hidden = NO;
             self.unlinkButton.alpha = 1;
             self.greetingsView.alpha = 0;
-            self.connectView.alpha = 1;
-            self.bluetoothDisabledView.alpha = 0;
+            self.bluetoothDisabledView.alpha = 1;
             self.connectViewTitleLabel.text = @"";
             self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"We can not find %@\n\nPlease start Sera on Your Mac",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
             self.connectViewStateImageView.image = [UIImage imageNamed:@"ic_mac_off"];
@@ -119,20 +119,31 @@
 #pragma mark - BTManager delegate
 - (void)bluetoothStateDidChanged:(CBPeripheralManagerState )state {
     if (self.currentBluetoothState != state){
-    self.currentBluetoothState = state;
-    if (self.currentBluetoothState == CBCentralManagerStatePoweredOn){
-        if (self.bluetoothDisabledView.alpha){
-            [UIView animateWithDuration:0.15 animations:^{
-                self.bluetoothDisabledView.alpha = 0;
-                self.connectView.alpha = 1;
-                [self.activityIndicator startAnimating];
-            } completion:^(BOOL finished) {
+        self.currentBluetoothState = state;
+        if (self.currentBluetoothState == CBCentralManagerStatePoweredOn){
+            if (self.bluetoothDisabledView.alpha){
+                [UIView animateWithDuration:0.15 animations:^{
+                    self.bluetoothDisabledView.alpha = 0;
+                    self.connectView.alpha = 1;
+                    [self.activityIndicator startAnimating];
+                } completion:^(BOOL finished) {
+                    [[BluetoothManager sharedClient] startAdvertisingIfReady];
+                }];
+            } else if (self.connectView.alpha){
                 [[BluetoothManager sharedClient] startAdvertisingIfReady];
-            }];
-        } else if (self.connectView.alpha){
-            [[BluetoothManager sharedClient] startAdvertisingIfReady];
+            }
+        } else if (self.currentBluetoothState == CBCentralManagerStatePoweredOff){
+            if (self.connectView.alpha){
+                [UIView animateWithDuration:0.15 animations:^{
+                    self.bluetoothDisabledView.alpha = 1;
+                    self.connectView.alpha = 0;
+                } completion:^(BOOL finished) {
+                    self.connectViewTitleLabel.text = @"";
+                    self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"We can not find %@\n\nPlease start Sera on Your Mac",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
+                    self.connectViewStateImageView.image = [UIImage imageNamed:@"ic_mac_off"];
+                }];
+            }
         }
-    }
     }
 }
 

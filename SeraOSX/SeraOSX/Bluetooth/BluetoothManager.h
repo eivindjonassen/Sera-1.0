@@ -27,6 +27,7 @@
 @property (nonatomic, strong) NSArray *supportedServices;
 @property (nonatomic, strong) NSArray *supportedCharacteristics;
 @property (nonatomic, strong) NSTimer *signalStrengthUpdater;
+@property (nonatomic, strong) NSTimer *reconnectTimer;
 @property (nonatomic, strong) CBCharacteristic *unlinkCharacteristic;
 @property (nonatomic, weak) id<BTManagerDelegate>delegate;
 

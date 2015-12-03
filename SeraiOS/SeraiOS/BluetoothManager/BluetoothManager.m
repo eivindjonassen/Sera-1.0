@@ -27,7 +27,7 @@
 }
 
 - (void)checkBluetoothState {
-    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO], CBCentralManagerOptionShowPowerAlertKey, nil];
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO], CBCentralManagerOptionShowPowerAlertKey, @"sera-location-identifier", CBPeripheralManagerOptionRestoreIdentifierKey, nil];
     self.peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:options];
 }
 
@@ -36,25 +36,28 @@
         [self.peripheralManager stopAdvertising];
     }
     
-   // [self.peripheralManager removeAllServices];
-    self.serviceUUID = [CBUUID UUIDWithString:BLE_SERVICE_UUID];
-    self.characteristicsUUID = [CBUUID UUIDWithString:BLE_CHARACTERISTICS_SERVICE_UUID];
-    self.macNameUUID = [CBUUID UUIDWithString:BLE_CHARACETRISTICS_MACNAME_UUID];
-    self.macNameLastUUID = [CBUUID UUIDWithString:BLE_CHARACTERISTICS_MACNAME_LAST_UUID];
-    self.unlinkUUID = [CBUUID UUIDWithString:BLE_CHARACTERISTICS_UNLINK_UUID];
-    
-    
-    self.deviceInfoService = [[CBMutableService alloc] initWithType:self.serviceUUID primary:YES];
-    self.deviceInfoCharacteristic = [[CBMutableCharacteristic alloc] initWithType:self.characteristicsUUID properties:CBCharacteristicPropertyNotify value:nil permissions:CBAttributePermissionsReadable];
-    
-    self.macNameCharacteristics = [[CBMutableCharacteristic alloc] initWithType:self.macNameUUID properties:CBCharacteristicPropertyWriteWithoutResponse value:nil permissions:CBAttributePermissionsWriteable];
-    
-    self.macNameLastCharacteristics = [[CBMutableCharacteristic alloc] initWithType:self.macNameLastUUID properties:CBCharacteristicPropertyWriteWithoutResponse value:nil permissions:CBAttributePermissionsWriteable];
-    
-    self.unlinkCharacteristics = [[CBMutableCharacteristic alloc] initWithType:self.unlinkUUID properties:CBCharacteristicPropertyWriteWithoutResponse|CBCharacteristicPropertyNotify value:nil permissions:CBAttributePermissionsWriteable];
-    
+    [self.peripheralManager removeAllServices];
+    if (self.serviceUUID == nil){
+        self.serviceUUID = [CBUUID UUIDWithString:BLE_SERVICE_UUID];
+        self.characteristicsUUID = [CBUUID UUIDWithString:BLE_CHARACTERISTICS_SERVICE_UUID];
+        self.macNameUUID = [CBUUID UUIDWithString:BLE_CHARACETRISTICS_MACNAME_UUID];
+        self.macNameLastUUID = [CBUUID UUIDWithString:BLE_CHARACTERISTICS_MACNAME_LAST_UUID];
+        self.unlinkUUID = [CBUUID UUIDWithString:BLE_CHARACTERISTICS_UNLINK_UUID];
+        
+        
+        self.deviceInfoService = [[CBMutableService alloc] initWithType:self.serviceUUID primary:YES];
+        self.deviceInfoCharacteristic = [[CBMutableCharacteristic alloc] initWithType:self.characteristicsUUID properties:CBCharacteristicPropertyNotify value:nil permissions:CBAttributePermissionsReadable];
+        
+        self.macNameCharacteristics = [[CBMutableCharacteristic alloc] initWithType:self.macNameUUID properties:CBCharacteristicPropertyWriteWithoutResponse value:nil permissions:CBAttributePermissionsWriteable];
+        
+        self.macNameLastCharacteristics = [[CBMutableCharacteristic alloc] initWithType:self.macNameLastUUID properties:CBCharacteristicPropertyWriteWithoutResponse value:nil permissions:CBAttributePermissionsWriteable];
+        
+        self.unlinkCharacteristics = [[CBMutableCharacteristic alloc] initWithType:self.unlinkUUID properties:CBCharacteristicPropertyWriteWithoutResponse|CBCharacteristicPropertyNotify value:nil permissions:CBAttributePermissionsWriteable];
+        
+    }
     self.deviceInfoService.characteristics = @[self.deviceInfoCharacteristic, self.macNameCharacteristics, self.macNameLastCharacteristics, self.unlinkCharacteristics];
     [self.peripheralManager addService:self.deviceInfoService];
+
 }
 
 
@@ -62,6 +65,7 @@
 #pragma mark - PeripheralManager delegate
 
 - (void)peripheralManager:(CBPeripheralManager *)peripheral didAddService:(CBService *)service error:(NSError *)error {
+    NSLog(@"peripheralManager:%@ didAddService:%@ error:%@",peripheral,service,error);
     if (self.peripheralManager.isAdvertising){
         [self.peripheralManager stopAdvertising];
     }
@@ -80,7 +84,7 @@
     NSLog(@"didSubscribeToCharacteristic");
     NSLog(@"%@",characteristic.UUID);
     if ([characteristic.UUID isEqual:self.characteristicsUUID]){
-        
+        self.connectedCentral = central;
     [self.delegate peripheralSuccessfullyConnected];
     }
 }
@@ -105,7 +109,7 @@
    
     
 //    dispatch_async(dispatch_get_main_queue(), ^{
-        [_delegate bluetoothStateDidChanged:peripheral.state];
+    [_delegate bluetoothStateDidChanged:peripheral.state];
     
     
     switch (peripheral.state)
@@ -121,6 +125,12 @@
         case CBCentralManagerStatePoweredOff:
         {
              NSLog(@"Peripheral powered off");
+            if (self.connectedCentral){
+                [self.delegate peripheralDisconnected];
+                [self.peripheralManager stopAdvertising];
+                [self.peripheralManager removeAllServices];
+            }
+            self.hasReceivedMacName = NO;
             break;
         }
         case CBCentralManagerStateResetting:
@@ -152,6 +162,10 @@
     
     
 
+}
+
+- (void)peripheralManager:(CBPeripheralManager *)peripheral willRestoreState:(NSDictionary<NSString *,id> *)dict {
+    NSLog(@"peripheralManager: %@ willRestoreState: %@",peripheral, dict);
 }
 
 - (void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveWriteRequests:(NSArray *)requests {

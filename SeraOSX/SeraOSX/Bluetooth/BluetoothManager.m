@@ -46,6 +46,7 @@
         [self.signalStrengthUpdater invalidate];
         self.signalStrengthUpdater = nil;
     }
+    self.connectedPhone = nil;
     [self.centralManager scanForPeripheralsWithServices:self.supportedServices options:nil];
 }
 
@@ -57,29 +58,35 @@
         [self.signalStrengthUpdater invalidate];
         self.signalStrengthUpdater = nil;
     }
+    
+    
+    [self.centralManager cancelPeripheralConnection:self.connectedPhone];
+    self.connectedPhone = nil;
+//    [self.centralManager connectPeripheral:self.connectedPhone options:nil];
     [self.centralManager scanForPeripheralsWithServices:self.supportedServices options:nil];
 }
 
 - (void)centralManager:(CBCentralManager *)central didRetrieveConnectedPeripherals:(NSArray<CBPeripheral *> *)peripherals {
-    
+    NSLog(@"centralManager: %@ didRetrieveConnectedPeripherals: %@",central, peripherals);
 }
 
 - (void)centralManager:(CBCentralManager *)central willRestoreState:(NSDictionary<NSString *,id> *)dict {
-    
+    NSLog(@"centralManager: %@, willRestoreState: %@", central,dict);
 }
 
 // CBCentralManagerDelegate - This is called with the CBPeripheral class as its main input parameter. This contains most of the information there is to know about a BLE peripheral.
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
+    NSLog(@"centerManager: %@, didDiscoverPeripheral: %@, adveristmentData: %@, RSSI: %@",central, peripheral,advertisementData, RSSI);
     NSString *localName = [advertisementData objectForKey:CBAdvertisementDataLocalNameKey];
     if ([localName length] > 0) {
         [[NSUserDefaults standardUserDefaults] setObject:localName forKey:@"iphoneName"];
+    }
         [[NSUserDefaults standardUserDefaults] synchronize];
         self.connectedPhone = peripheral;
         [self.centralManager stopScan];
         self.connectedPhone.delegate = self;
         [self.centralManager connectPeripheral:self.connectedPhone options:nil];
-    }
     
 }
 

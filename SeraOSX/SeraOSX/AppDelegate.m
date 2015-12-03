@@ -201,7 +201,7 @@
     }
     
     NSInteger signalStrength = [[NSUserDefaults standardUserDefaults] integerForKey:@"signalStrength"];
-    // NSLog(@"currentStrenght: %li, saved: %li",(long)RSSI.integerValue, (long)signalStrength);
+     NSLog(@"currentStrenght: %li, saved: %li",(long)RSSI.integerValue, (long)signalStrength);
     if (signalStrength != 0){
         if (signalStrength >= RSSI.integerValue+10){
             if (!self.isScreenLocked){
