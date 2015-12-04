@@ -99,6 +99,9 @@
     }
     else if ([central state] == CBCentralManagerStatePoweredOn) {
         NSLog(@"CoreBluetooth BLE hardware is powered on and ready");
+        if (self.connectedPhone){
+            [self.centralManager connectPeripheral:self.connectedPhone options:nil];
+        }
     }
     else if ([central state] == CBCentralManagerStateUnauthorized) {
         NSLog(@"CoreBluetooth BLE state is unauthorized");
