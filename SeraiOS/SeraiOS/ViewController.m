@@ -180,6 +180,7 @@
         self.connectViewStateImageView.image = [UIImage imageNamed:@"ic_mac_off"];
         self.connectViewTitleLabel.text = @"";
         self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"We can not find %@\n\nPlease start Sera on Your Mac",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
+            [[BluetoothManager sharedClient] startAdvertisingIfReady];
         } else {
             [self initViews];
             
