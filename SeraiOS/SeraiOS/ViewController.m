@@ -52,7 +52,7 @@
             self.greetingsView.alpha = 0;
             self.bluetoothDisabledView.alpha = 1;
             self.connectViewTitleLabel.text = @"";
-            self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"We can not find %@\n\nPlease start Sera on Your Mac",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
+            self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"We can not find\n %@\n\nPlease start Sera on your Mac",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
             self.connectViewStateImageView.image = [UIImage imageNamed:@"ic_mac_off"];
             self.statusImageYConstraint.constant -= 30;
             [self.activityIndicator startAnimating];
@@ -141,7 +141,7 @@
                     self.connectView.alpha = 0;
                 } completion:^(BOOL finished) {
                     self.connectViewTitleLabel.text = @"";
-                    self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"We can not find %@\n\nPlease start Sera on Your Mac",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
+                    self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"We can not find\n %@\n\nPlease start Sera on your Mac",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
                     self.connectViewStateImageView.image = [UIImage imageNamed:@"ic_mac_off"];
                 }];
             }
@@ -156,7 +156,7 @@
         case UserStateNotConfigured:
             [[NSUserDefaults standardUserDefaults] setInteger:2 forKey:@"userState"];
             self.connectViewTitleLabel.text = @"Congratulations!";
-            self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"You've connected to Your %@\n\nYou can now press sleep button on iPhone and put it in the pocket!",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
+            self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"You've connected to your\n %@\n\nYou can now press sleep button on iPhone and put it in the pocket!",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
             [self.connectViewStateImageView setImage:[UIImage imageNamed:@"ic_mac_complete"]];
             self.activityIndicator.hidden = YES;
             self.unlinkButton.hidden = NO;
@@ -165,7 +165,7 @@
         case UserStateConfigured:
             self.connectViewTitleLabel.text = @"";
             [self.connectViewStateImageView setImage:[UIImage imageNamed:@"ic_mac_on"]];
-            self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"Connected to %@",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
+            self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"Connected to\n %@",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
             self.activityIndicator.hidden = YES;
             self.unlinkButton.hidden = NO;
             break;
@@ -179,8 +179,8 @@
         self.activityIndicator.hidden = NO;
         self.connectViewStateImageView.image = [UIImage imageNamed:@"ic_mac_off"];
         self.connectViewTitleLabel.text = @"";
-        self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"We can not find %@\n\nPlease start Sera on Your Mac",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
-            [[BluetoothManager sharedClient] startAdvertisingIfReady];
+        self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"We can not find\n %@\n\nPlease start Sera on your Mac",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
+        [[BluetoothManager sharedClient] startAdvertisingIfReady];
         } else {
             [self initViews];
             
@@ -194,7 +194,7 @@
 
 - (void)macNameUpdated {
     if (self.connectView.alpha && (UserState)[[NSUserDefaults standardUserDefaults] integerForKey:@"userState"] == UserStateConfigured){
-        self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"Connected to %@",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
+        self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"Connected to\n %@",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
     }
 }
 
