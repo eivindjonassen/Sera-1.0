@@ -34,6 +34,7 @@
 // method called whenever you have successfully connected to the BLE peripheral
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
+    NSLog(@"didConnectPeripheral:%@",peripheral);
     [peripheral setDelegate:self];
     [peripheral discoverServices:self.supportedServices];
 }
@@ -81,12 +82,14 @@
     NSString *localName = [advertisementData objectForKey:CBAdvertisementDataLocalNameKey];
     if ([localName length] > 0) {
         [[NSUserDefaults standardUserDefaults] setObject:localName forKey:@"iphoneName"];
-    }
         [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    
         self.connectedPhone = peripheral;
-        [self.centralManager stopScan];
         self.connectedPhone.delegate = self;
         [self.centralManager connectPeripheral:self.connectedPhone options:nil];
+        [self.centralManager stopScan];
+
     
 }
 
@@ -101,6 +104,7 @@
         NSLog(@"CoreBluetooth BLE hardware is powered on and ready");
         if (self.connectedPhone){
             [self.centralManager connectPeripheral:self.connectedPhone options:nil];
+            [self.centralManager stopScan];
         }
     }
     else if ([central state] == CBCentralManagerStateUnauthorized) {
@@ -114,11 +118,11 @@
     }
     else if ([central state] == CBCentralManagerStateUnknown) {
         NSLog(@"CoreBluetooth BLE state is unknown");
-        NSAlert *alert = [[NSAlert alloc] init];
-        [alert setMessageText:@"Bluetooth error!"];
-        [alert setInformativeText:@"CoreBluetooth BLE state is unknown"];
-        [alert addButtonWithTitle:@"Ok"];
-        [alert runModal];
+//        NSAlert *alert = [[NSAlert alloc] init];
+//        [alert setMessageText:@"Bluetooth error!"];
+//        [alert setInformativeText:@"CoreBluetooth BLE state is unknown"];
+//        [alert addButtonWithTitle:@"Ok"];
+//        [alert runModal];
     }
     else if ([central state] == CBCentralManagerStateUnsupported) {
         NSLog(@"CoreBluetooth BLE hardware is unsupported on this platform");
@@ -200,6 +204,7 @@
             NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
             [[NSUserDefaults standardUserDefaults]
              removePersistentDomainForName:appDomain];
+            self.connectedPhone = nil;
             [self.delegate deviceUnlinked];
         }
     }

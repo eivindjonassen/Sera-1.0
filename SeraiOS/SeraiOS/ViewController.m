@@ -37,6 +37,8 @@
             self.greetingsView.userInteractionEnabled = YES;
             self.connectViewTitleLabel.text = @"Please download our app!";
             self.connectViewDescriptionLabel.text = @"You need to download our free app for mac at the AppStore";
+            self.connectView.alpha = 0;
+            self.bluetoothDisabledView.alpha = 0;
             break;
         }
         case UserStateNotConfigured:
@@ -158,11 +160,14 @@
             [self.connectViewStateImageView setImage:[UIImage imageNamed:@"ic_mac_complete"]];
             self.activityIndicator.hidden = YES;
             self.unlinkButton.hidden = NO;
+            [self performSelector:@selector(peripheralSuccessfullyConnected) withObject:nil afterDelay:3];
             break;
         case UserStateConfigured:
+            self.connectViewTitleLabel.text = @"";
             [self.connectViewStateImageView setImage:[UIImage imageNamed:@"ic_mac_on"]];
             self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"Connected to %@",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
-            self.activityIndicator.alpha = 0;
+            self.activityIndicator.hidden = YES;
+            self.unlinkButton.hidden = NO;
             break;
     }
      });
@@ -170,10 +175,19 @@
 
 - (void)peripheralDisconnected {
     if (self.connectView.alpha){
+        if ((UserState)[[NSUserDefaults standardUserDefaults] integerForKey:@"userState"] != UserStateFirstTime){
         self.activityIndicator.hidden = NO;
         self.connectViewStateImageView.image = [UIImage imageNamed:@"ic_mac_off"];
         self.connectViewTitleLabel.text = @"";
         self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"We can not find %@\n\nPlease start Sera on Your Mac",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
+        } else {
+            [self initViews];
+            
+            [UIView animateWithDuration:0.25 animations:^{
+                self.greetingsView.alpha = 1;
+                self.connectView.alpha = 0;
+            }];
+        }
     }
 }
 

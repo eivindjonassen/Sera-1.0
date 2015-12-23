@@ -25,7 +25,7 @@
     [[NSUserDefaults standardUserDefaults] setInteger:self.signalStrengthSlider.doubleValue forKey:@"signalStrength"];
     
     AppDelegate *delegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
-    [delegate showAllDoneView];
+    [delegate hidePopoverWithFade];
     
 }
 @end

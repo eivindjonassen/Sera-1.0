@@ -242,7 +242,7 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     self.mainPopover.contentViewController = [[SyncViewController alloc] initWithNibName:@"SyncViewController" bundle:nil];
     [self performSelector:@selector(showPopover) withObject:nil afterDelay:0.1]; // To show popover in the right place, we need delay
-    
+    [BluetoothManager sharedClient].connectedPhone = nil;
     [[BluetoothManager sharedClient] scanForDevices];
 }
 

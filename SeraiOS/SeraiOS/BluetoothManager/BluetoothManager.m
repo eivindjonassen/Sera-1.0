@@ -86,6 +86,7 @@
     if ([characteristic.UUID isEqual:self.characteristicsUUID]){
         self.connectedCentral = central;
     [self.delegate peripheralSuccessfullyConnected];
+        [self.peripheralManager stopAdvertising];
     }
 }
 
@@ -214,6 +215,7 @@
     if( [self.peripheralManager updateValue:payload forCharacteristic:self.unlinkCharacteristics onSubscribedCentrals:nil]){
         NSLog(@"didSentUnlink");
         [self.peripheralManager stopAdvertising];
+        self.hasReceivedMacName = NO;
     }
 
 }
