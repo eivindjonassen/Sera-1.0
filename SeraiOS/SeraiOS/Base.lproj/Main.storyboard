@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -19,41 +19,35 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="RDK-rA-2Eh">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <animations/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c4s-2w-r5S" userLabel="Permission View">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thank you for downloading Sera" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hND-u0-fLo">
                                         <rect key="frame" x="72" y="50" width="456" height="41"/>
-                                        <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="34"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We need permission to use Bluetooth Low Energy to lock and unlock your Mac." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6oX-Yb-WNJ">
                                         <rect key="frame" x="23" y="151" width="554" height="55"/>
-                                        <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bluetooth Low Energy use minimal battery power on your iPhone." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ykh-Zn-QQW">
                                         <rect key="frame" x="25" y="226" width="550" height="55"/>
-                                        <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="23"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="swipe left" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lQK-Ht-93m">
                                         <rect key="frame" x="257" y="474" width="86" height="26"/>
-                                        <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="22"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="lQK-Ht-93m" firstAttribute="top" secondItem="Ykh-Zn-QQW" secondAttribute="bottom" constant="20" id="0Rr-JA-GqR"/>
@@ -83,24 +77,20 @@
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We need you to turn on Bluetooth to use Sera" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uD7-ke-33A">
                                         <rect key="frame" x="90" y="287" width="420" height="26"/>
-                                        <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="22"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="swipe up !" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vJx-wi-t69">
                                         <rect key="frame" x="253" y="398" width="95" height="26"/>
-                                        <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="22"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="GSq-07-Uo4">
                                         <rect key="frame" x="294" y="424" width="13" height="176"/>
-                                        <animations/>
                                     </imageView>
                                 </subviews>
-                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="GSq-07-Uo4" firstAttribute="centerX" secondItem="Yxa-Ik-aWf" secondAttribute="centerX" id="RMs-Ng-dU8"/>
@@ -118,36 +108,39 @@
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please download our app!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1gy-TT-AZT">
                                         <rect key="frame" x="98" y="133" width="404" height="44"/>
-                                        <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="37"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_mac_off" translatesAutoresizingMaskIntoConstraints="NO" id="d2c-Jr-ALt">
                                         <rect key="frame" x="100" y="207" width="400" height="186"/>
-                                        <animations/>
                                     </imageView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You need to download our free app for mac at the AppStore" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SA9-b9-oDY">
                                         <rect key="frame" x="26" y="423" width="548" height="26"/>
-                                        <animations/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="22"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="17y-Jr-eTA">
                                         <rect key="frame" x="290" y="459" width="20" height="20"/>
-                                        <animations/>
                                     </activityIndicatorView>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eBr-81-2Bn">
                                         <rect key="frame" x="10" y="566" width="24" height="24"/>
-                                        <animations/>
                                         <state key="normal" image="ic_help"/>
                                         <connections>
                                             <action selector="onUnlinckClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Qll-7g-m9q"/>
                                         </connections>
                                     </button>
+                                    <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="akM-7M-fss">
+                                        <rect key="frame" x="0.0" y="400" width="600" height="200"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="ZnV-LC-f7Y"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
                                 </subviews>
-                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="d2c-Jr-ALt" firstAttribute="centerY" secondItem="yMF-Z0-TzG" secondAttribute="centerY" id="0qu-o5-rok"/>
@@ -169,7 +162,6 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="c4s-2w-r5S" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="5uk-JF-OEN"/>
@@ -179,6 +171,8 @@
                             <constraint firstItem="RDK-rA-2Eh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="L4G-r8-e5n"/>
                             <constraint firstItem="Yxa-Ik-aWf" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="UIY-ba-Lrx"/>
                             <constraint firstItem="RDK-rA-2Eh" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="WPx-TZ-lRF"/>
+                            <constraint firstAttribute="trailing" secondItem="akM-7M-fss" secondAttribute="trailing" id="XBh-Rn-Ae0"/>
+                            <constraint firstItem="akM-7M-fss" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="XOx-MY-wlT"/>
                             <constraint firstItem="RDK-rA-2Eh" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="XgF-18-fqu"/>
                             <constraint firstItem="yMF-Z0-TzG" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="fY8-Wa-Djl"/>
                             <constraint firstItem="yMF-Z0-TzG" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fo6-01-1uo"/>
@@ -187,6 +181,7 @@
                             <constraint firstItem="c4s-2w-r5S" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="lhB-lw-MDA"/>
                             <constraint firstItem="yMF-Z0-TzG" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="q24-CB-Ng5"/>
                             <constraint firstItem="c4s-2w-r5S" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="qCm-Sn-J1c"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="akM-7M-fss" secondAttribute="bottom" id="vaA-nD-Fpm"/>
                             <constraint firstItem="Yxa-Ik-aWf" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="zSX-km-aXD"/>
                         </constraints>
                     </view>
@@ -197,6 +192,7 @@
                         <outlet property="connectViewDescriptionLabel" destination="SA9-b9-oDY" id="ve5-wb-Lh6"/>
                         <outlet property="connectViewStateImageView" destination="d2c-Jr-ALt" id="Tsd-zG-KEx"/>
                         <outlet property="connectViewTitleLabel" destination="1gy-TT-AZT" id="81f-tK-kDR"/>
+                        <outlet property="debugTextView" destination="akM-7M-fss" id="bgJ-SD-5rD"/>
                         <outlet property="greetingsSwipeLeftLabel" destination="lQK-Ht-93m" id="muS-Sz-bnd"/>
                         <outlet property="greetingsView" destination="c4s-2w-r5S" id="D8t-iK-HNK"/>
                         <outlet property="statusImageYConstraint" destination="0qu-o5-rok" id="2it-XL-W5B"/>

@@ -12,10 +12,11 @@
 
 
 #define BLE_SERVICE_UUID @"B500"
-#define BLE_CHARACTERISTICS_SERVICE_UUID @"B511"
+//#define BLE_CHARACTERISTICS_SERVICE_UUID @"B511"
 #define BLE_CHARACTERISTICS_MACNAME_UUID @"B512"
 #define BLE_CHARACTERISTICS_MACNAME_LAST_UUID @"B513"
 #define BLE_CHARACTERISTICS_UNLINK_UUID @"B514"
+#define BLE_CHARACTERISTICS_DEVICE_UUID @"B515"
 
 @protocol BTManagerDelegate;
 
@@ -23,12 +24,15 @@
 + (instancetype)sharedClient;
 
 @property (nonatomic, strong) CBCentralManager *centralManager;
-@property (nonatomic, retain) CBPeripheral     *connectedPhone;
+@property (nonatomic, strong) CBPeripheral     *connectedPhone;
 @property (nonatomic, strong) NSArray *supportedServices;
 @property (nonatomic, strong) NSArray *supportedCharacteristics;
 @property (nonatomic, strong) NSTimer *signalStrengthUpdater;
 @property (nonatomic, strong) NSTimer *reconnectTimer;
 @property (nonatomic, strong) CBCharacteristic *unlinkCharacteristic;
+@property (nonatomic, strong) CBCharacteristic *macNameCharacteristic;
+@property (nonatomic, strong) CBCharacteristic *macNameLastCharacteristic;
+@property (nonatomic, strong) CBCharacteristic *deviceUDIDCharacteristic;
 @property (nonatomic, weak) id<BTManagerDelegate>delegate;
 
 - (void)scanForDevices;

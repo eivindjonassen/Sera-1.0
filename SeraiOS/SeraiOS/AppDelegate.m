@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "BluetoothManager.h"
 
 @interface AppDelegate ()
 
@@ -21,6 +22,9 @@
     
     NSArray *peripheralManagerIdentifiers = launchOptions[UIApplicationLaunchOptionsBluetoothPeripheralsKey];
     NSLog(@"peripherals: %@",peripheralManagerIdentifiers);
+    for (int i =0; i<peripheralManagerIdentifiers.count; i++){
+        [[BluetoothManager sharedClient] checkBluetoothState];
+    }
     return YES;
 }
 
@@ -32,6 +36,7 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+//    [[BluetoothManager sharedClient] startAdvertisingIfReady];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {

@@ -27,7 +27,6 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
     // Insert code here to initialize your application
-    
     [self compileLockScript];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self compileUnlockScriptWitchCompletionBlock:^{
@@ -44,17 +43,60 @@
                 NSMenu *mainMenu = [[NSMenu alloc] init];
                 [mainMenu addItemWithTitle:@"Setup Sera" action:@selector(onSetupClick) keyEquivalent:@""];
                 [mainMenu addItem:[NSMenuItem separatorItem]];
+                self.nibViews = [[IGNSignalStrengthView alloc] loadFromNib];
+//                if ([[NSBundle mainBundle] respondsToSelector:@selector(loadNibNamed:owner:topLevelObjects:)]) {
+//                    // We're running on Mountain Lion or higher
+//                    [[NSBundle mainBundle] loadNibNamed:@"NibName"
+//                                                  owner:self
+//                                        topLevelObjects:&self.nibViews];
+//                } else {
+//                    // We're running on Lion
+//                    [NSBundle loadNibNamed:@"NibName"
+//                                     owner:self];
+//                }
+                
+               
+              //  NSArray *nibViews = [[NSBundle mainBundle] loadNibNamed:@"MGCheckoutTableCell" owner:self options:nil];
+                //[[NSNib alloc] initWithNibNamed:@"IGNSignalStrengthView" bundle:[NSBundle mainBundle]];
+                
+                for (NSView *subview in self.nibViews){
+                    if ([subview isKindOfClass:[IGNSignalStrengthView class]]){
+                        self.signalStrengthView = (IGNSignalStrengthView*)subview;
+                        break;
+                    }
+                }
+                
+                
+                
+                
+                
                 
                 // Need reference for title changes
-                self.linkPhoneItem = [mainMenu addItemWithTitle:@"Scanning..." action:@selector(onLinkPhoneClick) keyEquivalent:@""];
-                self.linkPhoneItem.enabled = NO;
+                if ([[NSUserDefaults standardUserDefaults] stringForKey:@"iphoneName"]){
+                    self.linkPhoneItem = [mainMenu addItemWithTitle:[NSString stringWithFormat:@"Unlink %@",[[NSUserDefaults standardUserDefaults] stringForKey:@"iphoneName"]] action:@selector(onLinkPhoneClick) keyEquivalent:@""];
+                    self.linkPhoneItem.enabled = YES;
+                } else {
+                    self.linkPhoneItem = [mainMenu addItemWithTitle:@"Scanning..." action:@selector(onLinkPhoneClick) keyEquivalent:@""];
+                    self.linkPhoneItem.enabled = NO;
+                }
+                
                 [mainMenu addItemWithTitle:@"Unlock automaticly" action:@selector(onUpdatesClick) keyEquivalent:@""];
                 [mainMenu addItem:[NSMenuItem separatorItem]];
+                NSMenuItem *signalStrengthItem = [[NSMenuItem alloc]
+                                                  initWithTitle:@"Signal strength"
+                                                  action:nil
+                                                  keyEquivalent:@""];
+                
+                signalStrengthItem.view = self.signalStrengthView;
+                signalStrengthItem.enabled = NO;
+                [mainMenu addItem:signalStrengthItem];
+                [mainMenu addItem:[NSMenuItem separatorItem]];
+                
                 [mainMenu addItemWithTitle:@"Quit Sera" action:@selector(onQuitClick) keyEquivalent:@""];
                 
                 [mainMenu setAutoenablesItems:NO];
                 [mainMenu.itemArray objectAtIndex:0].enabled = NO;
-                [mainMenu.itemArray objectAtIndex:2].enabled = NO;
+                //[mainMenu.itemArray objectAtIndex:2].enabled = NO;
                 [mainMenu.itemArray objectAtIndex:3].enabled = YES;
                 [mainMenu.itemArray objectAtIndex:5].enabled = YES;
                 
@@ -192,13 +234,17 @@
     self.mainPopover.contentViewController = [[SyncViewController alloc] initWithNibName:@"SyncViewController" bundle:nil];
     [self.statusItem.menu.itemArray objectAtIndex:0].enabled = NO;
     [self.statusItem.menu.itemArray objectAtIndex:2].enabled = NO;
+    self.signalStrengthView.signalStrengthIndicator.doubleValue = -100;
 }
 
 - (void)connectedPhoneDidUpdateRSSI:(NSNumber *)RSSI {
+    dispatch_async(dispatch_get_main_queue(), ^{
     NSViewController *currentController = self.mainPopover.contentViewController;
     if ([currentController isKindOfClass:[SignalStrengthViewController class]]){
         ((SignalStrengthViewController *)currentController).currentSignalStrengthProgressBar.doubleValue = RSSI.doubleValue;
     }
+    
+    self.signalStrengthView.signalStrengthIndicator.doubleValue = RSSI.doubleValue;
     
     NSInteger signalStrength = [[NSUserDefaults standardUserDefaults] integerForKey:@"signalStrength"];
      NSLog(@"currentStrenght: %li, saved: %li",(long)RSSI.integerValue, (long)signalStrength);
@@ -231,14 +277,17 @@
             }
         }
     }
+    });
     
 }
 - (void)deviceUnlinked {
     [self.statusItem.menu.itemArray objectAtIndex:0].enabled = NO;
     [self.statusItem.menu.itemArray objectAtIndex:2].enabled = NO;
+    self.signalStrengthView.signalStrengthIndicator.doubleValue = -100;
     [[self.statusItem.menu.itemArray objectAtIndex:2] setTitle:@"Scanning..."];
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"signalStrength"];
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"sera_pass"];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"phoneUUID"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     self.mainPopover.contentViewController = [[SyncViewController alloc] initWithNibName:@"SyncViewController" bundle:nil];
     [self performSelector:@selector(showPopover) withObject:nil afterDelay:0.1]; // To show popover in the right place, we need delay
@@ -251,6 +300,7 @@
 }
 
 - (void)peripheralSuccessfulyConnected:(CBPeripheral *)peripheral {
+    dispatch_async(dispatch_get_main_queue(), ^{
     [self.statusItem.menu.itemArray objectAtIndex:0].enabled = YES;
     [self.statusItem.menu.itemArray objectAtIndex:2].enabled = YES;
     [[self.statusItem.menu.itemArray objectAtIndex:2] setTitle:[NSString stringWithFormat:@"Unlink %@",[[NSUserDefaults standardUserDefaults] stringForKey:@"iphoneName"]]];
@@ -266,6 +316,7 @@
         case 2:
             break;
     }
+    });
 }
 
 - (void) compileScripts {
@@ -328,6 +379,12 @@
     completion();
 }
 
+-(void)applicationDidBecomeActive:(NSNotification *)notification {
+    NSLog(@"applicationDidBecomeActive");
+}
 
+-(void)applicationWillResignActive:(NSNotification *)notification {
+    NSLog(@"applicationWillResignActive");
+}
 
 @end

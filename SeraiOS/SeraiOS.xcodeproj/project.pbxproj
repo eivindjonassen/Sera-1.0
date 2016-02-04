@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		074A4E9AFF861374BDDE1003 /* libPods-SeraiOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1978B5E8F7EE3B35E53293BB /* libPods-SeraiOS.a */; };
 		A73406461BF5F13000D25206 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A73406451BF5F13000D25206 /* UIKit.framework */; };
+		A77740FF1C50D18C0045A178 /* DeviceUID.m in Sources */ = {isa = PBXBuildFile; fileRef = A77740FE1C50D18C0045A178 /* DeviceUID.m */; };
+		A77741011C50D2090045A178 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A77741001C50D2090045A178 /* AdSupport.framework */; };
 		A77D68CC1BF48BA600DAB1FD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A77D68CB1BF48BA600DAB1FD /* main.m */; };
 		A77D68CF1BF48BA600DAB1FD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A77D68CE1BF48BA600DAB1FD /* AppDelegate.m */; };
 		A77D68D21BF48BA600DAB1FD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A77D68D11BF48BA600DAB1FD /* ViewController.m */; };
@@ -42,6 +44,9 @@
 		4E323CC0269E8D8AD989C4A4 /* Pods-SeraiOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeraiOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SeraiOS/Pods-SeraiOS.debug.xcconfig"; sourceTree = "<group>"; };
 		952E9E2B79F46096E03219E8 /* Pods-SeraiOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SeraiOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-SeraiOS/Pods-SeraiOS.release.xcconfig"; sourceTree = "<group>"; };
 		A73406451BF5F13000D25206 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A77740FD1C50D18C0045A178 /* DeviceUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceUID.h; sourceTree = "<group>"; };
+		A77740FE1C50D18C0045A178 /* DeviceUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceUID.m; sourceTree = "<group>"; };
+		A77741001C50D2090045A178 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		A77D68C71BF48BA600DAB1FD /* SeraiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeraiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A77D68CB1BF48BA600DAB1FD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A77D68CD1BF48BA600DAB1FD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -67,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A77741011C50D2090045A178 /* AdSupport.framework in Frameworks */,
 				A73406461BF5F13000D25206 /* UIKit.framework in Frameworks */,
 				074A4E9AFF861374BDDE1003 /* libPods-SeraiOS.a in Frameworks */,
 			);
@@ -89,6 +95,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A77740FC1C50D1780045A178 /* DeviceUID */ = {
+			isa = PBXGroup;
+			children = (
+				A77740FD1C50D18C0045A178 /* DeviceUID.h */,
+				A77740FE1C50D18C0045A178 /* DeviceUID.m */,
+			);
+			path = DeviceUID;
+			sourceTree = "<group>";
+		};
 		A77D68BE1BF48BA600DAB1FD = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +185,7 @@
 		A77D68FE1BF48C6700DAB1FD /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				A77740FC1C50D1780045A178 /* DeviceUID */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -191,6 +207,7 @@
 		B7F7027133352AAEB01C8F67 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A77741001C50D2090045A178 /* AdSupport.framework */,
 				1978B5E8F7EE3B35E53293BB /* libPods-SeraiOS.a */,
 			);
 			name = Frameworks;
@@ -396,6 +413,7 @@
 				A77D68CF1BF48BA600DAB1FD /* AppDelegate.m in Sources */,
 				A77D69031BF48C7C00DAB1FD /* BluetoothManager.m in Sources */,
 				A77D68CC1BF48BA600DAB1FD /* main.m in Sources */,
+				A77740FF1C50D18C0045A178 /* DeviceUID.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

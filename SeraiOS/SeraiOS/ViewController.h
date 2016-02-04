@@ -32,6 +32,7 @@ typedef NS_ENUM (NSInteger, UserState){
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *statusImageYConstraint;
 @property (assign, nonatomic) BOOL hasReceivedName;
+@property (weak, nonatomic) IBOutlet UITextView *debugTextView;
 
 @end
 

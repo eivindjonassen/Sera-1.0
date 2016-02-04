@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9060"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -21,7 +21,6 @@
             <subviews>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Gvx-xp-uzw">
                     <rect key="frame" x="111" y="223" width="258" height="29"/>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Choose signal strength!" id="fFt-OH-4yi">
                         <font key="font" metaFont="system" size="24"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -30,19 +29,16 @@
                 </textField>
                 <progressIndicator wantsLayer="YES" minValue="-100" maxValue="-20" doubleValue="-20" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="KLb-BG-COI">
                     <rect key="frame" x="96" y="178" width="288" height="20"/>
-                    <animations/>
                 </progressIndicator>
                 <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UxK-Y8-gWA">
                     <rect key="frame" x="94" y="173" width="292" height="29"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="tQo-E7-eEN"/>
                     </constraints>
-                    <animations/>
                     <sliderCell key="cell" state="on" alignment="left" minValue="-100" maxValue="-20" doubleValue="-60" tickMarkPosition="above" sliderType="linear" id="Wt6-0Q-mPu"/>
                 </slider>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nJc-en-cz5">
                     <rect key="frame" x="65" y="179" width="23" height="17"/>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="0%" id="wCA-Sf-jqA">
                         <font key="font" metaFont="systemThin" size="13"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -51,7 +47,6 @@
                 </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="e10-3g-9vR">
                     <rect key="frame" x="392" y="179" width="36" height="17"/>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="100%" id="RVd-S1-5bN">
                         <font key="font" metaFont="systemThin" size="13"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -60,7 +55,6 @@
                 </textField>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="ExN-J9-scg">
                     <rect key="frame" x="40" y="133" width="400" height="34"/>
-                    <animations/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="The blue bar shows the current signal strength between your iOS device and your Mac." id="nJ5-ia-ZEc">
                         <font key="font" metaFont="systemThin" size="13"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -69,7 +63,6 @@
                 </textField>
                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="vvT-3O-50S">
                     <rect key="frame" x="51" y="91" width="379" height="34"/>
-                    <animations/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Please move the slider to choose the desired strength and hit save!" id="RXJ-zt-1jk">
                         <font key="font" metaFont="systemThin" size="13"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -78,7 +71,6 @@
                 </textField>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="E77-eX-xM0">
                     <rect key="frame" x="205" y="43" width="70" height="32"/>
-                    <animations/>
                     <buttonCell key="cell" type="push" title="Save" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="D98-6l-IVW">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -112,7 +104,6 @@
                 <constraint firstItem="ExN-J9-scg" firstAttribute="top" secondItem="UxK-Y8-gWA" secondAttribute="bottom" constant="8" id="rne-s7-Bll"/>
                 <constraint firstItem="ExN-J9-scg" firstAttribute="centerX" secondItem="Hz6-mo-xeY" secondAttribute="centerX" id="sxP-N8-vMO"/>
             </constraints>
-            <animations/>
         </customView>
     </objects>
 </document>

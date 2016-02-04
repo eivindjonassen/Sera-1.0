@@ -21,6 +21,8 @@
 		A77C0F141BFC9E3B0018831F /* AllDoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A77C0F121BFC9E3B0018831F /* AllDoneViewController.xib */; };
 		A77C0F161BFCB8CB0018831F /* AppleScriptKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A77C0F151BFCB8CB0018831F /* AppleScriptKit.framework */; };
 		A77D68BD1BF4834600DAB1FD /* IOBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A77D68BC1BF4834600DAB1FD /* IOBluetooth.framework */; };
+		A77FEC8C1C50FD1F0065A20E /* IGNSignalStrengthView.m in Sources */ = {isa = PBXBuildFile; fileRef = A77FEC8B1C50FD1F0065A20E /* IGNSignalStrengthView.m */; };
+		A77FEC8E1C50FDC30065A20E /* IGNSignalStrengthView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A77FEC8D1C50FDC30065A20E /* IGNSignalStrengthView.xib */; };
 		A7C9675C1BE75BEF00A08022 /* PasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C9675A1BE75BEF00A08022 /* PasswordViewController.m */; };
 		A7C9675D1BE75BEF00A08022 /* PasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7C9675B1BE75BEF00A08022 /* PasswordViewController.xib */; };
 		A7C9675F1BE768EB00A08022 /* Collaboration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7C9675E1BE768EB00A08022 /* Collaboration.framework */; };
@@ -71,6 +73,9 @@
 		A77C0F121BFC9E3B0018831F /* AllDoneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AllDoneViewController.xib; sourceTree = "<group>"; };
 		A77C0F151BFCB8CB0018831F /* AppleScriptKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppleScriptKit.framework; path = System/Library/Frameworks/AppleScriptKit.framework; sourceTree = SDKROOT; };
 		A77D68BC1BF4834600DAB1FD /* IOBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOBluetooth.framework; path = System/Library/Frameworks/IOBluetooth.framework; sourceTree = SDKROOT; };
+		A77FEC8A1C50FD1F0065A20E /* IGNSignalStrengthView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGNSignalStrengthView.h; sourceTree = "<group>"; };
+		A77FEC8B1C50FD1F0065A20E /* IGNSignalStrengthView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGNSignalStrengthView.m; sourceTree = "<group>"; };
+		A77FEC8D1C50FDC30065A20E /* IGNSignalStrengthView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IGNSignalStrengthView.xib; sourceTree = "<group>"; };
 		A7C967591BE75BEF00A08022 /* PasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PasswordViewController.h; sourceTree = "<group>"; };
 		A7C9675A1BE75BEF00A08022 /* PasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PasswordViewController.m; sourceTree = "<group>"; };
 		A7C9675B1BE75BEF00A08022 /* PasswordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasswordViewController.xib; sourceTree = "<group>"; };
@@ -151,6 +156,7 @@
 		A705F0951BE34BBE001DE0C3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A77FEC871C50FCDD0065A20E /* IGNSignalStrenghtView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -219,6 +225,16 @@
 				A735524A1BE0FA7F008A02EE /* Info.plist */,
 			);
 			path = SeraOSXUITests;
+			sourceTree = "<group>";
+		};
+		A77FEC871C50FCDD0065A20E /* IGNSignalStrenghtView */ = {
+			isa = PBXGroup;
+			children = (
+				A77FEC8A1C50FD1F0065A20E /* IGNSignalStrengthView.h */,
+				A77FEC8B1C50FD1F0065A20E /* IGNSignalStrengthView.m */,
+				A77FEC8D1C50FDC30065A20E /* IGNSignalStrengthView.xib */,
+			);
+			path = IGNSignalStrenghtView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -324,6 +340,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A77FEC8E1C50FDC30065A20E /* IGNSignalStrengthView.xib in Resources */,
 				A7C967641BE7772F00A08022 /* SignalStrengthViewController.xib in Resources */,
 				A73552301BE0FA7F008A02EE /* Assets.xcassets in Resources */,
 				A73552331BE0FA7F008A02EE /* MainMenu.xib in Resources */,
@@ -358,6 +375,7 @@
 				A77C0F131BFC9E3B0018831F /* AllDoneViewController.m in Sources */,
 				A705F09E1BE3560B001DE0C3 /* SyncViewController.m in Sources */,
 				A735522E1BE0FA7F008A02EE /* main.m in Sources */,
+				A77FEC8C1C50FD1F0065A20E /* IGNSignalStrengthView.m in Sources */,
 				A705F0A31BE35EF0001DE0C3 /* ConnectedViewController.m in Sources */,
 				A7C967671BE77D2900A08022 /* BluetoothManager.m in Sources */,
 				A7C967631BE7772F00A08022 /* SignalStrengthViewController.m in Sources */,

@@ -120,6 +120,7 @@
 
 #pragma mark - BTManager delegate
 - (void)bluetoothStateDidChanged:(CBPeripheralManagerState )state {
+      dispatch_async(dispatch_get_main_queue(), ^{
     if (self.currentBluetoothState != state){
         self.currentBluetoothState = state;
         if (self.currentBluetoothState == CBCentralManagerStatePoweredOn){
@@ -147,10 +148,17 @@
             }
         }
     }
+      });
 }
 
 - (void)peripheralSuccessfullyConnected {
+    
      dispatch_async(dispatch_get_main_queue(), ^{
+         
+//         if (self.debugTextView.text == nil){
+//             self.debugTextView.text = @"";
+//         }
+//         self.debugTextView.text = [self.debugTextView.text stringByAppendingString:[NSString stringWithFormat:@"%@ Connected\n",[NSDate date]]];
     switch ((UserState)[[NSUserDefaults standardUserDefaults] integerForKey:@"userState"]){
         case UserStateFirstTime:
         case UserStateNotConfigured:
@@ -174,13 +182,19 @@
 }
 
 - (void)peripheralDisconnected {
+      dispatch_async(dispatch_get_main_queue(), ^{
+//    if (self.debugTextView.text == nil){
+//        self.debugTextView.text = @"";
+//    }
+//    self.debugTextView.text = [self.debugTextView.text stringByAppendingString:[NSString stringWithFormat:@"%@ Disconnected\n",[NSDate date]]];
+    
     if (self.connectView.alpha){
         if ((UserState)[[NSUserDefaults standardUserDefaults] integerForKey:@"userState"] != UserStateFirstTime){
         self.activityIndicator.hidden = NO;
         self.connectViewStateImageView.image = [UIImage imageNamed:@"ic_mac_off"];
         self.connectViewTitleLabel.text = @"";
         self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"We can not find\n %@\n\nPlease start Sera on your Mac",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
-        [[BluetoothManager sharedClient] startAdvertisingIfReady];
+        //[[BluetoothManager sharedClient] startAdvertisingIfReady];
         } else {
             [self initViews];
             
@@ -190,12 +204,15 @@
             }];
         }
     }
+      });
 }
 
 - (void)macNameUpdated {
+      dispatch_async(dispatch_get_main_queue(), ^{
     if (self.connectView.alpha && (UserState)[[NSUserDefaults standardUserDefaults] integerForKey:@"userState"] == UserStateConfigured){
         self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"Connected to\n %@",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
     }
+      });
 }
 
 - (void)didReceiveMemoryWarning {
@@ -228,23 +245,44 @@
 }
 
 - (void)unlinkInternal{
+    
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
     [[NSUserDefaults standardUserDefaults]
      removePersistentDomainForName:appDomain];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
+      dispatch_async(dispatch_get_main_queue(), ^{
     [self initViews];
     
     [UIView animateWithDuration:0.25 animations:^{
         self.greetingsView.alpha = 1;
         self.connectView.alpha = 0;
     }];
+      });
 }
 
 - (void)unlinkPhone {
 
     [[BluetoothManager sharedClient] sendUnlinkToCentral];
     [self unlinkInternal];
+}
+
+// DEBUG
+- (void)beganAdvertising {
+//      dispatch_async(dispatch_get_main_queue(), ^{
+//    if (self.debugTextView.text == nil){
+//        self.debugTextView.text = @"";
+//    }
+//    self.debugTextView.text = [self.debugTextView.text stringByAppendingString:[NSString stringWithFormat:@"%@ Starting Advertising\n",[NSDate date]]];
+//    });
+}
+
+- (void)stopedAdvertising {
+//      dispatch_async(dispatch_get_main_queue(), ^{
+//    if (self.debugTextView.text == nil){
+//        self.debugTextView.text = @"";
+//    }
+//    self.debugTextView.text = [self.debugTextView.text stringByAppendingString:[NSString stringWithFormat:@"%@ Stopping Advertising\n",[NSDate date]]];
+//      });
 }
 
 @end

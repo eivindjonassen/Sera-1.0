@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "BluetoothManager.h"
+#import "IGNSignalStrengthView.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, BTManagerDelegate>
 
@@ -15,6 +16,8 @@
 @property (nonatomic, assign) BOOL isScreenSleeping;
 @property (nonatomic, retain) NSAppleScript *lockScript;
 @property (nonatomic, retain) NSAppleScript *unlockScript;
+@property (nonatomic, strong) IGNSignalStrengthView *signalStrengthView;
+@property (nonatomic, strong) NSArray *nibViews;
 
 - (void)onSetupClick;
 - (void)hidePopoverWithFade;

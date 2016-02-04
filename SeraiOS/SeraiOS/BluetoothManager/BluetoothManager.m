@@ -7,6 +7,7 @@
 //
 
 #import "BluetoothManager.h"
+#import "DeviceUID.h"
 
 @implementation BluetoothManager
 
@@ -28,25 +29,28 @@
 
 - (void)checkBluetoothState {
     NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO], CBCentralManagerOptionShowPowerAlertKey, @"sera-location-identifier", CBPeripheralManagerOptionRestoreIdentifierKey, nil];
-    self.peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:nil options:options];
+    self.peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0) options:options];
 }
 
 - (void)startConnection {
     if (self.peripheralManager.isAdvertising){
+        NSLog(@"Stopping advertising");
+        [self.delegate stopedAdvertising];
         [self.peripheralManager stopAdvertising];
     }
     
     [self.peripheralManager removeAllServices];
     if (self.serviceUUID == nil){
         self.serviceUUID = [CBUUID UUIDWithString:BLE_SERVICE_UUID];
-        self.characteristicsUUID = [CBUUID UUIDWithString:BLE_CHARACTERISTICS_SERVICE_UUID];
+//        self.characteristicsUUID = [CBUUID UUIDWithString:BLE_CHARACTERISTICS_SERVICE_UUID];
         self.macNameUUID = [CBUUID UUIDWithString:BLE_CHARACETRISTICS_MACNAME_UUID];
         self.macNameLastUUID = [CBUUID UUIDWithString:BLE_CHARACTERISTICS_MACNAME_LAST_UUID];
         self.unlinkUUID = [CBUUID UUIDWithString:BLE_CHARACTERISTICS_UNLINK_UUID];
+        self.deviceUUID = [CBUUID UUIDWithString:BLE_CHARACTERISTICS_DEVICE_UUID];
         
         
         self.deviceInfoService = [[CBMutableService alloc] initWithType:self.serviceUUID primary:YES];
-        self.deviceInfoCharacteristic = [[CBMutableCharacteristic alloc] initWithType:self.characteristicsUUID properties:CBCharacteristicPropertyNotify value:nil permissions:CBAttributePermissionsReadable];
+//        self.deviceInfoCharacteristic = [[CBMutableCharacteristic alloc] initWithType:self.characteristicsUUID properties:CBCharacteristicPropertyNotify value:nil permissions:CBAttributePermissionsReadable];
         
         self.macNameCharacteristics = [[CBMutableCharacteristic alloc] initWithType:self.macNameUUID properties:CBCharacteristicPropertyWriteWithoutResponse value:nil permissions:CBAttributePermissionsWriteable];
         
@@ -54,8 +58,11 @@
         
         self.unlinkCharacteristics = [[CBMutableCharacteristic alloc] initWithType:self.unlinkUUID properties:CBCharacteristicPropertyWriteWithoutResponse|CBCharacteristicPropertyNotify value:nil permissions:CBAttributePermissionsWriteable];
         
+        NSLog(@"Device UID: %@",[DeviceUID uid]);
+        self.deviceCharacteristics = [[CBMutableCharacteristic alloc] initWithType:self.deviceUUID properties:CBCharacteristicPropertyRead value:[[DeviceUID uid]dataUsingEncoding:NSUTF8StringEncoding] permissions:CBAttributePermissionsReadable];
+        
     }
-    self.deviceInfoService.characteristics = @[self.deviceInfoCharacteristic, self.macNameCharacteristics, self.macNameLastCharacteristics, self.unlinkCharacteristics];
+    self.deviceInfoService.characteristics = @[/*self.deviceInfoCharacteristic,*/ self.macNameCharacteristics, self.macNameLastCharacteristics, self.unlinkCharacteristics , self.deviceCharacteristics];
     [self.peripheralManager addService:self.deviceInfoService];
 
 }
@@ -67,6 +74,8 @@
 - (void)peripheralManager:(CBPeripheralManager *)peripheral didAddService:(CBService *)service error:(NSError *)error {
     NSLog(@"peripheralManager:%@ didAddService:%@ error:%@",peripheral,service,error);
     if (self.peripheralManager.isAdvertising){
+        NSLog(@"Stopping advertising");
+        [self.delegate stopedAdvertising];
         [self.peripheralManager stopAdvertising];
     }
     
@@ -77,16 +86,20 @@
       CBAdvertisementDataLocalNameKey: (deviceName ? deviceName : @"Sera")
     };
     
+    NSLog(@"Starting advertising");
+    [self.delegate beganAdvertising];
     [self.peripheralManager startAdvertising:advertisment];
 }
 
 - (void)peripheralManager:(CBPeripheralManager *)peripheral central:(CBCentral *)central didSubscribeToCharacteristic:(CBCharacteristic *)characteristic {
     NSLog(@"didSubscribeToCharacteristic");
     NSLog(@"%@",characteristic.UUID);
-    if ([characteristic.UUID isEqual:self.characteristicsUUID]){
+    if ([characteristic.UUID isEqual:self.unlinkUUID]){
         self.connectedCentral = central;
     [self.delegate peripheralSuccessfullyConnected];
-        [self.peripheralManager stopAdvertising];
+//        NSLog(@"Stopping advertising");
+//        [self.delegate stopedAdvertising];
+//        [self.peripheralManager stopAdvertising];
     }
 }
 
@@ -128,6 +141,8 @@
              NSLog(@"Peripheral powered off");
             if (self.connectedCentral){
                 [self.delegate peripheralDisconnected];
+                NSLog(@"Stopping advertising");
+                [self.delegate stopedAdvertising];
                 [self.peripheralManager stopAdvertising];
                 [self.peripheralManager removeAllServices];
             }
@@ -198,6 +213,8 @@
             [[NSUserDefaults standardUserDefaults] synchronize];
             [self.delegate macNameUpdated];
         } else if ([singleRequest.characteristic.UUID isEqual:[CBUUID UUIDWithString:BLE_CHARACTERISTICS_UNLINK_UUID]]){
+            NSLog(@"Stopping advertising");
+            [self.delegate stopedAdvertising];
             [self.peripheralManager stopAdvertising];
             [self.delegate gotForceUnlink];
         }
@@ -214,6 +231,8 @@
     
     if( [self.peripheralManager updateValue:payload forCharacteristic:self.unlinkCharacteristics onSubscribedCentrals:nil]){
         NSLog(@"didSentUnlink");
+        NSLog(@"Stopping advertising");
+        [self.delegate stopedAdvertising];
         [self.peripheralManager stopAdvertising];
         self.hasReceivedMacName = NO;
     }
