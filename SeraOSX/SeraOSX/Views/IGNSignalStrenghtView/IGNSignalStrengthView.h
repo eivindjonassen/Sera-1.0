@@ -10,5 +10,7 @@
 
 @interface IGNSignalStrengthView : NSView
 @property (weak) IBOutlet NSProgressIndicator *signalStrengthIndicator;
+@property (weak) IBOutlet NSSlider *signalStrengthSlider;
+- (IBAction)signalChanged:(id)sender;
 - (NSArray*)loadFromNib;
 @end

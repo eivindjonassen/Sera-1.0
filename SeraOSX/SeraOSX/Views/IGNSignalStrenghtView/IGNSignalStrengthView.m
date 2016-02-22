@@ -15,6 +15,11 @@
     
     // Drawing code here.
 }
+- (IBAction)signalChanged:(id)sender {
+     [[NSUserDefaults standardUserDefaults] setInteger:self.signalStrengthSlider.doubleValue forKey:@"signalStrength"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 - (NSArray*)loadFromNib
 
 {

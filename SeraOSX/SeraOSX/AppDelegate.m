@@ -20,6 +20,7 @@
 @property (strong, nonatomic) NSStatusItem *statusItem;
 @property (weak) IBOutlet NSWindow *window;
 @property (strong, nonatomic) NSMenuItem *linkPhoneItem;
+@property (strong, nonatomic) NSMenuItem *signalStrengthItem;
 @property (strong, nonatomic) NSPopover *mainPopover;
 @end
 
@@ -44,32 +45,13 @@
                 [mainMenu addItemWithTitle:@"Setup Sera" action:@selector(onSetupClick) keyEquivalent:@""];
                 [mainMenu addItem:[NSMenuItem separatorItem]];
                 self.nibViews = [[IGNSignalStrengthView alloc] loadFromNib];
-//                if ([[NSBundle mainBundle] respondsToSelector:@selector(loadNibNamed:owner:topLevelObjects:)]) {
-//                    // We're running on Mountain Lion or higher
-//                    [[NSBundle mainBundle] loadNibNamed:@"NibName"
-//                                                  owner:self
-//                                        topLevelObjects:&self.nibViews];
-//                } else {
-//                    // We're running on Lion
-//                    [NSBundle loadNibNamed:@"NibName"
-//                                     owner:self];
-//                }
-                
-               
-              //  NSArray *nibViews = [[NSBundle mainBundle] loadNibNamed:@"MGCheckoutTableCell" owner:self options:nil];
-                //[[NSNib alloc] initWithNibNamed:@"IGNSignalStrengthView" bundle:[NSBundle mainBundle]];
-                
+
                 for (NSView *subview in self.nibViews){
                     if ([subview isKindOfClass:[IGNSignalStrengthView class]]){
                         self.signalStrengthView = (IGNSignalStrengthView*)subview;
                         break;
                     }
                 }
-                
-                
-                
-                
-                
                 
                 // Need reference for title changes
                 if ([[NSUserDefaults standardUserDefaults] stringForKey:@"iphoneName"]){
@@ -82,14 +64,14 @@
                 
                 [mainMenu addItemWithTitle:@"Unlock automaticly" action:@selector(onUpdatesClick) keyEquivalent:@""];
                 [mainMenu addItem:[NSMenuItem separatorItem]];
-                NSMenuItem *signalStrengthItem = [[NSMenuItem alloc]
+                self.signalStrengthItem = [[NSMenuItem alloc]
                                                   initWithTitle:@"Signal strength"
                                                   action:nil
                                                   keyEquivalent:@""];
                 
-                signalStrengthItem.view = self.signalStrengthView;
-                signalStrengthItem.enabled = NO;
-                [mainMenu addItem:signalStrengthItem];
+                self.signalStrengthItem.view = self.signalStrengthView;
+               
+                [mainMenu addItem:self.signalStrengthItem];
                 [mainMenu addItem:[NSMenuItem separatorItem]];
                 
                 [mainMenu addItemWithTitle:@"Quit Sera" action:@selector(onQuitClick) keyEquivalent:@""];
@@ -224,6 +206,7 @@
 
 - (void)hidePopover:(id)sender {
     [self.mainPopover performClose:sender];
+    [self configureSignalStrengthSlider];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
@@ -235,6 +218,7 @@
     [self.statusItem.menu.itemArray objectAtIndex:0].enabled = NO;
     [self.statusItem.menu.itemArray objectAtIndex:2].enabled = NO;
     self.signalStrengthView.signalStrengthIndicator.doubleValue = -100;
+    self.signalStrengthView.signalStrengthSlider.hidden = YES;
 }
 
 - (void)connectedPhoneDidUpdateRSSI:(NSNumber *)RSSI {
@@ -284,6 +268,7 @@
     [self.statusItem.menu.itemArray objectAtIndex:0].enabled = NO;
     [self.statusItem.menu.itemArray objectAtIndex:2].enabled = NO;
     self.signalStrengthView.signalStrengthIndicator.doubleValue = -100;
+    self.signalStrengthView.signalStrengthSlider.hidden = YES;
     [[self.statusItem.menu.itemArray objectAtIndex:2] setTitle:@"Scanning..."];
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"signalStrength"];
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"sera_pass"];
@@ -301,6 +286,7 @@
 
 - (void)peripheralSuccessfulyConnected:(CBPeripheral *)peripheral {
     dispatch_async(dispatch_get_main_queue(), ^{
+    [self configureSignalStrengthSlider];
     [self.statusItem.menu.itemArray objectAtIndex:0].enabled = YES;
     [self.statusItem.menu.itemArray objectAtIndex:2].enabled = YES;
     [[self.statusItem.menu.itemArray objectAtIndex:2] setTitle:[NSString stringWithFormat:@"Unlink %@",[[NSUserDefaults standardUserDefaults] stringForKey:@"iphoneName"]]];
@@ -385,6 +371,21 @@
 
 -(void)applicationWillResignActive:(NSNotification *)notification {
     NSLog(@"applicationWillResignActive");
+}
+
+- (void)configureSignalStrengthSlider {
+    [self.signalStrengthView setWantsLayer:YES];
+    [self.signalStrengthView.signalStrengthIndicator setWantsLayer:YES];
+    [self.signalStrengthView.signalStrengthSlider setWantsLayer:YES];
+    self.signalStrengthView.signalStrengthSlider.layer.zPosition = 100;
+    if ([[NSUserDefaults standardUserDefaults] integerForKey:@"signalStrength"] != 0){
+        self.signalStrengthItem.enabled = YES;
+        self.signalStrengthView.signalStrengthSlider.doubleValue = [[NSUserDefaults standardUserDefaults] integerForKey:@"signalStrength"];
+        self.signalStrengthView.signalStrengthSlider.hidden = NO;
+    } else {
+        self.signalStrengthItem.enabled = NO;
+        self.signalStrengthView.signalStrengthSlider.hidden = YES;
+    }
 }
 
 @end

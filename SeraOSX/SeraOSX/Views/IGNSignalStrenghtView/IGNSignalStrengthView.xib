@@ -9,51 +9,68 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView id="c22-O7-iKe" customClass="IGNSignalStrengthView">
-            <rect key="frame" x="0.0" y="0.0" width="217" height="46"/>
+            <rect key="frame" x="0.0" y="0.0" width="217" height="53"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
+                <progressIndicator wantsLayer="YES" minValue="-100" maxValue="-20" doubleValue="-20" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="oxM-ki-uvZ">
+                    <rect key="frame" x="34" y="-8" width="136" height="52"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="k7b-cI-Qbm"/>
+                    </constraints>
+                </progressIndicator>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="C6L-qK-WAH">
-                    <rect key="frame" x="20" y="28" width="102" height="18"/>
+                    <rect key="frame" x="20" y="35" width="102" height="18"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Signal strength" id="3d8-WQ-zbJ">
                         <font key="font" metaFont="system" size="14"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="leI-7j-qhH">
-                    <rect key="frame" x="178" y="6" width="36" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="100%" id="Bip-FU-kTk">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SBe-Sl-mJs">
+                    <rect key="frame" x="178" y="9" width="36" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="100%" id="n3u-6W-8wp">
                         <font key="font" metaFont="systemThin" size="13"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ClY-n5-6ju">
-                    <rect key="frame" x="3" y="6" width="23" height="17"/>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="0%" id="gY9-Gs-FTl">
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DJ9-Lo-sCR">
+                    <rect key="frame" x="3" y="9" width="23" height="17"/>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="0%" id="fwh-EX-Vmh">
                         <font key="font" metaFont="systemThin" size="13"/>
                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <progressIndicator wantsLayer="YES" minValue="-100" maxValue="-20" doubleValue="-100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="f76-b7-AIC">
-                    <rect key="frame" x="34" y="4" width="136" height="20"/>
-                </progressIndicator>
+                <slider hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="k1Y-h0-Bl8">
+                    <rect key="frame" x="32" y="3" width="140" height="29"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="K0n-3d-FMQ"/>
+                    </constraints>
+                    <sliderCell key="cell" state="on" alignment="left" minValue="-100" maxValue="-20" doubleValue="-60" tickMarkPosition="above" sliderType="linear" id="RLv-CJ-Sem"/>
+                    <connections>
+                        <action selector="signalChanged:" target="c22-O7-iKe" id="8L0-eM-s3Z"/>
+                    </connections>
+                </slider>
             </subviews>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="f76-b7-AIC" secondAttribute="bottom" constant="5" id="JzD-o1-LOW"/>
-                <constraint firstItem="f76-b7-AIC" firstAttribute="leading" secondItem="ClY-n5-6ju" secondAttribute="trailing" constant="10" id="QFL-P6-aSf"/>
+                <constraint firstItem="oxM-ki-uvZ" firstAttribute="trailing" secondItem="k1Y-h0-Bl8" secondAttribute="trailing" id="5cE-fh-fQy"/>
+                <constraint firstItem="DJ9-Lo-sCR" firstAttribute="centerY" secondItem="k1Y-h0-Bl8" secondAttribute="centerY" id="7bF-dA-7Xx"/>
+                <constraint firstItem="DJ9-Lo-sCR" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="5" id="7eO-yT-vds"/>
+                <constraint firstItem="SBe-Sl-mJs" firstAttribute="centerY" secondItem="k1Y-h0-Bl8" secondAttribute="centerY" id="8iy-Co-RiX"/>
+                <constraint firstItem="k1Y-h0-Bl8" firstAttribute="leading" secondItem="DJ9-Lo-sCR" secondAttribute="trailing" constant="10" id="CbW-dF-Zn8"/>
+                <constraint firstItem="SBe-Sl-mJs" firstAttribute="leading" secondItem="k1Y-h0-Bl8" secondAttribute="trailing" constant="10" id="ELb-bH-lmm"/>
+                <constraint firstItem="oxM-ki-uvZ" firstAttribute="centerY" secondItem="SBe-Sl-mJs" secondAttribute="centerY" id="KjY-Ru-EmH"/>
+                <constraint firstAttribute="trailing" secondItem="SBe-Sl-mJs" secondAttribute="trailing" constant="5" id="MFm-me-b7g"/>
+                <constraint firstItem="oxM-ki-uvZ" firstAttribute="leading" secondItem="k1Y-h0-Bl8" secondAttribute="leading" id="MpL-6G-ySl"/>
                 <constraint firstItem="C6L-qK-WAH" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="22" id="QZA-Iw-RuW"/>
-                <constraint firstItem="ClY-n5-6ju" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="5" id="Qq9-Bu-pcy"/>
                 <constraint firstItem="C6L-qK-WAH" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="SIg-0G-Zy9"/>
-                <constraint firstItem="f76-b7-AIC" firstAttribute="top" secondItem="C6L-qK-WAH" secondAttribute="bottom" constant="5" id="W0p-7j-IFZ"/>
-                <constraint firstAttribute="trailing" secondItem="leI-7j-qhH" secondAttribute="trailing" constant="5" id="dvj-U8-EK9"/>
-                <constraint firstItem="leI-7j-qhH" firstAttribute="leading" secondItem="f76-b7-AIC" secondAttribute="trailing" constant="10" id="fxH-Qj-YPc"/>
-                <constraint firstItem="leI-7j-qhH" firstAttribute="centerY" secondItem="f76-b7-AIC" secondAttribute="centerY" id="nCA-sQ-wnE"/>
-                <constraint firstItem="ClY-n5-6ju" firstAttribute="centerY" secondItem="f76-b7-AIC" secondAttribute="centerY" id="uB2-Ve-y7I"/>
+                <constraint firstItem="k1Y-h0-Bl8" firstAttribute="top" secondItem="C6L-qK-WAH" secondAttribute="bottom" constant="5" id="UtY-9c-PW8"/>
+                <constraint firstAttribute="bottom" secondItem="k1Y-h0-Bl8" secondAttribute="bottom" constant="5" id="VoP-Zh-BGe"/>
             </constraints>
             <connections>
-                <outlet property="signalStrengthIndicator" destination="f76-b7-AIC" id="5kR-hZ-7on"/>
+                <outlet property="signalStrengthIndicator" destination="oxM-ki-uvZ" id="dbF-Go-UhZ"/>
+                <outlet property="signalStrengthSlider" destination="k1Y-h0-Bl8" id="5yc-Gn-VdJ"/>
             </connections>
             <point key="canvasLocation" x="131.5" y="152.5"/>
         </customView>
