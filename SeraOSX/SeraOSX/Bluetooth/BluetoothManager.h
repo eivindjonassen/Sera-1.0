@@ -12,11 +12,12 @@
 
 
 #define BLE_SERVICE_UUID @"B500"
-//#define BLE_CHARACTERISTICS_SERVICE_UUID @"B511"
+#define BLE_CHARACTERISTICS_MAC_UUID @"B511"
 #define BLE_CHARACTERISTICS_MACNAME_UUID @"B512"
 #define BLE_CHARACTERISTICS_MACNAME_LAST_UUID @"B513"
 #define BLE_CHARACTERISTICS_UNLINK_UUID @"B514"
 #define BLE_CHARACTERISTICS_DEVICE_UUID @"B515"
+#define BLE_CHARACTERSITICS_UPDATE_MAC_UUID @"B516"
 
 @protocol BTManagerDelegate;
 
@@ -30,10 +31,14 @@
 @property (nonatomic, strong) NSTimer *signalStrengthUpdater;
 @property (nonatomic, strong) NSTimer *reconnectTimer;
 @property (nonatomic, strong) CBCharacteristic *unlinkCharacteristic;
+@property (nonatomic, strong) CBCharacteristic *macCharacteristic;
 @property (nonatomic, strong) CBCharacteristic *macNameCharacteristic;
 @property (nonatomic, strong) CBCharacteristic *macNameLastCharacteristic;
 @property (nonatomic, strong) CBCharacteristic *deviceUDIDCharacteristic;
+@property (nonatomic, strong) CBCharacteristic *updateMacUUIDCharacteristic;
 @property (nonatomic, weak) id<BTManagerDelegate>delegate;
+@property (nonatomic, assign) BOOL hasMacUUID;
+@property (nonatomic, assign) BOOL hasDeviceUUID;
 
 - (void)scanForDevices;
 - (void)sendUnlink;

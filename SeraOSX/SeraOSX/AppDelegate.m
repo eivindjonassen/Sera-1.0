@@ -216,7 +216,7 @@
 - (void)peripheralDisconnected:(CBPeripheral *)peripheral {
     self.mainPopover.contentViewController = [[SyncViewController alloc] initWithNibName:@"SyncViewController" bundle:nil];
     [self.statusItem.menu.itemArray objectAtIndex:0].enabled = NO;
-    [self.statusItem.menu.itemArray objectAtIndex:2].enabled = NO;
+    //[self.statusItem.menu.itemArray objectAtIndex:2].enabled = NO;
     self.signalStrengthView.signalStrengthIndicator.doubleValue = -100;
     self.signalStrengthView.signalStrengthSlider.hidden = YES;
 }
@@ -265,6 +265,7 @@
     
 }
 - (void)deviceUnlinked {
+    [self hidePopover:nil];
     [self.statusItem.menu.itemArray objectAtIndex:0].enabled = NO;
     [self.statusItem.menu.itemArray objectAtIndex:2].enabled = NO;
     self.signalStrengthView.signalStrengthIndicator.doubleValue = -100;

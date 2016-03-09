@@ -8,6 +8,7 @@
 
 #import "BluetoothManager.h"
 #import <Cocoa/Cocoa.h>
+#import "DeviceUID.h"
 
 
 @implementation BluetoothManager
@@ -18,7 +19,7 @@
     dispatch_once(&onceToken, ^{
         _sharedClient = [[BluetoothManager alloc] init];
         _sharedClient.supportedServices = @[[CBUUID UUIDWithString:BLE_SERVICE_UUID]];
-        _sharedClient.supportedCharacteristics = @[/*[CBUUID UUIDWithString:BLE_CHARACTERISTICS_SERVICE_UUID],*/ [CBUUID UUIDWithString:BLE_CHARACTERISTICS_MACNAME_UUID], [CBUUID UUIDWithString:BLE_CHARACTERISTICS_MACNAME_LAST_UUID], [CBUUID UUIDWithString:BLE_CHARACTERISTICS_UNLINK_UUID], [CBUUID UUIDWithString:BLE_CHARACTERISTICS_DEVICE_UUID]];
+        _sharedClient.supportedCharacteristics = @[[CBUUID UUIDWithString:BLE_CHARACTERISTICS_MAC_UUID], [CBUUID UUIDWithString:BLE_CHARACTERISTICS_MACNAME_UUID], [CBUUID UUIDWithString:BLE_CHARACTERISTICS_MACNAME_LAST_UUID], [CBUUID UUIDWithString:BLE_CHARACTERISTICS_UNLINK_UUID], [CBUUID UUIDWithString:BLE_CHARACTERISTICS_DEVICE_UUID], [CBUUID UUIDWithString:BLE_CHARACTERSITICS_UPDATE_MAC_UUID]];
     });
     
     return _sharedClient;
@@ -44,6 +45,8 @@
      dispatch_async(dispatch_get_main_queue(), ^{
     NSLog(@"Did fail to connect");
     NSLog(@"%@",error);
+         self.hasMacUUID = NO;
+         self.hasDeviceUUID = NO;
     [self.delegate peripheralDisconnected:peripheral];
     if (self.signalStrengthUpdater){
         [self.signalStrengthUpdater invalidate];
@@ -70,6 +73,8 @@
     dispatch_async(dispatch_get_main_queue(), ^{
     NSLog(@"Peripheral disconnected");
     NSLog(@"%@",error);
+        self.hasMacUUID = NO;
+        self.hasDeviceUUID = NO;
     [self.delegate peripheralDisconnected:peripheral];
     if (self.signalStrengthUpdater){
         [self.signalStrengthUpdater invalidate];
@@ -192,12 +197,16 @@
         {
             if ([aChar.UUID isEqual:[CBUUID UUIDWithString:BLE_CHARACTERISTICS_DEVICE_UUID]]){
                 [peripheral readValueForCharacteristic:aChar];
+            } else if ([aChar.UUID isEqual:[CBUUID UUIDWithString:BLE_CHARACTERISTICS_MAC_UUID]]){
+                [peripheral readValueForCharacteristic:aChar];
             } else if ([aChar.UUID isEqual:[CBUUID UUIDWithString:BLE_CHARACTERISTICS_UNLINK_UUID]]){
                 self.unlinkCharacteristic = aChar;
             } else if ([aChar.UUID isEqual:[CBUUID UUIDWithString:BLE_CHARACTERISTICS_MACNAME_UUID]]) { // 3
                 self.macNameCharacteristic = aChar;
             } else if ([aChar.UUID isEqual:[CBUUID UUIDWithString:BLE_CHARACTERISTICS_MACNAME_LAST_UUID]]){
                 self.macNameLastCharacteristic = aChar;
+            } else if ([aChar.UUID isEqual:[CBUUID UUIDWithString:BLE_CHARACTERSITICS_UPDATE_MAC_UUID]]){
+                self.updateMacUUIDCharacteristic = aChar;
             }
         }
     }
@@ -223,11 +232,10 @@
             if (savedPhoneUUIDString != nil){
                 NSString *peripheralDeviceUUID = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
                 if ([savedPhoneUUIDString isEqualToString:peripheralDeviceUUID]){ // Connect
-                    [self setupCharacteristics];
-                    [self.delegate peripheralSuccessfulyConnected:self.connectedPhone];
-                    NSRunLoop * rl = [NSRunLoop mainRunLoop];
-                    self.signalStrengthUpdater = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(requestCurrentSignalStrenght) userInfo:nil repeats:NO];
-                    [rl addTimer:self.signalStrengthUpdater forMode:NSRunLoopCommonModes];
+                    self.hasDeviceUUID = YES;
+                    if (self.hasMacUUID){
+                        [self setupConnection];
+                    }
                 } else {
                     [self.centralManager cancelPeripheralConnection:peripheral];
                     self.connectedPhone = nil;
@@ -235,21 +243,46 @@
                 }
             } else { //TODO check if all string is passed, connect and save UUID string
                 //[peripheral readValueForCharacteristic:characteristic];
+                self.hasDeviceUUID = YES;
                 NSString *peripheralDeviceUUID = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
                 
                 NSLog(@"Device UID: %@",peripheralDeviceUUID);
                 [[NSUserDefaults standardUserDefaults] setObject:peripheralDeviceUUID forKey:@"phoneUUID"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 
-                [self setupCharacteristics];
-                [self.delegate peripheralSuccessfulyConnected:self.connectedPhone];
-                NSRunLoop * rl = [NSRunLoop mainRunLoop];
-                self.signalStrengthUpdater = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(requestCurrentSignalStrenght) userInfo:nil repeats:NO];
-                [rl addTimer:self.signalStrengthUpdater forMode:NSRunLoopCommonModes];
+                if (self.hasMacUUID){
+                    [self setupConnection];
+                }
+            }
+        } else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:BLE_CHARACTERISTICS_MAC_UUID]]){
+             NSString *macDeviceUUID = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+            if (macDeviceUUID && macDeviceUUID.length){
+                if (![macDeviceUUID isEqualToString:[DeviceUID uid]]){
+                    [self.centralManager cancelPeripheralConnection:peripheral];
+                    self.connectedPhone = nil;
+                    [self scanForDevices];
+                } else {
+                    self.hasMacUUID = YES;
+                    [self setupConnection];
+                }
+            } else {
+                self.hasMacUUID = YES;
+                [self sendMacUUID];
+                if (self.hasDeviceUUID){
+                    [self setupConnection];
+                }
             }
         }
     }
      });
+}
+
+- (void)setupConnection {
+    [self setupCharacteristics];
+    [self.delegate peripheralSuccessfulyConnected:self.connectedPhone];
+    NSRunLoop * rl = [NSRunLoop mainRunLoop];
+    self.signalStrengthUpdater = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(requestCurrentSignalStrenght) userInfo:nil repeats:NO];
+    [rl addTimer:self.signalStrengthUpdater forMode:NSRunLoopCommonModes];
 }
 
 - (void)setupCharacteristics{
@@ -288,6 +321,29 @@
     NSLog(@"peripheral: %@ didUpdateNotificationStateForCharacteristic: %@, error: %@",peripheral, characteristic.UUID, error)
     ;
 
+}
+
+- (void)sendMacUUID {
+    if (self.updateMacUUIDCharacteristic){
+        NSString *macUID = [DeviceUID uid];
+        NSLog(@"Mac UID: %@",macUID);
+        NSData *uidData = [macUID dataUsingEncoding:NSUTF8StringEncoding];
+        
+        int count = 0;
+        int dataLength = uidData.length;
+        if (dataLength > 20){
+            while (count < dataLength && dataLength - count > 20){
+                [self.connectedPhone writeValue:[uidData subdataWithRange:NSMakeRange(count, 20)] forCharacteristic:self.updateMacUUIDCharacteristic type:CBCharacteristicWriteWithoutResponse];
+                
+                [NSThread sleepForTimeInterval:0.005];
+                count += 20;
+            }
+        }
+        
+        if (count < dataLength){
+            [self.connectedPhone writeValue:[uidData subdataWithRange:NSMakeRange(count, dataLength-count)] forCharacteristic:self.updateMacUUIDCharacteristic type:CBCharacteristicWriteWithoutResponse];
+        }
+    }
 }
 
 - (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(NSError *)error {

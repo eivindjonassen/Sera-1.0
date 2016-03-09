@@ -42,15 +42,16 @@
     [self.peripheralManager removeAllServices];
     if (self.serviceUUID == nil){
         self.serviceUUID = [CBUUID UUIDWithString:BLE_SERVICE_UUID];
-//        self.characteristicsUUID = [CBUUID UUIDWithString:BLE_CHARACTERISTICS_SERVICE_UUID];
+        self.macUUID = [CBUUID UUIDWithString:BLE_CHARACTERISTICS_MAC_UUID];
         self.macNameUUID = [CBUUID UUIDWithString:BLE_CHARACETRISTICS_MACNAME_UUID];
         self.macNameLastUUID = [CBUUID UUIDWithString:BLE_CHARACTERISTICS_MACNAME_LAST_UUID];
         self.unlinkUUID = [CBUUID UUIDWithString:BLE_CHARACTERISTICS_UNLINK_UUID];
         self.deviceUUID = [CBUUID UUIDWithString:BLE_CHARACTERISTICS_DEVICE_UUID];
+        self.updateMacUUID = [CBUUID UUIDWithString:BLE_CHARACTERISTICS_UPDATE_MAC_UUID];
         
         
         self.deviceInfoService = [[CBMutableService alloc] initWithType:self.serviceUUID primary:YES];
-//        self.deviceInfoCharacteristic = [[CBMutableCharacteristic alloc] initWithType:self.characteristicsUUID properties:CBCharacteristicPropertyNotify value:nil permissions:CBAttributePermissionsReadable];
+        self.macCharacteristic = [[CBMutableCharacteristic alloc] initWithType:self.macUUID properties:CBCharacteristicPropertyRead value:nil permissions:CBAttributePermissionsReadable];
         
         self.macNameCharacteristics = [[CBMutableCharacteristic alloc] initWithType:self.macNameUUID properties:CBCharacteristicPropertyWriteWithoutResponse value:nil permissions:CBAttributePermissionsWriteable];
         
@@ -61,8 +62,10 @@
         NSLog(@"Device UID: %@",[DeviceUID uid]);
         self.deviceCharacteristics = [[CBMutableCharacteristic alloc] initWithType:self.deviceUUID properties:CBCharacteristicPropertyRead value:[[DeviceUID uid]dataUsingEncoding:NSUTF8StringEncoding] permissions:CBAttributePermissionsReadable];
         
+        self.updateMacUUIDCharacteristics = [[CBMutableCharacteristic alloc] initWithType:self.updateMacUUID properties:CBCharacteristicPropertyWriteWithoutResponse value:nil permissions:CBAttributePermissionsWriteable];
+        
     }
-    self.deviceInfoService.characteristics = @[/*self.deviceInfoCharacteristic,*/ self.macNameCharacteristics, self.macNameLastCharacteristics, self.unlinkCharacteristics , self.deviceCharacteristics];
+    self.deviceInfoService.characteristics = @[self.macCharacteristic, self.macNameCharacteristics, self.macNameLastCharacteristics, self.unlinkCharacteristics , self.deviceCharacteristics, self.updateMacUUIDCharacteristics];
     [self.peripheralManager addService:self.deviceInfoService];
 
 }
@@ -184,6 +187,19 @@
     NSLog(@"peripheralManager: %@ willRestoreState: %@",peripheral, dict);
 }
 
+- (void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveReadRequest:(CBATTRequest *)request {
+    if ([request.characteristic.UUID isEqual:self.macCharacteristic.UUID]){
+        if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"mac_uuid"]dataUsingEncoding:NSUTF8StringEncoding].length){
+           request.value = [[[NSUserDefaults standardUserDefaults] stringForKey:@"mac_uuid"]dataUsingEncoding:NSUTF8StringEncoding];
+                    } else {
+                        request.value = [@"" dataUsingEncoding:NSUTF8StringEncoding];
+            }
+            [self.peripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
+            [self.peripheralManager updateValue:request.value forCharacteristic:self.macCharacteristic onSubscribedCentrals:nil];
+    }
+    
+}
+
 - (void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveWriteRequests:(NSArray *)requests {
     for (CBATTRequest *singleRequest in requests){
         if ([singleRequest.characteristic.UUID isEqual:[CBUUID UUIDWithString:BLE_CHARACETRISTICS_MACNAME_UUID]]){
@@ -208,15 +224,19 @@
                 [[NSUserDefaults standardUserDefaults] setObject:[prevName stringByAppendingString:macName] forKey:@"macName"];
             }
             [[NSUserDefaults standardUserDefaults] synchronize];
-            
-            
-            [[NSUserDefaults standardUserDefaults] synchronize];
+
             [self.delegate macNameUpdated];
         } else if ([singleRequest.characteristic.UUID isEqual:[CBUUID UUIDWithString:BLE_CHARACTERISTICS_UNLINK_UUID]]){
             NSLog(@"Stopping advertising");
             [self.delegate stopedAdvertising];
             [self.peripheralManager stopAdvertising];
             [self.delegate gotForceUnlink];
+            self.serviceUUID = nil;
+        } else if ([singleRequest.characteristic.UUID isEqual:[CBUUID UUIDWithString:BLE_CHARACTERISTICS_UPDATE_MAC_UUID]]){
+            NSLog(@"%@",[[NSString alloc] initWithData:singleRequest.value encoding:NSUTF8StringEncoding]);
+            [self.macCharacteristic setValue:singleRequest.value];
+            [[NSUserDefaults standardUserDefaults] setObject:[[NSString alloc] initWithData:singleRequest.value encoding:NSUTF8StringEncoding] forKey:@"mac_uuid"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
         }
     }
 }
@@ -235,6 +255,7 @@
         [self.delegate stopedAdvertising];
         [self.peripheralManager stopAdvertising];
         self.hasReceivedMacName = NO;
+        self.serviceUUID = nil;
     }
 
 }

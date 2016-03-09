@@ -11,6 +11,7 @@
 		A705F09F1BE3560B001DE0C3 /* SyncViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A705F09D1BE3560B001DE0C3 /* SyncViewController.xib */; };
 		A705F0A31BE35EF0001DE0C3 /* ConnectedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A705F0A11BE35EF0001DE0C3 /* ConnectedViewController.m */; };
 		A705F0A41BE35EF0001DE0C3 /* ConnectedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A705F0A21BE35EF0001DE0C3 /* ConnectedViewController.xib */; };
+		A71F12401C8440D000E54CA9 /* DeviceUID.m in Sources */ = {isa = PBXBuildFile; fileRef = A71F123F1C8440D000E54CA9 /* DeviceUID.m */; };
 		A735522B1BE0FA7F008A02EE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A735522A1BE0FA7F008A02EE /* AppDelegate.m */; };
 		A735522E1BE0FA7F008A02EE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A735522D1BE0FA7F008A02EE /* main.m */; };
 		A73552301BE0FA7F008A02EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A735522F1BE0FA7F008A02EE /* Assets.xcassets */; };
@@ -55,6 +56,8 @@
 		A705F0A01BE35EF0001DE0C3 /* ConnectedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConnectedViewController.h; sourceTree = "<group>"; };
 		A705F0A11BE35EF0001DE0C3 /* ConnectedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConnectedViewController.m; sourceTree = "<group>"; };
 		A705F0A21BE35EF0001DE0C3 /* ConnectedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConnectedViewController.xib; sourceTree = "<group>"; };
+		A71F123E1C8440D000E54CA9 /* DeviceUID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceUID.h; sourceTree = "<group>"; };
+		A71F123F1C8440D000E54CA9 /* DeviceUID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceUID.m; sourceTree = "<group>"; };
 		A73552261BE0FA7F008A02EE /* SeraOSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SeraOSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A73552291BE0FA7F008A02EE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A735522A1BE0FA7F008A02EE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -127,6 +130,7 @@
 		A705F0931BE34BBE001DE0C3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				A71F123D1C8440D000E54CA9 /* DeviceUID */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -159,6 +163,15 @@
 				A77FEC871C50FCDD0065A20E /* IGNSignalStrenghtView */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		A71F123D1C8440D000E54CA9 /* DeviceUID */ = {
+			isa = PBXGroup;
+			children = (
+				A71F123E1C8440D000E54CA9 /* DeviceUID.h */,
+				A71F123F1C8440D000E54CA9 /* DeviceUID.m */,
+			);
+			path = DeviceUID;
 			sourceTree = "<group>";
 		};
 		A735521D1BE0FA7F008A02EE = {
@@ -376,6 +389,7 @@
 				A705F09E1BE3560B001DE0C3 /* SyncViewController.m in Sources */,
 				A735522E1BE0FA7F008A02EE /* main.m in Sources */,
 				A77FEC8C1C50FD1F0065A20E /* IGNSignalStrengthView.m in Sources */,
+				A71F12401C8440D000E54CA9 /* DeviceUID.m in Sources */,
 				A705F0A31BE35EF0001DE0C3 /* ConnectedViewController.m in Sources */,
 				A7C967671BE77D2900A08022 /* BluetoothManager.m in Sources */,
 				A7C967631BE7772F00A08022 /* SignalStrengthViewController.m in Sources */,
