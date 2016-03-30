@@ -54,6 +54,7 @@
     }
     
     if (self.connectedPhone){
+        self.lastConnectedPhone = self.connectedPhone;
         [self.centralManager connectPeripheral:self.connectedPhone options:nil];
         if (self.connectedPhone.state != CBPeripheralStateConnected){
             [self performSelector:@selector(reconnectToPhone) withObject:nil afterDelay:1];
@@ -71,37 +72,39 @@
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
     dispatch_async(dispatch_get_main_queue(), ^{
-    NSLog(@"Peripheral disconnected");
-    NSLog(@"%@",error);
+        NSLog(@"Peripheral disconnected");
+        NSLog(@"%@",error);
         self.hasMacUUID = NO;
         self.hasDeviceUUID = NO;
-    [self.delegate peripheralDisconnected:peripheral];
-    if (self.signalStrengthUpdater){
-        [self.signalStrengthUpdater invalidate];
-        self.signalStrengthUpdater = nil;
-    }
-    
-    
-//    [self.centralManager cancelPeripheralConnection:self.connectedPhone];
-//    self.connectedPhone = nil;
-    if (self.connectedPhone){
-        [self.centralManager connectPeripheral:self.connectedPhone options:nil];
-        if (self.connectedPhone.state != CBPeripheralStateConnected){
-            [self performSelector:@selector(reconnectToPhone) withObject:nil afterDelay:1];
+        [self.delegate peripheralDisconnected:peripheral];
+        if (self.signalStrengthUpdater){
+            [self.signalStrengthUpdater invalidate];
+            self.signalStrengthUpdater = nil;
         }
-    } else {
-        NSLog(@"Starting scanning");
-        [self.centralManager scanForPeripheralsWithServices:self.supportedServices options:nil];
-    }
-    //NSLog(@"Starting scanning");
-    //[self.centralManager scanForPeripheralsWithServices:self.supportedServices options:nil];
+        
+        
+        //    [self.centralManager cancelPeripheralConnection:self.connectedPhone];
+        //    self.connectedPhone = nil;
+        if (self.connectedPhone){
+            self.lastConnectedPhone = self.connectedPhone;
+            [self.centralManager connectPeripheral:self.lastConnectedPhone options:nil];
+            if (self.lastConnectedPhone.state != CBPeripheralStateConnected){
+                [self performSelector:@selector(reconnectToPhone) withObject:nil afterDelay:1];
+            }
+            [self.centralManager scanForPeripheralsWithServices:self.supportedServices options:nil];
+        } else {
+            NSLog(@"Starting scanning");
+            [self.centralManager scanForPeripheralsWithServices:self.supportedServices options:nil];
+        }
+        //NSLog(@"Starting scanning");
+        //[self.centralManager scanForPeripheralsWithServices:self.supportedServices options:nil];
     });
 }
 
 - (void)reconnectToPhone {
     NSLog(@"Reconnecting to phone with state: %li", self.connectedPhone.state);
-    if (self.connectedPhone && self.connectedPhone.state == CBPeripheralStateDisconnected){
-        [self.centralManager connectPeripheral:self.connectedPhone options:nil];
+    if (self.lastConnectedPhone && self.lastConnectedPhone.state == CBPeripheralStateDisconnected){
+        [self.centralManager connectPeripheral:self.lastConnectedPhone options:nil];
         [self performSelector:@selector(reconnectToPhone) withObject:nil afterDelay:1];
     }
 }

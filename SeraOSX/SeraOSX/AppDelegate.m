@@ -274,11 +274,17 @@
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"signalStrength"];
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"sera_pass"];
     [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"phoneUUID"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    self.mainPopover.contentViewController = [[SyncViewController alloc] initWithNibName:@"SyncViewController" bundle:nil];
-    [self performSelector:@selector(showPopover) withObject:nil afterDelay:0.1]; // To show popover in the right place, we need delay
-    [BluetoothManager sharedClient].connectedPhone = nil;
-    [[BluetoothManager sharedClient] scanForDevices];
+    [[NSUserDefaults standardUserDefaults] setObject:NO forKey:@"shouldWakeUp"];
+     [[NSUserDefaults standardUserDefaults] synchronize];
+    [self compileUnlockScriptWitchCompletionBlock:^{
+        self.mainPopover.contentViewController = [[SyncViewController alloc] initWithNibName:@"SyncViewController" bundle:nil];
+        [self performSelector:@selector(showPopover) withObject:nil afterDelay:0.1]; // To show popover in the right place, we need delay
+        [BluetoothManager sharedClient].connectedPhone = nil;
+        [BluetoothManager sharedClient].lastConnectedPhone = nil;
+        [[BluetoothManager sharedClient] scanForDevices];
+    }];
+   
+    
 }
 
 - (void)showSignalStrenghtView {

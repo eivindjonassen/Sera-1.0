@@ -222,6 +222,7 @@
             } else {
                 NSString *prevName = [[NSUserDefaults standardUserDefaults] stringForKey:@"macName"];
                 [[NSUserDefaults standardUserDefaults] setObject:[prevName stringByAppendingString:macName] forKey:@"macName"];
+                self.hasReceivedMacName = NO;
             }
             [[NSUserDefaults standardUserDefaults] synchronize];
 

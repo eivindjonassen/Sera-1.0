@@ -155,10 +155,10 @@
     
      dispatch_async(dispatch_get_main_queue(), ^{
          
-//         if (self.debugTextView.text == nil){
-//             self.debugTextView.text = @"";
-//         }
-//         self.debugTextView.text = [self.debugTextView.text stringByAppendingString:[NSString stringWithFormat:@"%@ Connected\n",[NSDate date]]];
+         if (self.debugTextView.text == nil){
+             self.debugTextView.text = @"";
+         }
+         self.debugTextView.text = [self.debugTextView.text stringByAppendingString:[NSString stringWithFormat:@"%@ Connected\n",[NSDate date]]];
     switch ((UserState)[[NSUserDefaults standardUserDefaults] integerForKey:@"userState"]){
         case UserStateFirstTime:
         case UserStateNotConfigured:
@@ -183,10 +183,10 @@
 
 - (void)peripheralDisconnected {
       dispatch_async(dispatch_get_main_queue(), ^{
-//    if (self.debugTextView.text == nil){
-//        self.debugTextView.text = @"";
-//    }
-//    self.debugTextView.text = [self.debugTextView.text stringByAppendingString:[NSString stringWithFormat:@"%@ Disconnected\n",[NSDate date]]];
+    if (self.debugTextView.text == nil){
+        self.debugTextView.text = @"";
+    }
+    self.debugTextView.text = [self.debugTextView.text stringByAppendingString:[NSString stringWithFormat:@"%@ Disconnected\n",[NSDate date]]];
     
     if (self.connectView.alpha){
         if ((UserState)[[NSUserDefaults standardUserDefaults] integerForKey:@"userState"] != UserStateFirstTime){
@@ -268,21 +268,21 @@
 
 // DEBUG
 - (void)beganAdvertising {
-//      dispatch_async(dispatch_get_main_queue(), ^{
-//    if (self.debugTextView.text == nil){
-//        self.debugTextView.text = @"";
-//    }
-//    self.debugTextView.text = [self.debugTextView.text stringByAppendingString:[NSString stringWithFormat:@"%@ Starting Advertising\n",[NSDate date]]];
-//    });
+      dispatch_async(dispatch_get_main_queue(), ^{
+    if (self.debugTextView.text == nil){
+        self.debugTextView.text = @"";
+    }
+    self.debugTextView.text = [self.debugTextView.text stringByAppendingString:[NSString stringWithFormat:@"%@ Starting Advertising\n",[NSDate date]]];
+    });
 }
 
 - (void)stopedAdvertising {
-//      dispatch_async(dispatch_get_main_queue(), ^{
-//    if (self.debugTextView.text == nil){
-//        self.debugTextView.text = @"";
-//    }
-//    self.debugTextView.text = [self.debugTextView.text stringByAppendingString:[NSString stringWithFormat:@"%@ Stopping Advertising\n",[NSDate date]]];
-//      });
+      dispatch_async(dispatch_get_main_queue(), ^{
+    if (self.debugTextView.text == nil){
+        self.debugTextView.text = @"";
+    }
+    self.debugTextView.text = [self.debugTextView.text stringByAppendingString:[NSString stringWithFormat:@"%@ Stopping Advertising\n",[NSDate date]]];
+      });
 }
 
 @end

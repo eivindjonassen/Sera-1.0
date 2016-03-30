@@ -26,6 +26,7 @@
 
 @property (nonatomic, strong) CBCentralManager *centralManager;
 @property (nonatomic, strong) CBPeripheral     *connectedPhone;
+@property (nonatomic, strong) CBPeripheral *lastConnectedPhone;
 @property (nonatomic, strong) NSArray *supportedServices;
 @property (nonatomic, strong) NSArray *supportedCharacteristics;
 @property (nonatomic, strong) NSTimer *signalStrengthUpdater;
