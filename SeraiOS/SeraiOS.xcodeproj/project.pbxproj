@@ -292,7 +292,7 @@
 				TargetAttributes = {
 					A77D68C61BF48BA600DAB1FD = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = DX47P89GRB;
+						DevelopmentTeam = 6763QPFAGS;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -557,9 +557,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = SeraiOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = no.ignitum.SeraiOS;
+				PRODUCT_BUNDLE_IDENTIFIER = no.ignitum.sera;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -573,9 +573,9 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = SeraiOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = no.ignitum.SeraiOS;
+				PRODUCT_BUNDLE_IDENTIFIER = no.ignitum.sera;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
