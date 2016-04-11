@@ -62,7 +62,7 @@
                     self.linkPhoneItem.enabled = NO;
                 }
                 
-                [mainMenu addItemWithTitle:@"Unlock automaticly" action:@selector(onUpdatesClick) keyEquivalent:@""];
+                [mainMenu addItemWithTitle:@"Unlock automatically" action:@selector(onUpdatesClick) keyEquivalent:@""];
                 [mainMenu addItem:[NSMenuItem separatorItem]];
                 self.signalStrengthItem = [[NSMenuItem alloc]
                                                   initWithTitle:@"Signal strength"

@@ -36,7 +36,7 @@
             [self.greetingsView addGestureRecognizer:swipeLeft];
             self.greetingsView.userInteractionEnabled = YES;
             self.connectViewTitleLabel.text = @"Please download our app!";
-            self.connectViewDescriptionLabel.text = @"You need to download our free app for mac at the AppStore";
+            self.connectViewDescriptionLabel.text = @"You need to download our free app for Mac at www.ignitum.io";
             self.connectView.alpha = 0;
             self.bluetoothDisabledView.alpha = 0;
             break;
@@ -169,7 +169,7 @@
             case UserStateNotConfigured:
                 [[NSUserDefaults standardUserDefaults] setInteger:2 forKey:@"userState"];
                 self.connectViewTitleLabel.text = @"Congratulations!";
-                self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"You've connected to your\n %@\n\nYou can now press sleep button on iPhone and put it in the pocket!",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
+                self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"You've connected to\n %@\n\nYou can now press the sleep button on your iPhone and put it in your pocket!",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
                 [self.connectViewStateImageView setImage:[UIImage imageNamed:@"ic_mac_complete"]];
                 self.activityIndicator.hidden = YES;
                 self.unlinkButton.hidden = NO;
@@ -229,7 +229,7 @@
    
     
     UIActionSheet *actionSheet = [[UIActionSheet alloc]
-                        initWithTitle:[NSString stringWithFormat:@"Do You want to unlink this phone from %@",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]]
+                        initWithTitle:[NSString stringWithFormat:@"Do you want to unlink this phone from %@",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]]
                         delegate:self
                         cancelButtonTitle:@"Cancel"
                         destructiveButtonTitle:nil
