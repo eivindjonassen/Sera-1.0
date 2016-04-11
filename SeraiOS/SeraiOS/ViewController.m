@@ -36,7 +36,7 @@
             [self.greetingsView addGestureRecognizer:swipeLeft];
             self.greetingsView.userInteractionEnabled = YES;
             self.connectViewTitleLabel.text = @"Please download our app!";
-            self.connectViewDescriptionLabel.text = @"You need to download our free app for Mac at www.ignitum.io";
+            self.connectViewDescriptionLabel.text = @"You need to download our free app for mac at the AppStore";
             self.connectView.alpha = 0;
             self.bluetoothDisabledView.alpha = 0;
             break;
@@ -120,91 +120,96 @@
 
 #pragma mark - BTManager delegate
 - (void)bluetoothStateDidChanged:(CBPeripheralManagerState )state {
-      dispatch_async(dispatch_get_main_queue(), ^{
-    if (self.currentBluetoothState != state){
-        self.currentBluetoothState = state;
-        if (self.currentBluetoothState == CBCentralManagerStatePoweredOn){
-            if (self.bluetoothDisabledView.alpha){
-                [UIView animateWithDuration:0.15 animations:^{
-                    self.bluetoothDisabledView.alpha = 0;
-                    self.connectView.alpha = 1;
-                    [self.activityIndicator startAnimating];
-                } completion:^(BOOL finished) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.currentBluetoothState != state){
+            self.currentBluetoothState = state;
+            if (self.currentBluetoothState == CBCentralManagerStatePoweredOn){
+                if (self.bluetoothDisabledView.alpha){
+                    [UIView animateWithDuration:0.15 animations:^{
+                        self.bluetoothDisabledView.alpha = 0;
+                        self.connectView.alpha = 1;
+                        [self.activityIndicator startAnimating];
+                    } completion:^(BOOL finished) {
+                        [[BluetoothManager sharedClient] startAdvertisingIfReady];
+                    }];
+                } else if (self.connectView.alpha){
                     [[BluetoothManager sharedClient] startAdvertisingIfReady];
-                }];
-            } else if (self.connectView.alpha){
-                [[BluetoothManager sharedClient] startAdvertisingIfReady];
-            }
-        } else if (self.currentBluetoothState == CBCentralManagerStatePoweredOff){
-            if (self.connectView.alpha){
-                [UIView animateWithDuration:0.15 animations:^{
-                    self.bluetoothDisabledView.alpha = 1;
-                    self.connectView.alpha = 0;
-                } completion:^(BOOL finished) {
-                    self.connectViewTitleLabel.text = @"";
-                    self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"We can not find\n %@\n\nPlease start Sera on your Mac",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
-                    self.connectViewStateImageView.image = [UIImage imageNamed:@"ic_mac_off"];
-                }];
+                }
+            } else if (self.currentBluetoothState == CBCentralManagerStatePoweredOff){
+                if (self.connectView.alpha){
+                    [UIView animateWithDuration:0.15 animations:^{
+                        self.bluetoothDisabledView.alpha = 1;
+                        self.connectView.alpha = 0;
+                    } completion:^(BOOL finished) {
+                        self.connectViewTitleLabel.text = @"";
+                        
+                        NSString* macName = [[NSUserDefaults standardUserDefaults] stringForKey:@"macName"];
+                        if (macName){
+                            self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"We can not find\n %@\n\nPlease start Sera on your Mac",macName];
+                        }
+                        
+                        self.connectViewStateImageView.image = [UIImage imageNamed:@"ic_mac_off"];
+                    }];
+                }
             }
         }
-    }
-      });
+    });
 }
 
 - (void)peripheralSuccessfullyConnected {
     
-     dispatch_async(dispatch_get_main_queue(), ^{
-         
-         if (self.debugTextView.text == nil){
-             self.debugTextView.text = @"";
-         }
-         self.debugTextView.text = [self.debugTextView.text stringByAppendingString:[NSString stringWithFormat:@"%@ Connected\n",[NSDate date]]];
-    switch ((UserState)[[NSUserDefaults standardUserDefaults] integerForKey:@"userState"]){
-        case UserStateFirstTime:
-        case UserStateNotConfigured:
-            [[NSUserDefaults standardUserDefaults] setInteger:2 forKey:@"userState"];
-            self.connectViewTitleLabel.text = @"Congratulations!";
-            self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"You've connected to \n %@\n\nYou can now press the sleep button on your iPhone and put it in your pocket!",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
-            [self.connectViewStateImageView setImage:[UIImage imageNamed:@"ic_mac_complete"]];
-            self.activityIndicator.hidden = YES;
-            self.unlinkButton.hidden = NO;
-            [self performSelector:@selector(peripheralSuccessfullyConnected) withObject:nil afterDelay:3];
-            break;
-        case UserStateConfigured:
-            self.connectViewTitleLabel.text = @"";
-            [self.connectViewStateImageView setImage:[UIImage imageNamed:@"ic_mac_on"]];
-            self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"Connected to\n %@",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
-            self.activityIndicator.hidden = YES;
-            self.unlinkButton.hidden = NO;
-            break;
-    }
-     });
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        if (self.debugTextView.text == nil){
+            self.debugTextView.text = @"";
+        }
+        self.debugTextView.text = [self.debugTextView.text stringByAppendingString:[NSString stringWithFormat:@"%@ Connected\n",[NSDate date]]];
+        switch ((UserState)[[NSUserDefaults standardUserDefaults] integerForKey:@"userState"]){
+            case UserStateFirstTime:
+            case UserStateNotConfigured:
+                [[NSUserDefaults standardUserDefaults] setInteger:2 forKey:@"userState"];
+                self.connectViewTitleLabel.text = @"Congratulations!";
+                self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"You've connected to your\n %@\n\nYou can now press sleep button on iPhone and put it in the pocket!",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
+                [self.connectViewStateImageView setImage:[UIImage imageNamed:@"ic_mac_complete"]];
+                self.activityIndicator.hidden = YES;
+                self.unlinkButton.hidden = NO;
+                [self performSelector:@selector(peripheralSuccessfullyConnected) withObject:nil afterDelay:3];
+                break;
+            case UserStateConfigured:
+                self.connectViewTitleLabel.text = @"";
+                [self.connectViewStateImageView setImage:[UIImage imageNamed:@"ic_mac_on"]];
+                self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"Connected to\n %@",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
+                self.activityIndicator.hidden = YES;
+                self.unlinkButton.hidden = NO;
+                break;
+        }
+    });
 }
 
 - (void)peripheralDisconnected {
-      dispatch_async(dispatch_get_main_queue(), ^{
-    if (self.debugTextView.text == nil){
-        self.debugTextView.text = @"";
-    }
-    self.debugTextView.text = [self.debugTextView.text stringByAppendingString:[NSString stringWithFormat:@"%@ Disconnected\n",[NSDate date]]];
-    
-    if (self.connectView.alpha){
-        if ((UserState)[[NSUserDefaults standardUserDefaults] integerForKey:@"userState"] != UserStateFirstTime){
-        self.activityIndicator.hidden = NO;
-        self.connectViewStateImageView.image = [UIImage imageNamed:@"ic_mac_off"];
-        self.connectViewTitleLabel.text = @"";
-        self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"We can not find\n %@\n\nPlease start Sera on your Mac",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
-        //[[BluetoothManager sharedClient] startAdvertisingIfReady];
-        } else {
-            [self initViews];
-            
-            [UIView animateWithDuration:0.25 animations:^{
-                self.greetingsView.alpha = 1;
-                self.connectView.alpha = 0;
-            }];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.debugTextView.text == nil){
+            self.debugTextView.text = @"";
         }
-    }
-      });
+        self.debugTextView.text = [self.debugTextView.text stringByAppendingString:[NSString stringWithFormat:@"%@ Disconnected\n",[NSDate date]]];
+        
+        if (self.connectView.alpha){
+            if ((UserState)[[NSUserDefaults standardUserDefaults] integerForKey:@"userState"] != UserStateFirstTime){
+                self.activityIndicator.hidden = NO;
+                self.connectViewStateImageView.image = [UIImage imageNamed:@"ic_mac_off"];
+                self.connectViewTitleLabel.text = @"";
+                self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"We can not find\n %@\n\nPlease start Sera on your Mac",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
+                //[[BluetoothManager sharedClient] startAdvertisingIfReady];
+            } else {
+                [self initViews];
+                
+                [UIView animateWithDuration:0.25 animations:^{
+                    self.greetingsView.alpha = 1;
+                    self.connectView.alpha = 0;
+                }];
+            }
+        }
+    });
 }
 
 - (void)macNameUpdated {
@@ -224,7 +229,7 @@
    
     
     UIActionSheet *actionSheet = [[UIActionSheet alloc]
-                        initWithTitle:[NSString stringWithFormat:@"Do you want to unlink this phone from %@",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]]
+                        initWithTitle:[NSString stringWithFormat:@"Do You want to unlink this phone from %@",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]]
                         delegate:self
                         cancelButtonTitle:@"Cancel"
                         destructiveButtonTitle:nil

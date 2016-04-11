@@ -102,10 +102,12 @@
 }
 
 - (void)reconnectToPhone {
-    NSLog(@"Reconnecting to phone with state: %li", self.connectedPhone.state);
-    if (self.lastConnectedPhone && self.lastConnectedPhone.state == CBPeripheralStateDisconnected){
-        [self.centralManager connectPeripheral:self.lastConnectedPhone options:nil];
-        [self performSelector:@selector(reconnectToPhone) withObject:nil afterDelay:1];
+    NSLog(@"Reconnecting to phone with state: %li %f", self.connectedPhone.state, [[NSDate date] timeIntervalSince1970]);
+    if (self.connectedPhone && self.connectedPhone.state != CBPeripheralStateConnected)
+    {
+        [self.centralManager connectPeripheral:self.connectedPhone options:nil];
+        [self performSelector:@selector(reconnectToPhone) withObject:nil afterDelay:1.0];
+        
     }
 }
 
@@ -127,11 +129,13 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
     
-        self.connectedPhone = peripheral;
-        self.connectedPhone.delegate = self;
-        [self.centralManager connectPeripheral:self.connectedPhone options:nil];
+    self.connectedPhone = peripheral;
+    self.connectedPhone.delegate = self;
+    
+    [self.centralManager cancelPeripheralConnection:self.connectedPhone];
+    [self.centralManager connectPeripheral:self.connectedPhone options:nil];
     NSLog(@"Stopping scanning");
-        [self.centralManager stopScan];
+    [self.centralManager stopScan];
 
     
 }
@@ -378,7 +382,9 @@
 - (void)sendUnlink {
     NSUInteger index = 1;
     NSData *payload = [NSData dataWithBytes:&index length:sizeof(index)];
+    if (self.connectedPhone && self.connectedPhone.state == CBPeripheralStateConnected){
     [self.connectedPhone writeValue:payload forCharacteristic:self.unlinkCharacteristic type:CBCharacteristicWriteWithoutResponse];
+    }
 }
 
 @end
