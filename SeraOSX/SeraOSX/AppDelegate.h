@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "BluetoothManager.h"
+#import "BluetoothManager2.h"
 #import "IGNSignalStrengthView.h"
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, BTManagerDelegate>

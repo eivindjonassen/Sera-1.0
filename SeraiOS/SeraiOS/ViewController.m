@@ -187,6 +187,7 @@
 }
 
 - (void)peripheralDisconnected {
+    NSLog(@"Peripheral disconnected");
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.debugTextView.text == nil){
             self.debugTextView.text = @"";
@@ -199,7 +200,7 @@
                 self.connectViewStateImageView.image = [UIImage imageNamed:@"ic_mac_off"];
                 self.connectViewTitleLabel.text = @"";
                 self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"We can not find\n %@\n\nPlease start Sera on your Mac",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
-                //[[BluetoothManager sharedClient] startAdvertisingIfReady];
+                [[BluetoothManager sharedClient] startAdvertisingIfReady];
             } else {
                 [self initViews];
                 
@@ -213,11 +214,11 @@
 }
 
 - (void)macNameUpdated {
-      dispatch_async(dispatch_get_main_queue(), ^{
-    if (self.connectView.alpha && (UserState)[[NSUserDefaults standardUserDefaults] integerForKey:@"userState"] == UserStateConfigured){
-        self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"Connected to\n %@",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
-    }
-      });
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.connectView.alpha && (UserState)[[NSUserDefaults standardUserDefaults] integerForKey:@"userState"] == UserStateConfigured){
+            self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"Connected to\n %@",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
+        }
+    });
 }
 
 - (void)didReceiveMemoryWarning {

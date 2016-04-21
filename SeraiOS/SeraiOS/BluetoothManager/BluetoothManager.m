@@ -16,6 +16,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         _sharedClient = [[BluetoothManager alloc] init];
+        _sharedClient.hasConnectedPeripheral = NO;
     });
     
     return _sharedClient;
@@ -33,6 +34,7 @@
 }
 
 - (void)startConnection {
+    NSLog(@"startConnection");
     if (self.peripheralManager.isAdvertising){
         NSLog(@"Stopping advertising");
         [self.delegate stopedAdvertising];
@@ -67,7 +69,6 @@
     }
     self.deviceInfoService.characteristics = @[self.macCharacteristic, self.macNameCharacteristics, self.macNameLastCharacteristics, self.unlinkCharacteristics , self.deviceCharacteristics, self.updateMacUUIDCharacteristics];
     [self.peripheralManager addService:self.deviceInfoService];
-
 }
 
 
@@ -76,6 +77,17 @@
 
 - (void)peripheralManager:(CBPeripheralManager *)peripheral didAddService:(CBService *)service error:(NSError *)error {
     NSLog(@"peripheralManager:%@ didAddService:%@ error:%@",peripheral,service,error);
+    
+    [self startAdvertising];
+}
+
+- (void)startAdvertisingIfNotConnected {
+    if (!self.hasConnectedPeripheral) {
+        [self startAdvertising];
+    }
+}
+
+- (void)startAdvertising {
     if (self.peripheralManager.isAdvertising){
         NSLog(@"Stopping advertising");
         [self.delegate stopedAdvertising];
@@ -85,13 +97,15 @@
     NSString *deviceName = [[UIDevice currentDevice] name];
     
     NSDictionary *advertisment = @{
-      CBAdvertisementDataServiceUUIDsKey : @[self.serviceUUID],
-      CBAdvertisementDataLocalNameKey: (deviceName ? deviceName : @"Sera")
-    };
+                                   CBAdvertisementDataServiceUUIDsKey : @[self.serviceUUID],
+                                   CBAdvertisementDataLocalNameKey: (deviceName ? deviceName : @"Sera")
+                                   };
     
     NSLog(@"Starting advertising");
     [self.delegate beganAdvertising];
     [self.peripheralManager startAdvertising:advertisment];
+    
+    [self performSelector:@selector(startAdvertisingIfNotConnected) withObject:nil afterDelay:60];
 }
 
 - (void)peripheralManager:(CBPeripheralManager *)peripheral central:(CBCentral *)central didSubscribeToCharacteristic:(CBCharacteristic *)characteristic {
@@ -99,18 +113,18 @@
     NSLog(@"%@",characteristic.UUID);
     if ([characteristic.UUID isEqual:self.unlinkUUID]){
         self.connectedCentral = central;
-    [self.delegate peripheralSuccessfullyConnected];
-//        NSLog(@"Stopping advertising");
-//        [self.delegate stopedAdvertising];
-//        [self.peripheralManager stopAdvertising];
+        self.hasConnectedPeripheral = YES;
+        [self.delegate peripheralSuccessfullyConnected];
+        // NSLog(@"Stopping advertising");
+        // [self.delegate stopedAdvertising];
+        // [self.peripheralManager stopAdvertising];
     }
 }
 
 - (void)peripheralManagerDidStartAdvertising:(CBPeripheralManager *)peripheral error:(NSError *)error {
     NSLog(@"peripheralManagerDidStartAdvertising");
     
-    if (error != nil)
-    {
+    if (error != nil) {
         NSLog(@"Unable To Start Advertisement: Error: %@", error);
         //[self.delegate Disconnected_Sender];
     }
@@ -119,6 +133,7 @@
 - (void)peripheralManager:(CBPeripheralManager *)peripheral central:(CBCentral *)central didUnsubscribeFromCharacteristic:(CBCharacteristic *)characteristic {
     NSLog(@"didUnsiscripeFromCharacteristic");
     self.hasReceivedMacName = NO;
+    self.hasConnectedPeripheral = NO;
     [self.delegate peripheralDisconnected];
 }
 
@@ -143,6 +158,7 @@
         {
              NSLog(@"Peripheral powered off");
             if (self.connectedCentral){
+                self.hasConnectedPeripheral = NO;
                 [self.delegate peripheralDisconnected];
                 NSLog(@"Stopping advertising");
                 [self.delegate stopedAdvertising];
@@ -188,19 +204,22 @@
 }
 
 - (void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveReadRequest:(CBATTRequest *)request {
+    NSLog(@"peripheralManager didReceiveReadRequest %@", request);
     if ([request.characteristic.UUID isEqual:self.macCharacteristic.UUID]){
         if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"mac_uuid"]dataUsingEncoding:NSUTF8StringEncoding].length){
-           request.value = [[[NSUserDefaults standardUserDefaults] stringForKey:@"mac_uuid"]dataUsingEncoding:NSUTF8StringEncoding];
-                    } else {
-                        request.value = [@"" dataUsingEncoding:NSUTF8StringEncoding];
-            }
-            [self.peripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
-            [self.peripheralManager updateValue:request.value forCharacteristic:self.macCharacteristic onSubscribedCentrals:nil];
+            request.value = [[[NSUserDefaults standardUserDefaults] stringForKey:@"mac_uuid"]dataUsingEncoding:NSUTF8StringEncoding];
+        } else {
+            request.value = [@"" dataUsingEncoding:NSUTF8StringEncoding];
+        }
+        [self.peripheralManager respondToRequest:request withResult:CBATTErrorSuccess];
+        [self.peripheralManager updateValue:request.value forCharacteristic:self.macCharacteristic onSubscribedCentrals:nil];
     }
     
 }
 
 - (void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveWriteRequests:(NSArray *)requests {
+    NSLog(@"didReceiveWriteRequests %@", requests);
+    
     for (CBATTRequest *singleRequest in requests){
         if ([singleRequest.characteristic.UUID isEqual:[CBUUID UUIDWithString:BLE_CHARACETRISTICS_MACNAME_UUID]]){
             NSString *macName = [[NSString alloc] initWithData:singleRequest.value encoding:NSUTF8StringEncoding];
@@ -208,8 +227,8 @@
                 self.hasReceivedMacName = YES;
                 [[NSUserDefaults standardUserDefaults] setObject:macName forKey:@"macName"];
             } else {
-                 NSString *prevName = [[NSUserDefaults standardUserDefaults] stringForKey:@"macName"];
-                 [[NSUserDefaults standardUserDefaults] setObject:[prevName stringByAppendingString:macName] forKey:@"macName"];
+                NSString *prevName = [[NSUserDefaults standardUserDefaults] stringForKey:@"macName"];
+                [[NSUserDefaults standardUserDefaults] setObject:[prevName stringByAppendingString:macName] forKey:@"macName"];
             }
             [[NSUserDefaults standardUserDefaults] synchronize];
             
@@ -225,7 +244,7 @@
                 self.hasReceivedMacName = NO;
             }
             [[NSUserDefaults standardUserDefaults] synchronize];
-
+            
             [self.delegate macNameUpdated];
         } else if ([singleRequest.characteristic.UUID isEqual:[CBUUID UUIDWithString:BLE_CHARACTERISTICS_UNLINK_UUID]]){
             NSLog(@"Stopping advertising");
@@ -241,6 +260,7 @@
         }
     }
 }
+
 - (void)peripheralManagerIsReadyToUpdateSubscribers:(CBPeripheralManager *)peripheral {
     
 }

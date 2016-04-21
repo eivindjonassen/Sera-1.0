@@ -30,6 +30,8 @@
 		A7C967631BE7772F00A08022 /* SignalStrengthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C967611BE7772F00A08022 /* SignalStrengthViewController.m */; };
 		A7C967641BE7772F00A08022 /* SignalStrengthViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7C967621BE7772F00A08022 /* SignalStrengthViewController.xib */; };
 		A7C967671BE77D2900A08022 /* BluetoothManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C967661BE77D2900A08022 /* BluetoothManager.m */; };
+		BA24975A1CBFF6CF00D1B8CC /* CustomLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = BA2497591CBFF6CF00D1B8CC /* CustomLogger.m */; };
+		BA24975D1CBFF6D600D1B8CC /* BluetoothManager2.m in Sources */ = {isa = PBXBuildFile; fileRef = BA24975C1CBFF6D600D1B8CC /* BluetoothManager2.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +90,10 @@
 		A7C967621BE7772F00A08022 /* SignalStrengthViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignalStrengthViewController.xib; sourceTree = "<group>"; };
 		A7C967651BE77D2900A08022 /* BluetoothManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BluetoothManager.h; sourceTree = "<group>"; };
 		A7C967661BE77D2900A08022 /* BluetoothManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BluetoothManager.m; sourceTree = "<group>"; };
+		BA2497581CBFF6CF00D1B8CC /* CustomLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomLogger.h; sourceTree = "<group>"; };
+		BA2497591CBFF6CF00D1B8CC /* CustomLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomLogger.m; sourceTree = "<group>"; };
+		BA24975B1CBFF6D600D1B8CC /* BluetoothManager2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BluetoothManager2.h; sourceTree = "<group>"; };
+		BA24975C1CBFF6D600D1B8CC /* BluetoothManager2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BluetoothManager2.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +129,8 @@
 			children = (
 				A7C967651BE77D2900A08022 /* BluetoothManager.h */,
 				A7C967661BE77D2900A08022 /* BluetoothManager.m */,
+				BA24975B1CBFF6D600D1B8CC /* BluetoothManager2.h */,
+				BA24975C1CBFF6D600D1B8CC /* BluetoothManager2.m */,
 			);
 			path = Bluetooth;
 			sourceTree = "<group>";
@@ -200,6 +208,7 @@
 		A73552281BE0FA7F008A02EE /* SeraOSX */ = {
 			isa = PBXGroup;
 			children = (
+				BA2497571CBFF6C300D1B8CC /* Utils */,
 				A705F0921BE34BBE001DE0C3 /* Bluetooth */,
 				A705F0931BE34BBE001DE0C3 /* Classes */,
 				A705F0941BE34BBE001DE0C3 /* ViewControllers */,
@@ -248,6 +257,15 @@
 				A77FEC8D1C50FDC30065A20E /* IGNSignalStrengthView.xib */,
 			);
 			path = IGNSignalStrenghtView;
+			sourceTree = "<group>";
+		};
+		BA2497571CBFF6C300D1B8CC /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				BA2497581CBFF6CF00D1B8CC /* CustomLogger.h */,
+				BA2497591CBFF6CF00D1B8CC /* CustomLogger.m */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -391,8 +409,10 @@
 				A77FEC8C1C50FD1F0065A20E /* IGNSignalStrengthView.m in Sources */,
 				A71F12401C8440D000E54CA9 /* DeviceUID.m in Sources */,
 				A705F0A31BE35EF0001DE0C3 /* ConnectedViewController.m in Sources */,
+				BA24975A1CBFF6CF00D1B8CC /* CustomLogger.m in Sources */,
 				A7C967671BE77D2900A08022 /* BluetoothManager.m in Sources */,
 				A7C967631BE7772F00A08022 /* SignalStrengthViewController.m in Sources */,
+				BA24975D1CBFF6D600D1B8CC /* BluetoothManager2.m in Sources */,
 				A735522B1BE0FA7F008A02EE /* AppDelegate.m in Sources */,
 				A7C9675C1BE75BEF00A08022 /* PasswordViewController.m in Sources */,
 			);

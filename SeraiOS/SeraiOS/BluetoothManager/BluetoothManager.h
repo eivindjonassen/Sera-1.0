@@ -43,6 +43,7 @@
 @property(nonatomic, strong) CBMutableCharacteristic *updateMacUUIDCharacteristics;
 @property(nonatomic, assign) BOOL shouldStartAdvertising;
 @property(nonatomic, assign) BOOL hasReceivedMacName;
+@property(nonatomic, assign) BOOL hasConnectedPeripheral;
 
 @property(weak, nonatomic) id<BTManagerDelegate>delegate;
 

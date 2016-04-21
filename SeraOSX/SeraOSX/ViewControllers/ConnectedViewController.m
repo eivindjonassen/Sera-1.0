@@ -35,6 +35,7 @@
 }
 
 - (IBAction)goToConfiguration:(id)sender  {
+    LOG(@"Go to configuration");
      AppDelegate *delegate = (AppDelegate *)[[NSApplication sharedApplication] delegate];
     [delegate onSetupClick];
 }

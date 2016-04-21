@@ -37,8 +37,20 @@
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
     NSLog(@"didConnectPeripheral:%@",peripheral);
-    [peripheral setDelegate:self];
-    [peripheral discoverServices:self.supportedServices];
+    //NSArray * peripherals = [self.centralManager retrieveConnectedPeripheralsWithServices:nil];
+    //NSLog(@"devices: %@", peripherals);
+    
+    self.connectedPhone = peripheral;
+    peripheral.delegate = self;
+    
+    if(peripheral.services && peripheral.services.count != 0)
+    {
+        [self peripheral:peripheral didDiscoverServices:nil];
+    }
+    else
+    {
+        [peripheral discoverServices:self.supportedServices];
+    }
 }
 
 - (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error{
@@ -57,7 +69,7 @@
         self.lastConnectedPhone = self.connectedPhone;
         [self.centralManager connectPeripheral:self.connectedPhone options:nil];
         if (self.connectedPhone.state != CBPeripheralStateConnected){
-            [self performSelector:@selector(reconnectToPhone) withObject:nil afterDelay:1];
+            [self performSelector:@selector(reconnectToPhone) withObject:nil afterDelay:1.0];
         }
     } else {
         NSLog(@"Starting scanning");
@@ -72,43 +84,69 @@
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
     dispatch_async(dispatch_get_main_queue(), ^{
+        
         NSLog(@"Peripheral disconnected");
         NSLog(@"%@",error);
         self.hasMacUUID = NO;
         self.hasDeviceUUID = NO;
         [self.delegate peripheralDisconnected:peripheral];
+        
+        //self.connectedPhone = peripheral;
+        
         if (self.signalStrengthUpdater){
             [self.signalStrengthUpdater invalidate];
             self.signalStrengthUpdater = nil;
         }
         
+//        //    [self.centralManager cancelPeripheralConnection:self.connectedPhone];
+//        //    self.connectedPhone = nil;
+//        
+//        if (self.connectedPhone){
+//            //self.lastConnectedPhone = self.connectedPhone;
+//            
+//            //[self.centralManager cancelPeripheralConnection:self.lastConnectedPhone];
+//            //[self.centralManager connectPeripheral:self.lastConnectedPhone options:nil];
+//
+//            NSLog(@"didDisconnectPeripheral lastConnectedPhone state %li", self.lastConnectedPhone.state);
+//            
+//            //[self reconnectToPhone];
+//            //[self performSelector:@selector(reconnectToPhone) withObject:nil afterDelay:1.0];
+//            //[self.centralManager scanForPeripheralsWithServices:self.supportedServices options:nil];
+//        
+//        } else {
+//            
+//        }
         
-        //    [self.centralManager cancelPeripheralConnection:self.connectedPhone];
-        //    self.connectedPhone = nil;
-        if (self.connectedPhone){
-            self.lastConnectedPhone = self.connectedPhone;
-            [self.centralManager connectPeripheral:self.lastConnectedPhone options:nil];
-            if (self.lastConnectedPhone.state != CBPeripheralStateConnected){
-                [self performSelector:@selector(reconnectToPhone) withObject:nil afterDelay:1];
-            }
-            [self.centralManager scanForPeripheralsWithServices:self.supportedServices options:nil];
-        } else {
-            NSLog(@"Starting scanning");
-            [self.centralManager scanForPeripheralsWithServices:self.supportedServices options:nil];
-        }
+        NSLog(@"Starting scanning");
+        [self.centralManager scanForPeripheralsWithServices:self.supportedServices options:nil];
+        
         //NSLog(@"Starting scanning");
         //[self.centralManager scanForPeripheralsWithServices:self.supportedServices options:nil];
     });
 }
 
+- (void) startScan{
+    
+    NSLog(@"Starting scanning");
+    [self.centralManager scanForPeripheralsWithServices:self.supportedServices options:nil];
+}
+
+- (void) stopScan{
+    
+    NSLog(@"Stopping scanning");
+    [self.centralManager stopScan];
+}
+
 - (void)reconnectToPhone {
-    NSLog(@"Reconnecting to phone with state: %li %f", self.connectedPhone.state, [[NSDate date] timeIntervalSince1970]);
-    if (self.connectedPhone && self.connectedPhone.state != CBPeripheralStateConnected)
-    {
-        [self.centralManager connectPeripheral:self.connectedPhone options:nil];
-        [self performSelector:@selector(reconnectToPhone) withObject:nil afterDelay:1.0];
-        
-    }
+    
+//    if (self.connectedPhone && self.connectedPhone.state == CBPeripheralStateDisconnected)
+//    {
+//        NSLog(@"Reconnecting to phone with state: %li %f", self.connectedPhone.state, [[NSDate date] timeIntervalSince1970]);
+//        //[self.centralManager cancelPeripheralConnection:self.connectedPhone];
+//        
+//        [self.centralManager connectPeripheral:self.connectedPhone options:nil];
+//        //[self performSelector:@selector(reconnectToPhone) withObject:nil afterDelay:1.0];
+//    }
 }
 
 - (void)centralManager:(CBCentralManager *)central didRetrieveConnectedPeripherals:(NSArray<CBPeripheral *> *)peripherals {
@@ -122,7 +160,7 @@
 // CBCentralManagerDelegate - This is called with the CBPeripheral class as its main input parameter. This contains most of the information there is to know about a BLE peripheral.
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
-    NSLog(@"centerManager: %@, didDiscoverPeripheral: %@, adveristmentData: %@, RSSI: %@",central, peripheral,advertisementData, RSSI);
+    NSLog(@"centerManager: %@, didDiscoverPeripheral: %@, adveristmentData: %@, RSSI: %@",central, peripheral, advertisementData, RSSI);
     NSString *localName = [advertisementData objectForKey:CBAdvertisementDataLocalNameKey];
     if ([localName length] > 0) {
         [[NSUserDefaults standardUserDefaults] setObject:localName forKey:@"iphoneName"];
@@ -132,12 +170,11 @@
     self.connectedPhone = peripheral;
     self.connectedPhone.delegate = self;
     
-    [self.centralManager cancelPeripheralConnection:self.connectedPhone];
-    [self.centralManager connectPeripheral:self.connectedPhone options:nil];
+        [self.centralManager cancelPeripheralConnection:peripheral];
+        [self.centralManager connectPeripheral:peripheral options:nil];
+    
     NSLog(@"Stopping scanning");
     [self.centralManager stopScan];
-
-    
 }
 
 // method called whenever the device state changes.
@@ -191,6 +228,7 @@
         NSLog(@"Discovered service: %@", service.UUID);
         if ([self.supportedServices containsObject:service.UUID]){
             [peripheral discoverCharacteristics:nil forService:service];
+            //self.connectedPhone = peripheral;
             break;
         }
     }

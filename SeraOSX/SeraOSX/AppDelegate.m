@@ -11,7 +11,6 @@
 #import "ConnectedViewController.h"
 #import "PasswordViewController.h"
 #import "SignalStrengthViewController.h"
-#import "BluetoothManager.h"
 #import "AllDoneViewController.h"
 
 @interface AppDelegate ()
@@ -63,6 +62,9 @@
                 }
                 
                 [mainMenu addItemWithTitle:@"Unlock automatically" action:@selector(onUpdatesClick) keyEquivalent:@""];
+                BOOL autoUpdate = [[NSUserDefaults standardUserDefaults] boolForKey:@"removeSleep"];
+                [mainMenu.itemArray objectAtIndex:3].image = autoUpdate ? [NSImage imageNamed:@"ic_tick"] : nil;
+                
                 [mainMenu addItem:[NSMenuItem separatorItem]];
                 self.signalStrengthItem = [[NSMenuItem alloc]
                                                   initWithTitle:@"Signal strength"
@@ -84,7 +86,7 @@
                 
                 self.statusItem.menu = mainMenu;
                 
-                [BluetoothManager sharedClient].delegate = self;
+                [BluetoothManager2 sharedClient].delegate = self;
                 
                 
                 // Main popover for views
@@ -92,7 +94,8 @@
                 self.mainPopover.contentViewController = [[SyncViewController alloc] initWithNibName:@"SyncViewController" bundle:nil];
                 [self performSelector:@selector(togglePopover:) withObject:nil afterDelay:0.5]; // To show popover in the right place, we need delay
                 
-                [[BluetoothManager sharedClient] scanForDevices];
+                // [[BluetoothManager sharedClient] scanForDevices];
+                [[BluetoothManager2 sharedClient] initCentralManager];
                 
                 NSDistributedNotificationCenter * center =
                 [NSDistributedNotificationCenter defaultCenter];
@@ -140,12 +143,15 @@
 }
 
 - (void)onSetupClick {
+    LOG(@"onSetupClick");
+    if ([self.mainPopover.contentViewController isKindOfClass:[PasswordViewController class]]) return;
+    
     self.mainPopover.contentViewController = [[PasswordViewController alloc] initWithNibName:@"PasswordViewController" bundle:nil];
     [self showPopover];
 }
 
 - (void)onLinkPhoneClick {
-    [[BluetoothManager sharedClient] sendUnlink];
+    [[BluetoothManager2 sharedClient] sendUnlink];
     
     [self deviceUnlinked];
 }
@@ -235,7 +241,7 @@
     if (signalStrength != 0){
         if (signalStrength >= RSSI.integerValue+10){
             if (!self.isScreenLocked){
-                NSLog(@"lock screen");
+                NSLog(@"lock screen !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                 [self.lockScript executeAndReturnError:nil];
             }
         } else {
@@ -279,9 +285,10 @@
     [self compileUnlockScriptWitchCompletionBlock:^{
         self.mainPopover.contentViewController = [[SyncViewController alloc] initWithNibName:@"SyncViewController" bundle:nil];
         [self performSelector:@selector(showPopover) withObject:nil afterDelay:0.1]; // To show popover in the right place, we need delay
-        [BluetoothManager sharedClient].connectedPhone = nil;
-        [BluetoothManager sharedClient].lastConnectedPhone = nil;
-        [[BluetoothManager sharedClient] scanForDevices];
+        [BluetoothManager2 sharedClient].connectedPhone = nil;
+        
+        // [[BluetoothManager sharedClient] scanForDevices];
+        [[BluetoothManager2 sharedClient] initCentralManager];
     }];
    
     
