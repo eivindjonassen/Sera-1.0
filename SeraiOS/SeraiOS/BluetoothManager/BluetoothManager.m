@@ -22,19 +22,17 @@
     return _sharedClient;
 }
 
-- (void)startAdvertisingIfReady {
+- (void)initPeripheralManager {
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO],
+                             CBCentralManagerOptionShowPowerAlertKey, @"sera-location-identifier",
+                             CBPeripheralManagerOptionRestoreIdentifierKey,
+                             nil];
     self.shouldStartAdvertising = YES;
-    [self checkBluetoothState];
-   
-}
-
-- (void)checkBluetoothState {
-    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:NO], CBCentralManagerOptionShowPowerAlertKey, @"sera-location-identifier", CBPeripheralManagerOptionRestoreIdentifierKey, nil];
     self.peripheralManager = [[CBPeripheralManager alloc] initWithDelegate:self queue:dispatch_get_global_queue(QOS_CLASS_BACKGROUND, 0) options:options];
 }
 
-- (void)startConnection {
-    NSLog(@"startConnection");
+- (void)addDeviceInfoService {
+    NSLog(@"addDeviceInfoService");
     if (self.peripheralManager.isAdvertising){
         NSLog(@"Stopping advertising");
         [self.delegate stopedAdvertising];
@@ -51,6 +49,7 @@
         self.deviceUUID = [CBUUID UUIDWithString:BLE_CHARACTERISTICS_DEVICE_UUID];
         self.updateMacUUID = [CBUUID UUIDWithString:BLE_CHARACTERISTICS_UPDATE_MAC_UUID];
         
+        NSLog(@"Device UUID: %@",[DeviceUID uid]);
         
         self.deviceInfoService = [[CBMutableService alloc] initWithType:self.serviceUUID primary:YES];
         self.macCharacteristic = [[CBMutableCharacteristic alloc] initWithType:self.macUUID properties:CBCharacteristicPropertyRead value:nil permissions:CBAttributePermissionsReadable];
@@ -61,7 +60,6 @@
         
         self.unlinkCharacteristics = [[CBMutableCharacteristic alloc] initWithType:self.unlinkUUID properties:CBCharacteristicPropertyWriteWithoutResponse|CBCharacteristicPropertyNotify value:nil permissions:CBAttributePermissionsWriteable];
         
-        NSLog(@"Device UID: %@",[DeviceUID uid]);
         self.deviceCharacteristics = [[CBMutableCharacteristic alloc] initWithType:self.deviceUUID properties:CBCharacteristicPropertyRead value:[[DeviceUID uid]dataUsingEncoding:NSUTF8StringEncoding] permissions:CBAttributePermissionsReadable];
         
         self.updateMacUUIDCharacteristics = [[CBMutableCharacteristic alloc] initWithType:self.updateMacUUID properties:CBCharacteristicPropertyWriteWithoutResponse value:nil permissions:CBAttributePermissionsWriteable];
@@ -71,14 +69,8 @@
     [self.peripheralManager addService:self.deviceInfoService];
 }
 
-
-
-#pragma mark - PeripheralManager delegate
-
-- (void)peripheralManager:(CBPeripheralManager *)peripheral didAddService:(CBService *)service error:(NSError *)error {
-    NSLog(@"peripheralManager:%@ didAddService:%@ error:%@",peripheral,service,error);
-    
-    [self startAdvertising];
+- (void)startAdvertisingIfReady {
+    [self startAdvertisingIfNotConnected];
 }
 
 - (void)startAdvertisingIfNotConnected {
@@ -96,6 +88,7 @@
     
     NSString *deviceName = [[UIDevice currentDevice] name];
     
+    if (!self.serviceUUID) [self addDeviceInfoService];
     NSDictionary *advertisment = @{
                                    CBAdvertisementDataServiceUUIDsKey : @[self.serviceUUID],
                                    CBAdvertisementDataLocalNameKey: (deviceName ? deviceName : @"Sera")
@@ -105,31 +98,39 @@
     [self.delegate beganAdvertising];
     [self.peripheralManager startAdvertising:advertisment];
     
-    [self performSelector:@selector(startAdvertisingIfNotConnected) withObject:nil afterDelay:60];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(startAdvertisingIfNotConnected) object:nil];
+    
+    [self performSelector:@selector(startAdvertisingIfNotConnected) withObject:nil afterDelay:15];
 }
 
+#pragma mark - PeripheralManager delegate
+
+- (void)peripheralManager:(CBPeripheralManager *)peripheral didAddService:(CBService *)service error:(NSError *)error {
+    NSLog(@"peripheralManager: didAddService:%@ error:%@", service, error);
+    
+    // [self startAdvertising];
+}
+
+// Subscribed to characteristic
 - (void)peripheralManager:(CBPeripheralManager *)peripheral central:(CBCentral *)central didSubscribeToCharacteristic:(CBCharacteristic *)characteristic {
-    NSLog(@"didSubscribeToCharacteristic");
-    NSLog(@"%@",characteristic.UUID);
+    NSLog(@"didSubscribeToCharacteristic %@",characteristic.UUID);
     if ([characteristic.UUID isEqual:self.unlinkUUID]){
         self.connectedCentral = central;
         self.hasConnectedPeripheral = YES;
         [self.delegate peripheralSuccessfullyConnected];
-        // NSLog(@"Stopping advertising");
-        // [self.delegate stopedAdvertising];
-        // [self.peripheralManager stopAdvertising];
     }
 }
 
+// Started advertising
 - (void)peripheralManagerDidStartAdvertising:(CBPeripheralManager *)peripheral error:(NSError *)error {
     NSLog(@"peripheralManagerDidStartAdvertising");
     
-    if (error != nil) {
+    if (error) {
         NSLog(@"Unable To Start Advertisement: Error: %@", error);
-        //[self.delegate Disconnected_Sender];
     }
 }
 
+// Unsubscibed to characteristic
 - (void)peripheralManager:(CBPeripheralManager *)peripheral central:(CBCentral *)central didUnsubscribeFromCharacteristic:(CBCharacteristic *)characteristic {
     NSLog(@"didUnsiscripeFromCharacteristic");
     self.hasReceivedMacName = NO;
@@ -138,11 +139,9 @@
 }
 
 - (void)peripheralManagerDidUpdateState:(CBPeripheralManager *)peripheral {
-   
     
-//    dispatch_async(dispatch_get_main_queue(), ^{
     [_delegate bluetoothStateDidChanged:peripheral.state];
-    
+    NSLog(@"peripheralManagerDidUpdateState");
     
     switch (peripheral.state)
     {
@@ -150,13 +149,13 @@
         {
             NSLog(@"Peripheral powered on");
             if (self.shouldStartAdvertising){
-                [self startConnection];
+                [self addDeviceInfoService];
             }
             break;
         }
         case CBCentralManagerStatePoweredOff:
         {
-             NSLog(@"Peripheral powered off");
+            NSLog(@"Peripheral powered off");
             if (self.connectedCentral){
                 self.hasConnectedPeripheral = NO;
                 [self.delegate peripheralDisconnected];
@@ -170,12 +169,12 @@
         }
         case CBCentralManagerStateResetting:
         {
-             NSLog(@"Peripheral resetting");
+            NSLog(@"Peripheral resetting");
             break;
         }
         case CBCentralManagerStateUnauthorized:
         {
-             NSLog(@"Peripheral unauthorized");
+            NSLog(@"Peripheral unauthorized");
             break;
         }
         case CBCentralManagerStateUnknown:
@@ -185,7 +184,7 @@
         }
         case CBCentralManagerStateUnsupported:
         {
-             NSLog(@"Peripheral unsupported");
+            NSLog(@"Peripheral unsupported");
             break;
         }
         default:
@@ -194,9 +193,6 @@
             break;
         }
     }
-    
-    
-
 }
 
 - (void)peripheralManager:(CBPeripheralManager *)peripheral willRestoreState:(NSDictionary<NSString *,id> *)dict {
@@ -204,7 +200,7 @@
 }
 
 - (void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveReadRequest:(CBATTRequest *)request {
-    NSLog(@"peripheralManager didReceiveReadRequest %@", request);
+    NSLog(@"peripheralManager didReceiveReadRequest");
     if ([request.characteristic.UUID isEqual:self.macCharacteristic.UUID]){
         if ([[[NSUserDefaults standardUserDefaults] stringForKey:@"mac_uuid"]dataUsingEncoding:NSUTF8StringEncoding].length){
             request.value = [[[NSUserDefaults standardUserDefaults] stringForKey:@"mac_uuid"]dataUsingEncoding:NSUTF8StringEncoding];
@@ -218,7 +214,7 @@
 }
 
 - (void)peripheralManager:(CBPeripheralManager *)peripheral didReceiveWriteRequests:(NSArray *)requests {
-    NSLog(@"didReceiveWriteRequests %@", requests);
+    NSLog(@"didReceiveWriteRequests");
     
     for (CBATTRequest *singleRequest in requests){
         if ([singleRequest.characteristic.UUID isEqual:[CBUUID UUIDWithString:BLE_CHARACETRISTICS_MACNAME_UUID]]){
@@ -277,6 +273,8 @@
         [self.peripheralManager stopAdvertising];
         self.hasReceivedMacName = NO;
         self.serviceUUID = nil;
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(startAdvertisingIfNotConnected) object:nil];
+        
     }
 
 }

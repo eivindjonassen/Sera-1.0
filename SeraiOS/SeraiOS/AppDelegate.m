@@ -18,13 +18,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
-    NSArray *peripheralManagerIdentifiers = launchOptions[UIApplicationLaunchOptionsBluetoothPeripheralsKey];
-    NSLog(@"peripherals: %@",peripheralManagerIdentifiers);
-    for (int i =0; i<peripheralManagerIdentifiers.count; i++){
-        [[BluetoothManager sharedClient] checkBluetoothState];
-    }
+    // NSArray *peripheralManagerIdentifiers = launchOptions[UIApplicationLaunchOptionsBluetoothPeripheralsKey];
+    
+    // #warning What is this?!
+    // NSLog(@"peripherals: %@",peripheralManagerIdentifiers);
+    // for (int i =0; i<peripheralManagerIdentifiers.count; i++){
+    // [[BluetoothManager sharedClient] checkBluetoothState];
+    // }
     return YES;
 }
 

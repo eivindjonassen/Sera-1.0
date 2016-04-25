@@ -49,6 +49,8 @@
         LOG(@"Will scan for peripherals (connected phone %@)", self.connectedPhone);
         [self.centralManager stopScan];
         [self.centralManager scanForPeripheralsWithServices:self.supportedServices options:nil];
+        
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(startScanningForPeripheralsIfNoPhoneIsConnected) object:nil];
         [self performSelector:@selector(startScanningForPeripheralsIfNoPhoneIsConnected) withObject:nil afterDelay:10.0];
     });
 }

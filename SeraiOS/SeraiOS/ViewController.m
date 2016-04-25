@@ -19,8 +19,7 @@
     // Do any additional setup after loading the view, typically from a nib
     [BluetoothManager sharedClient].delegate = self;
     [self initViews];
-    [[BluetoothManager sharedClient] checkBluetoothState];
-    //[[BluetoothManager sharedClient] startAdvertisingIfReady];
+    [[BluetoothManager sharedClient] initPeripheralManager];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -194,14 +193,18 @@
         }
         self.debugTextView.text = [self.debugTextView.text stringByAppendingString:[NSString stringWithFormat:@"%@ Disconnected\n",[NSDate date]]];
         
+        NSLog(@"before if (self.connectView.alpha)");
         if (self.connectView.alpha){
+            NSLog(@"inside if (self.connectView.alpha)");
             if ((UserState)[[NSUserDefaults standardUserDefaults] integerForKey:@"userState"] != UserStateFirstTime){
+                NSLog(@"!= UserStateFirstTime");
                 self.activityIndicator.hidden = NO;
                 self.connectViewStateImageView.image = [UIImage imageNamed:@"ic_mac_off"];
                 self.connectViewTitleLabel.text = @"";
                 self.connectViewDescriptionLabel.text = [NSString stringWithFormat:@"We can not find\n %@\n\nPlease start Sera on your Mac",[[NSUserDefaults standardUserDefaults] stringForKey:@"macName"]];
                 [[BluetoothManager sharedClient] startAdvertisingIfReady];
             } else {
+                NSLog(@"== UserStateFirstTime");
                 [self initViews];
                 
                 [UIView animateWithDuration:0.25 animations:^{
@@ -209,6 +212,8 @@
                     self.connectView.alpha = 0;
                 }];
             }
+        } else {
+            NSLog(@"inside if (self.connectView.alpha) ELSE");
         }
     });
 }

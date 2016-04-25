@@ -47,9 +47,11 @@
 
 @property(weak, nonatomic) id<BTManagerDelegate>delegate;
 
+
+- (void)initPeripheralManager;
 - (void)startAdvertisingIfReady;
-- (void)checkBluetoothState;
 - (void)sendUnlinkToCentral;
+
 @end
 
 @protocol BTManagerDelegate <NSObject>
