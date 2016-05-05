@@ -101,6 +101,8 @@
     LOG(@"localName: %@", localName);
     if ([localName length] > 0) {
         _foundDeviceName = localName;
+    } else {
+        _foundDeviceName = @"iPhone";
     }
     
     LOG(@"Stop scan");

@@ -20,9 +20,15 @@
     // Override point for customization after application launch.
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
-    // NSArray *peripheralManagerIdentifiers = launchOptions[UIApplicationLaunchOptionsBluetoothPeripheralsKey];
     
-    // #warning What is this?!
+    // When your app is relaunched by system, you can retrieve all the restoration identifiers
+    // for the central manager objects the system was preserving for your app
+    NSArray *peripheralManagerIdentifiers = launchOptions[UIApplicationLaunchOptionsBluetoothPeripheralsKey];
+    
+    if (peripheralManagerIdentifiers.count > 0) {
+        // App is relaunched, initialize peripheral manager
+        [[BluetoothManager sharedClient] initPeripheralManager];
+    }
     // NSLog(@"peripherals: %@",peripheralManagerIdentifiers);
     // for (int i =0; i<peripheralManagerIdentifiers.count; i++){
     // [[BluetoothManager sharedClient] checkBluetoothState];
